@@ -28,28 +28,6 @@ require( "xtable" )
 ###################################################
 ### chunk number 2: 
 ###################################################
-build.nr <- readLines( 
-    con = file.path( getwd(), "version.txt" ), 
-    n   = 1 
-)   #
-#
-build.nr <- as.numeric( build.nr )[1] + 1 
-
-
-###################################################
-### chunk number 3: 
-###################################################
-build.nr <- writeLines( 
-    con     = file.path( getwd(), "version.txt" ), 
-    text    = as.character( build.nr )  
-)   #
-#
-rm( build.nr ) 
-
-
-###################################################
-### chunk number 4: 
-###################################################
 old.wd  <- getwd() 
 
 # setwd("C:/_RTOOLS/SWEAVE_WORK/SOIL_TEXTURES/rforge/pkg/soiltexture/inst/doc/INOUT") 
@@ -58,29 +36,29 @@ if( !("soiltexture" %in%  as.character( installed.packages()[,1] )) )
 {   #
     suppressMessages( 
         install.packages( 
-            pkgs  = "soiltexture", 
-            repos = "http://R-Forge.R-project.org" 
+            pkgs  = "soiltexture"  
+            # repos = "http://R-Forge.R-project.org" 
         )   #
     )   #
 }   #
 
 require( 
-    package = "soiltexture", 
+    package        = "soiltexture", 
     character.only = TRUE, 
-    quietly = TRUE 
+    quietly        = TRUE 
 )   #
 
 # setwd(old.wd) 
 
 
 ###################################################
-### chunk number 5: COVERFIG
+### chunk number 3: COVERFIG
 ###################################################
 TT.plot(class.p.bg.col=T,class.sys="USDA.TT",main=NA)
 
 
 ###################################################
-### chunk number 6: 
+### chunk number 4: 
 ###################################################
 bornes <- c(0,2,20,50,200,2e3,20e3)
 noms   <- c("Cl","FiSi","CoSi","FiSa","CoSa","Gr","St")
@@ -125,7 +103,7 @@ text(x=xtxt,y=rep(1,length(xtxt)),labels=tmp$"noms",cex=2)
 
 
 ###################################################
-### chunk number 7: 
+### chunk number 5: 
 ###################################################
 TT.plot( 
     class.sys   = "none", 
@@ -139,7 +117,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 8: 
+### chunk number 6: 
 ###################################################
 TT.plot( 
     class.sys   = "FAO50.TT", 
@@ -153,7 +131,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 9: 
+### chunk number 7: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "FAO50.TT" ) 
 xtable( 
@@ -164,14 +142,13 @@ xtable(
 
 
 ###################################################
-### chunk number 10:  eval=FALSE
+### chunk number 8:  eval=FALSE
 ###################################################
-## detach( package:soiltexture ) 
-## remove.packages( "soiltexture" ) 
+## install.packages( pkgs = "soiltexture" ) 
 
 
 ###################################################
-### chunk number 11:  eval=FALSE
+### chunk number 9:  eval=FALSE
 ###################################################
 ## install.packages( 
 ##     pkgs  = "soiltexture", 
@@ -180,61 +157,32 @@ xtable(
 
 
 ###################################################
-### chunk number 12: 
+### chunk number 10: 
 ###################################################
 require( soiltexture ) 
 
 
 ###################################################
-### chunk number 13:  eval=FALSE
+### chunk number 11:  eval=FALSE
 ###################################################
 ## detach( package:soiltexture ) 
 ## remove.packages( "soiltexture" ) 
 
 
 ###################################################
-### chunk number 14:  eval=FALSE
-###################################################
-## download.file( 
-##     url = 
-## "http://r-forge.r-project.org/bin/windows/contrib/2.10/soiltexture_1.0.zip", 
-##     destfile = file.path( getwd(), "soiltexture_1.0.zip" ) 
-## )   #
-## #
-## install.packages( 
-##     pkgs  = file.path( getwd(), "soiltexture_1.0.zip" ), 
-##     repos = NULL 
-## )   #
-## #
-## file.remove( "soiltexture_1.0.zip" ) 
-
-
-###################################################
-### chunk number 15: 
-###################################################
-source( 
-    paste( 
-        sep = "", 
-        "http://r-forge.r-project.org/scm/viewvc.php/*checkout*", 
-        "/pkg/soiltexture/R/soiltexture.R?&root=soiltexture"
-    )   #
-)   #
-
-
-###################################################
-### chunk number 16: 
+### chunk number 12: 
 ###################################################
 TT.plot( class.sys = "none" ) 
 
 
 ###################################################
-### chunk number 17: 
+### chunk number 13: 
 ###################################################
 TT.plot( class.sys = "USDA.TT" ) 
 
 
 ###################################################
-### chunk number 18: 
+### chunk number 14: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "USDA.TT" ) 
 xtable( 
@@ -245,13 +193,13 @@ xtable(
 
 
 ###################################################
-### chunk number 19: 
+### chunk number 15: 
 ###################################################
 TT.plot( class.sys = "FAO50.TT" ) 
 
 
 ###################################################
-### chunk number 20: 
+### chunk number 16: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "FAO50.TT" ) 
 xtable( 
@@ -262,13 +210,13 @@ xtable(
 
 
 ###################################################
-### chunk number 21: 
+### chunk number 17: 
 ###################################################
 TT.plot( class.sys = "FR.AISNE.TT" ) 
 
 
 ###################################################
-### chunk number 22: 
+### chunk number 18: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "FR.AISNE.TT" ) 
 xtable( 
@@ -279,13 +227,13 @@ xtable(
 
 
 ###################################################
-### chunk number 23: 
+### chunk number 19: 
 ###################################################
 TT.plot( class.sys = "FR.GEPPA.TT" ) 
 
 
 ###################################################
-### chunk number 24: 
+### chunk number 20: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "FR.GEPPA.TT" ) 
 xtable( 
@@ -296,13 +244,13 @@ xtable(
 
 
 ###################################################
-### chunk number 25: 
+### chunk number 21: 
 ###################################################
 TT.plot( class.sys = "DE.BK94.TT" ) 
 
 
 ###################################################
-### chunk number 26: 
+### chunk number 22: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "DE.BK94.TT" ) 
 xtable( 
@@ -313,13 +261,13 @@ xtable(
 
 
 ###################################################
-### chunk number 27: 
+### chunk number 23: 
 ###################################################
 TT.plot( class.sys = "UK.SSEW.TT" ) 
 
 
 ###################################################
-### chunk number 28: 
+### chunk number 24: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "UK.SSEW.TT" ) 
 xtable( 
@@ -330,13 +278,13 @@ xtable(
 
 
 ###################################################
-### chunk number 29: 
+### chunk number 25: 
 ###################################################
 TT.plot( class.sys = "AU.TT" ) 
 
 
 ###################################################
-### chunk number 30: 
+### chunk number 26: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "AU.TT" ) 
 xtable( 
@@ -347,13 +295,13 @@ xtable(
 
 
 ###################################################
-### chunk number 31: 
+### chunk number 27: 
 ###################################################
 TT.plot( class.sys = "BE.TT" ) 
 
 
 ###################################################
-### chunk number 32: 
+### chunk number 28: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "BE.TT" ) 
 xtable( 
@@ -364,19 +312,19 @@ xtable(
 
 
 ###################################################
-### chunk number 33: 
+### chunk number 29: 
 ###################################################
 TT.plot( class.sys = "CA.EN.TT" ) 
 
 
 ###################################################
-### chunk number 34: 
+### chunk number 30: 
 ###################################################
 TT.plot( class.sys = "CA.FR.TT" ) 
 
 
 ###################################################
-### chunk number 35: 
+### chunk number 31: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "CA.EN.TT" ) 
 xtable( 
@@ -387,7 +335,7 @@ xtable(
 
 
 ###################################################
-### chunk number 36: 
+### chunk number 32: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "CA.FR.TT" ) 
 xtable( 
@@ -398,13 +346,13 @@ xtable(
 
 
 ###################################################
-### chunk number 37: 
+### chunk number 33: 
 ###################################################
 TT.plot( class.sys = "ISSS.TT" ) 
 
 
 ###################################################
-### chunk number 38: 
+### chunk number 34: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "ISSS.TT" ) 
 xtable( 
@@ -415,13 +363,13 @@ xtable(
 
 
 ###################################################
-### chunk number 39: 
+### chunk number 35: 
 ###################################################
 TT.plot( class.sys = "ROM.TT" ) 
 
 
 ###################################################
-### chunk number 40: 
+### chunk number 36: 
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "ROM.TT" ) 
 xtable( 
@@ -432,7 +380,7 @@ xtable(
 
 
 ###################################################
-### chunk number 41: 
+### chunk number 37: 
 ###################################################
 TT.plot( 
     class.sys = "ROM.TT", 
@@ -443,7 +391,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 42: 
+### chunk number 38: 
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -465,7 +413,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 43: 
+### chunk number 39: 
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -487,7 +435,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 44: 
+### chunk number 40: 
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -509,7 +457,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 45: 
+### chunk number 41: 
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -531,7 +479,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 46: 
+### chunk number 42: 
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -553,7 +501,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 47: 
+### chunk number 43: 
 ###################################################
 TT.plot( 
     class.sys       = "FAO50.TT", 
@@ -562,7 +510,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 48: 
+### chunk number 44: 
 ###################################################
 # First plot the USDA texture triangle, and retrieve its 
 #   geometrical features, silently outputted by TT.plot 
@@ -584,7 +532,7 @@ TT.classes(
 
 
 ###################################################
-### chunk number 49: 
+### chunk number 45: 
 ###################################################
 # First plot the USDA texture triangle, and retrieve its 
 #   geometrical features, silently outputted by TT.plot 
@@ -606,7 +554,7 @@ TT.classes(
 
 
 ###################################################
-### chunk number 50: 
+### chunk number 46: 
 ###################################################
 # Create a dummy data frame of soil textures:
 my.text <- data.frame( 
@@ -621,7 +569,7 @@ my.text
 
 
 ###################################################
-### chunk number 51: 
+### chunk number 47: 
 ###################################################
 TT.plot( 
     class.sys   = "FAO50.TT", 
@@ -631,7 +579,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 52: 
+### chunk number 48: 
 ###################################################
 TT.plot( 
     class.sys   = "none", 
@@ -642,13 +590,13 @@ TT.plot(
 
 
 ###################################################
-### chunk number 53: 
+### chunk number 49: 
 ###################################################
 rand.text	<- TT.dataset(n=100,seed.val=1980042401)
 
 
 ###################################################
-### chunk number 54: 
+### chunk number 50: 
 ###################################################
 TT.plot( 
     class.sys   = "none", 
@@ -659,7 +607,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 55: 
+### chunk number 51: 
 ###################################################
 TT.plot( 
     class.sys   = "none", 
@@ -713,7 +661,7 @@ legend(
 
 
 ###################################################
-### chunk number 56: 
+### chunk number 52: 
 ###################################################
 geo <- TT.geo.get() 
 #
@@ -737,7 +685,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 57: 
+### chunk number 53: 
 ###################################################
 TT.image( 
     x       = iwd.res, 
@@ -760,7 +708,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 58: 
+### chunk number 54: 
 ###################################################
 geo <- TT.geo.get()  
 #
@@ -787,7 +735,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 59: 
+### chunk number 55: 
 ###################################################
 geo <- TT.geo.get() 
 #
@@ -814,7 +762,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 60: 
+### chunk number 56: 
 ###################################################
 geo <- TT.geo.get() 
 #
@@ -843,7 +791,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 61: 
+### chunk number 57: 
 ###################################################
 # Display the USDA texture triangle:
 geo     <- TT.plot(class.sys="USDA.TT") 
@@ -863,13 +811,13 @@ TT.text(
 
 
 ###################################################
-### chunk number 62: 
+### chunk number 58: 
 ###################################################
 TT.data.test( tri.data = rand.text ) 
 
 
 ###################################################
-### chunk number 63: 
+### chunk number 59: 
 ###################################################
 res <- TT.normalise.sum( tri.data = rand.text ) 
 #
@@ -885,7 +833,7 @@ max( res[ , "residuals" ] )
 
 
 ###################################################
-### chunk number 64: 
+### chunk number 60: 
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -894,7 +842,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### chunk number 65: 
+### chunk number 61: 
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -903,7 +851,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### chunk number 66: 
+### chunk number 62: 
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -913,7 +861,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### chunk number 67: 
+### chunk number 63: 
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -923,7 +871,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### chunk number 68: 
+### chunk number 64: 
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -934,7 +882,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### chunk number 69: 
+### chunk number 65: 
 ###################################################
 tmp.cex <- 1.5
 old.par <- par(no.readonly = TRUE)
@@ -1030,13 +978,13 @@ par(old.par)
 
 
 ###################################################
-### chunk number 70: 
+### chunk number 66: 
 ###################################################
 my.text[1:5,]   
 
 
 ###################################################
-### chunk number 71: 
+### chunk number 67: 
 ###################################################
 TT.text.transf( 
 	tri.data        = my.text[1:5,],  
@@ -1046,7 +994,7 @@ TT.text.transf(
 
 
 ###################################################
-### chunk number 72: 
+### chunk number 68: 
 ###################################################
 # Copy the data.frame
 my.text.fr  <- my.text 
@@ -1057,7 +1005,7 @@ colnames(my.text.fr) <- c("ARGILE","LIMON","SABLE","CO")
 
 
 ###################################################
-### chunk number 73: 
+### chunk number 69: 
 ###################################################
 TT.text.transf( 
     tri.data        = my.text.fr[1:5,],  
@@ -1068,7 +1016,7 @@ TT.text.transf(
 
 
 ###################################################
-### chunk number 74: 
+### chunk number 70: 
 ###################################################
 # Create a random fraction between 0 and 1
 r.frac <- runif(n=dim(my.text)[1]) 
@@ -1084,7 +1032,7 @@ my.text4[1:5,]
 
 
 ###################################################
-### chunk number 75: 
+### chunk number 71: 
 ###################################################
 TT.text.transf.X( 
     tri.data        = my.text4[1:5,], 
@@ -1094,7 +1042,7 @@ TT.text.transf.X(
 
 
 ###################################################
-### chunk number 76: 
+### chunk number 72: 
 ###################################################
 TT.text.transf.X( 
     tri.data        = my.text4[1:5,], 
@@ -1104,7 +1052,7 @@ TT.text.transf.X(
 
 
 ###################################################
-### chunk number 77: 
+### chunk number 73: 
 ###################################################
 # First, plot the data without transformation:
 geo <- TT.plot( 
@@ -1126,7 +1074,7 @@ TT.points(
 
 
 ###################################################
-### chunk number 78: 
+### chunk number 74: 
 ###################################################
 # Not transformed
 geo <- TT.plot( 
@@ -1151,7 +1099,7 @@ TT.classes(
 
 
 ###################################################
-### chunk number 79: 
+### chunk number 75: 
 ###################################################
 # No transformation needed or stated
 geo <- TT.plot( 
@@ -1174,7 +1122,7 @@ TT.classes(
 
 
 ###################################################
-### chunk number 80: 
+### chunk number 76: 
 ###################################################
 # Untransformed
 geo <- TT.plot( 
@@ -1198,7 +1146,7 @@ TT.classes(
 
 
 ###################################################
-### chunk number 81: 
+### chunk number 77: 
 ###################################################
 geo <- TT.plot( 
     class.sys   = "FR.GEPPA.TT", 
@@ -1221,7 +1169,7 @@ TT.classes(
 
 
 ###################################################
-### chunk number 82: 
+### chunk number 78: 
 ###################################################
 # Not transformed
 geo <- TT.plot( 
@@ -1246,7 +1194,7 @@ TT.classes(
 
 
 ###################################################
-### chunk number 83: 
+### chunk number 79: 
 ###################################################
 TT.points.in.classes( 
     tri.data        = my.text[1:5,], 
@@ -1257,7 +1205,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### chunk number 84: 
+### chunk number 80: 
 ###################################################
 TT.plot( 
     class.sys       = "USDA.TT", 
@@ -1269,7 +1217,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 85: 
+### chunk number 81: 
 ###################################################
 TT.points.in.classes( 
     tri.data        = my.text[1:5,], 
@@ -1281,7 +1229,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### chunk number 86: 
+### chunk number 82: 
 ###################################################
 TT.plot( 
     class.sys       = "USDA.TT", 
@@ -1294,7 +1242,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 87: 
+### chunk number 83: 
 ###################################################
 # Create a new function, in fact the copy of TT.text.transf()
 TT.text.transf2 <- TT.text.transf
@@ -1313,7 +1261,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### chunk number 88: 
+### chunk number 84: 
 ###################################################
 TT.plot( 
     class.sys       = "USDA.TT", 
@@ -1329,7 +1277,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 89: 
+### chunk number 85: 
 ###################################################
 TT.plot( 
     class.sys   = "USDA.TT", 
@@ -1339,7 +1287,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 90: 
+### chunk number 86: 
 ###################################################
 TT.plot( 
     class.sys   = "FR.AISNE.TT", 
@@ -1349,7 +1297,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 91: 
+### chunk number 87: 
 ###################################################
 TT.plot( 
     class.sys   = "FAO50.TT", 
@@ -1359,7 +1307,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 92: 
+### chunk number 88: 
 ###################################################
 TT.plot( 
     class.sys   = "FR.GEPPA.TT", 
@@ -1371,7 +1319,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 93: 
+### chunk number 89: 
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -1392,7 +1340,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 94: 
+### chunk number 90: 
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -1414,7 +1362,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 95: 
+### chunk number 91: 
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -1436,7 +1384,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 96: 
+### chunk number 92: 
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -1458,7 +1406,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 97: 
+### chunk number 93: 
 ###################################################
 # Set a 2 by 2 plot matrix (for size):
 old.par <- par(no.readonly=T)
@@ -1481,7 +1429,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 98: 
+### chunk number 94: 
 ###################################################
 # Set a 2 by 2 plot matrix (for size):
 old.par <- par(no.readonly=T)
@@ -1498,7 +1446,7 @@ par(old.par)
 
 
 ###################################################
-### chunk number 99: 
+### chunk number 95: 
 ###################################################
 TT.plot( 
     tri.data    = my.text.fr, 
@@ -1508,7 +1456,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 100: 
+### chunk number 96: 
 ###################################################
 TT.plot( 
     tri.data    = my.text.fr, 
@@ -1521,7 +1469,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 101: 
+### chunk number 97: 
 ###################################################
 TT.plot( 
     tri.data    = my.text.fr, 
@@ -1538,7 +1486,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 102: 
+### chunk number 98: 
 ###################################################
 # Fisrt, retrieve all the data about 
 #   the USDA texture triangle
@@ -1554,7 +1502,7 @@ tmp[ !names(tmp) %in% c("tt.points","tt.polygons") ]
 
 
 ###################################################
-### chunk number 103: 
+### chunk number 99: 
 ###################################################
 # Retrieve and save the table:
 tmp2 <- TT.classes.tbl( class.sys = "FAO50.TT" ) 
@@ -1567,13 +1515,13 @@ tmp2[,c(1,3)]
 
 
 ###################################################
-### chunk number 104: 
+### chunk number 100: 
 ###################################################
 TT.vertices.tbl( class.sys = "FAO50.TT" ) 
 
 
 ###################################################
-### chunk number 105: 
+### chunk number 101: 
 ###################################################
 geo <- TT.plot( 
     class.sys   = "FAO50.TT", 
@@ -1590,7 +1538,7 @@ TT.vertices.plot(
 
 
 ###################################################
-### chunk number 106: 
+### chunk number 102: 
 ###################################################
 # Step 1 
 FAO63 <- TT.get("FAO50.TT") 
@@ -1608,7 +1556,7 @@ TT.add( "FAO63.TT" = FAO63 )
 
 
 ###################################################
-### chunk number 107: 
+### chunk number 103: 
 ###################################################
 TT.plot( 
     class.sys   = "FAO63.TT", 
@@ -1617,7 +1565,7 @@ TT.plot(
 
 
 ###################################################
-### chunk number 108: 
+### chunk number 104: 
 ###################################################
 # Get the definition of the FAO50 texture triangle
 FAO50 <- TT.get( "FAO50.TT" ) 
