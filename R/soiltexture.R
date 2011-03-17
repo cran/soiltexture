@@ -1699,7 +1699,7 @@ TT.col2hsv  <- function(# Convert any colors to hsv.
                 col     = col, 
                 alpha   = FALSE
             ),  #
-            gamma           = 1, 
+            #gamma          = 1, 
             maxColorValue   = 255  
         )   #
     )   #
@@ -5280,7 +5280,7 @@ TT.plot <- function(# Plot soil texture triangles / diagrams.
     #
     # - Define if class.p.bg.col is TRUE (or not a logical)
     class.p.bg.col.test <- is.logical( class.p.bg.col ) 
-    if( class.p.bg.col.test )
+    if( class.p.bg.col.test ) 
     {   #
         class.p.bg.col.test <- class.p.bg.col 
     }else{ 
