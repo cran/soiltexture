@@ -1,4 +1,4 @@
-# source( "C:/_RTOOLS/SWEAVE_WORK/SOIL_TEXTURES/rforge/pkg/soiltexture/R/soiltexture.r" ) 
+# source( "C:/_R_PACKAGES/soiltexture/pkg/soiltexture/R/soiltexture.R" ) 
 # source( "http://r-forge.r-project.org/scm/viewvc.php/*checkout*/pkg/soiltexture/R/soiltexture.R?revision=19&root=soiltexture" ) 
 # +-------------------------------------------------------------------------+
 # |                                                                         |
@@ -263,23 +263,23 @@ assign(
         lang.par    = data.frame( 
             "lang"  = c(    "en",                           "fr",                       "it", 
                             "es",                           "de",                       "nl",
-                            "se",                           "fl",                       "ro" ), ##
+                            "se",                           "fl",                       "ro" ),   
             #
             "CLAY"  = c(    "\"Clay\"",                     "\"Argile\"",               "\"Argilla\"", 
                             "\"Arcilla\"",                  "\"Ton\"",                  "\"Lutum\"", 
-                            "\"Ler\"",                      "\"Klei\"",                 "\"Argila\"" ), ##
+                            "\"Ler\"",                      "\"Klei\"",                 "\"Argila\"" ),   
             #
             "SILT"  = c(    "\"Silt\"",                     "\"Limon\"",                "\"Limo\"", 
                             "\"Limo\"",                     "\"Schluff\"",              "\"Silt\"", 
-                            "\"Silt\"",                     "\"Leem\"",                 "\"Praf\"" ), ##
+                            "\"Silt\"",                     "\"Leem\"",                 "\"Praf\"" ),   
             #
             "SAND"  = c(    "\"Sand\"",                     "\"Sable\"",                "\"Sabbia\"", 
                             "\"Arena\"",                    "\"Sand\"",                 "\"Zand\"", 
-                            "\"Sand\"",                     "\"Zand\"",                 "\"Nisip\"" ), ##
+                            "\"Sand\"",                     "\"Zand\"",                 "\"Nisip\"" ),   
             #
             "TT"    = c(    "\"Texture triangle\"",         "\"Triangle de texture\"",  "\"Triangolo della tessitura\"", 
-                            "\"Tri\\340ngulo de textura\"", "\"Bodenartendiagramm\"",   "\"Textuurdriehoek\"", 
-                            "\"Texturtriangel\"",           "\"Textuurdriehoek\"",      "\"Diagrama triunghiulara a texturii\"" ), ##
+                            "\"Triangulo de textura\"",     "\"Bodenartendiagramm\"",   "\"Textuurdriehoek\"", 
+                            "\"Texturtriangel\"",           "\"Textuurdriehoek\"",      "\"Diagrama triunghiulara a texturii\"" ),   
             stringsAsFactors    = FALSE  
         ),  #
         # Acknowledgments: Rosca Bogdan, from the Romanian Academy, Iasi Branch, Geography team, provided the Romanian translation (thanks!).
@@ -1090,7 +1090,7 @@ assign(
             #                  by Rosca Bogdan, Romanian Academy 
             #                  Iasi Branch, Geography team
             #
-            main            = "SRTS 2003", 
+            main = "SRTS 2003", 
             # 
             #                The list below specify the CSS coordinates of the different POINTS
             #                   that are used to draw soil texture classes. One points can be 
@@ -1141,6 +1141,115 @@ assign(
             base.css.ps.lim = c(0,2,20,2000), 
             tri.css.ps.lim  = c(0,2,20,2000), 
             #
+            unit.ps         = quote(bold(mu) * bold('m')), 
+            unit.tx         = quote(bold('%')), 
+            #
+            text.sum        = 100 
+        ),  #
+        #
+        "DE.SEA74.TT"  = list( # GDR Forest soils TRIANGLE PARAMETERS :
+            #
+            main            = "Standortserkundungsanweisung SEA 1974 (DE)", 
+            #
+            #                 The list below specify the CSS coordinates of the different POINTS
+            #                   that are used to draw soil texture classes. One points can be 
+            #                   used by several classes. The clay definition of points 08, 09, 10 closely follows the
+            #                   triangle, plotted in SEA 1974, conforms to the GDR standard (TGL 24300-05:1985-06), but
+            #                   is 1 Percent larger than the actual German texture triangle in DE.BK94.TT :
+            #                  P01    P02    P03    P04    P05    P06    P07    P08    P09    P10    P11    P12    P13    
+            #                  P14    P15    P16    P17    P18    P19    P20    P21    P22    P23    P24    P25
+            "tt.points"     = data.frame( 
+                "CLAY"  =   c( 1.000, 0.450, 0.450, 0.300, 0.300, 0.300, 0.300, 0.180, 0.180, 0.180, 0.150, 0.120, 0.050, 
+                               0.000, 0.000, 0.000, 0.000, 0.050, 0.100, 0.025, 0.050, 0.080, 0.080, 0.000, 0.000),
+                "SILT"  =   c( 0.000, 0.550, 0.000, 0.700, 0.550, 0.150, 0.000, 0.820, 0.550, 0.150, 0.000, 0.150, 0.550, 
+                               0.550, 0.200, 0.100, 0.000, 0.000, 0.000, 0.075, 0.150, 0.800, 0.920, 1.000, 0.800),  
+                "SAND"  =   c( 0.000, 0.000, 0.550, 0.000, 0.150, 0.550, 0.700, 0.000, 0.270, 0.670, 0.850, 0.730, 0.400, 
+                               0.450, 0.800, 0.900, 1.000, 0.950, 0.900, 0.900, 0.800, 0.120, 0.000, 0.000, 0.200)  
+            ),  #
+            # 
+            #   Abreviations;       Names of the texture cl;    Points marking the class limits (points specified above)
+            "tt.polygons"   = list( 
+                "L"   = list( "name" = "Lehm",                "points" = c(10, 06, 05, 09 ) ), 
+                "stL" = list( "name" = "sandig-toniger Lehm", "points" = c(11, 07, 06, 10, 12 ) ), 
+                "sL"  = list( "name" = "sandiger Lehm",       "points" = c(12, 10, 09, 13 ) ), 
+                "S"   = list( "name" = "Sand",                "points" = c(17, 18, 20, 16 ) ), 
+                "alS" = list( "name" = "anlehmiger Sand",     "points" = c(18, 19, 21, 15, 16, 20 ) ), 
+                "lS"  = list( "name" = "lehmiger Sand",       "points" = c(19, 11, 12, 13, 14, 15, 21 ) ), 
+                "T"   = list( "name" = "Ton",                 "points" = c(03, 01, 02 ) ), 
+                "uT"  = list( "name" = "schluffiger Ton",     "points" = c(05, 02, 04 ) ), 
+                "lT"  = list( "name" = "lehmiger Ton",        "points" = c(03, 02, 05, 06 ) ), 
+                "sT"  = list( "name" = "sandiger Ton",        "points" = c(07, 03, 06 ) ), 
+                "U"   = list( "name" = "Schluff",             "points" = c(25, 22, 23, 24 ) ), 
+                "UL"  = list( "name" = "Schlufflehm",         "points" = c(09, 05, 04, 08 ) ), 
+                "lU"  = list( "name" = "lehmiger Schluff",    "points" = c(14, 13, 09, 08, 23, 22, 25 ) ) 
+                #
+            ),  #
+            #
+            # Triangle specific parameters for triangle geometry / appearance
+            #   See general parameters above for detailed description of them
+            blr.clock       = c(F,T,NA), 
+            tlr.an          = c(45,90,45), 
+            #
+            blr.tx      = c("CLAY","SILT","SAND"), 
+            # 
+            base.css.ps.lim = c(0,2,63,2000), 
+            tri.css.ps.lim  = c(0,2,63,2000), 
+            # 
+            unit.ps         = quote(bold(mu) * bold('m')), 
+            unit.tx         = quote(bold('%')), 
+            #
+            text.sum        = 100 
+        ),  #
+        #
+        "DE.TGL85.TT" = list( # GDR Arable soils TRIANGLE PARAMETERS :
+            #
+            main = "TGL 24300-05, landwirtschaftliche Boeden (DE)", 
+            #
+            #                 The list below specify the CSS coordinates of the different POINTS
+            #                   that are used to draw soil texture classes. One points can be 
+            #                   used by several classes. Definitions follow the GDR Standard for arable soils
+            #                   (TGL 24300-05:1985-06; Aufnahme landwirtschaftlich genutzter Standorte):
+            #                  P01    P02    P03    P04    P05    P06    P07    P08    P09    P10    P11    P12    P13    
+            #                  P14    P15    P16    P17    P18    P19    P20    P21    P22    P23    P24    P25    P26
+            "tt.points" = data.frame( 
+                "CLAY"  =   c( 1.000, 0.500, 0.500, 0.500, 0.300, 0.300, 0.300, 0.300, 0.180, 0.180, 0.180, 0.080, 0.080, 
+                               0.000, 0.000, 0.140, 0.110, 0.080, 0.050, 0.000, 0.000, 0.000, 0.050, 0.085, 0.000, 0.050),
+                "SILT"  =   c( 0.000, 0.500, 0.300, 0.000, 0.700, 0.500, 0.200, 0.000, 0.820, 0.500, 0.000, 0.920, 0.720, 
+                               0.800, 1.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.150, 0.300, 0.300, 0.300, 0.500, 0.500),  
+                "SAND"  =   c( 0.000, 0.000, 0.200, 0.500, 0.000, 0.200, 0.500, 0.700, 0.000, 0.320, 0.820, 0.000, 0.200, 
+                               0.200, 0.000, 0.860, 0.890, 0.920, 0.950, 1.000, 0.850, 0.700, 0.650, 0.615, 0.500, 0.450)  
+            ),  #
+            # 
+            #   Abreviations;       Names of the texture cl;    Points marking the class limits (points specified above)
+            "tt.polygons"   = list( 
+                "rS"    = list( "name" = "reiner Sand",                "points" = c(19, 20, 21 ) ), 
+                "l''S"  = list( "name" = "sehr schwach lehmiger Sand", "points" = c(18, 19, 21, 22 ) ), 
+                "l'S"   = list( "name" = "schwach lehmiger Sand",      "points" = c(17, 18, 22, 23 ) ), 
+                #"lS"   = list( "name" = "stark lehmiger Sand",        "points" = c(17, 18, 20, 16 ) ), 
+                "lS"    = list( "name" = "stark lehmiger Sand",        "points" = c(16, 17, 23, 24 ) ), 
+                "uS"    = list( "name" = "schluffiger Sand",           "points" = c(24, 23, 22, 25, 26 ) ), 
+                "U"     = list( "name" = "Schluff",                    "points" = c(13, 14, 15, 12 ) ), 
+                "lU"    = list( "name" = "lehmiger Schluff",           "points" = c(10, 26, 25, 14, 13, 12, 09 ) ), 
+                "sL"    = list( "name" = "sandiger Lehm",              "points" = c(11, 16, 24, 26,  10 ) ), 
+                "L"     = list( "name" = "Lehm",                       "points" = c(08, 11, 10, 06, 07 ) ), 
+                "UL"    = list( "name" = "Schlufflehm",                "points" = c(06, 10, 09, 05 ) ), 
+                "uT"    = list( "name" = "schluffiger Ton",            "points" = c(03, 06, 05, 02 ) ), 
+                "lT"    = list( "name" = "lehmiger Ton",               "points" = c(04, 07, 06, 03 ) ), 
+                "sT"    = list( "name" = "sandiger Ton",               "points" = c(04, 08, 07 ) ),
+                "T"     = list( "name" = "Ton",                        "points" = c(01, 04, 03, 02 ) )
+                #
+            ),  #
+            #
+            # Triangle specific parameters for triangle geometry / appearance
+            #   See general parameters above for detailed description of them
+            blr.clock       = c(F,T,NA), 
+            tlr.an          = c(45,90,45), 
+            #
+            blr.tx          = c("CLAY","SILT","SAND"), 
+            # 
+            base.css.ps.lim = c(0,2,63,2000), 
+            tri.css.ps.lim  = c(0,2,63,2000), 
+            # 
             unit.ps         = quote(bold(mu) * bold('m')), 
             unit.tx         = quote(bold('%')), 
             #
@@ -1677,10 +1786,10 @@ TT.DJ.col <- function(# A function to obtaine a weight average 'mix' of differen
     if( gray.l ){ m.cl[] <- rep(mean(m.cl),3) }     # 1:3 stands here in case of alpha value...
     #
     rgb( 
-        r               = m.cl["red"], 
-        g               = m.cl["green"], 
-        b               = m.cl["blue"], 
-        maxColorValue   = 255  
+        red           = m.cl["red"], 
+        green         = m.cl["green"], 
+        blue          = m.cl["blue"], 
+        maxColorValue = 255  
     )   #
 }   #
 
@@ -1902,7 +2011,7 @@ TT.geo.get  <- function(# Internal. Retrieve and return the geometrical paramete
     null.geo.par    <- unlist(  lapply( 
             X   = geo.par, 
             FUN = function(X){ 
-                is.null( get(x=X,env=p.env) ) 
+                is.null( get(x=X,envir=p.env) ) 
             }   #
     )   )   #
     #
@@ -1922,14 +2031,14 @@ TT.geo.get  <- function(# Internal. Retrieve and return the geometrical paramete
             silent  <- lapply( 
                 X   = geo.par, 
                 FUN = function(X){ 
-                    assign(x=X,value=TT.data[[X]],env=p.env)
+                    assign(x=X,value=TT.data[[X]],envir=p.env)
                 }   #
             )   #
         }else{ 
             silent  <- lapply( 
                 X   = geo.par, 
                 FUN = function(X){ 
-                    assign(x=X,value=TT.get(X),env=p.env) 
+                    assign(x=X,value=TT.get(X),envir=p.env) 
                 }   #
             )   #
         }   #
@@ -3469,9 +3578,9 @@ TT.grid <- function(# Plot a grid at regular texture intervals inside an existin
                 bg.hsv      <- col2rgb( bg, alpha = FALSE )[,1]/255 
                 #
                 grid.col    <- rgb( 
-                    r   = bg.hsv["red"], 
-                    g   = bg.hsv["green"], 
-                    b   = bg.hsv["blue"]  
+                    red   = bg.hsv["red"], 
+                    green = bg.hsv["green"], 
+                    blue  = bg.hsv["blue"]  
                 )   #
             # Frame backgound color is not NULL 
             }else{ 
@@ -4268,7 +4377,7 @@ TT.vertices.plot <- function(# Plot the vertices of a texture classification sys
         col         = col, 
         cex         = cex, 
         font        = font, 
-        family      = family.op, 
+        family.op   = family.op, 
         adj         = adj, 
         pos         = pos, 
         offset      = offset, 
