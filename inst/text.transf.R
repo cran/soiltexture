@@ -1,6 +1,8 @@
 # source( "C:/_RTOOLS/SWEAVE_WORK/SOIL_TEXTURES/rforge/pkg/soiltexture/R/text.transf.r" ) 
 
 
+library( "drc" )
+
 
 TT.check.ps.lim.Xm <- function(# Internal. Check the consistency between 'base.ps.lim' and 'dat.ps.lim'. 
 ### Check the consistency between 'base.ps.lim' and 'dat.ps.lim'. 
@@ -186,9 +188,9 @@ tri.sum.norm=FALSE
     # }else{ 
     #     require( "drc" ) 
     # }   #
-    #
+    
     require( "drc" ) 
-    #
+    
     fitpsd <- function(
     y,
     xin,
@@ -197,7 +199,7 @@ tri.sum.norm=FALSE
     method)
     {
         require( "drc" ) # Added 2010/08/11 by JM
-        #
+        
         #default max and min of initial parameters
         maxspa1 <- 1
         minspa1 <- 0.1
@@ -376,12 +378,12 @@ tri.sum.norm=FALSE
                         
                         spa[1:pn-1]     <- runif(n = pn-1,max = maxspa1,min = minspa1)
                         spa[pn]         <- runif(n = 1,max = maxspa2,min = minspa2)
-                        tt<- try( drc:::drm(y ~ xin, fct = list( logi, NULL,pname ), # JM:2010/08/11 changed drc::drm to drm alone
+                        tt<- try( drm(y ~ xin, fct = list( logi, NULL,pname ), # JM:2010/08/11 changed drc::drm to drm alone
                                 start   = spa[1:pn],
                                 #roust  = "median",
                                 lowerl  = lowerl,
                                 upperl  = upperl,
-                                control = drc:::drmc(constr = TRUE,maxIt = 500, # JM:2010/08/11 changed drc::drmc to drmc alone
+                                control = drmc(constr = TRUE,maxIt = 500, # JM:2010/08/11 changed drc::drmc to drmc alone
                                     noMessage   = TRUE,
                                     method      = meth[j],
                                     # method    = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN"),
@@ -414,12 +416,12 @@ tri.sum.norm=FALSE
                     
                     spa[1:pn-1] <- runif(n=pn-1,max = maxspa1,min = minspa1)
                     spa[pn]     <- runif(n=1,max = maxspa2,min = minspa2)
-                    tt  <- try( drc:::drm(y ~ xin, fct = list(logi, NULL, pname), # JM:2010/08/11 changed drc::drm to drm alone
+                    tt  <- try( drm(y ~ xin, fct = list(logi, NULL, pname), # JM:2010/08/11 changed drc::drm to drm alone
                             start   = spa[1:pn],
                             #roust  = "median",
                             lowerl  = lowerl,
                             upperl  = upperl,
-                            control = drc:::drmc(constr = TRUE,maxIt = 500,# JM:2010/08/11 changed drc::drmc to drmc alone
+                            control = drmc(constr = TRUE,maxIt = 500,# JM:2010/08/11 changed drc::drmc to drmc alone
                                 noMessage   = TRUE,
                                 method      = method,
                                 # method    = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN"),
@@ -557,3 +559,5 @@ tri.sum.norm=FALSE
 #       psdmodel    = "AD",
 #       omethod     = "Nelder-Mead"
 #     )
+
+

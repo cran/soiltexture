@@ -41,73 +41,24 @@ you can type TT.get("class.sys"). To set a different default
 value for a given argument in R, use TT.set() (see ?TT.set). 
 For instance to change the default value of 'class.sys', type 
 TT.set( "class.sys" = "USDA.TT" ).}
-\usage{
-TT.plot(geo = NULL,
-tri.data = NULL,
-add = FALSE,
-css.names = NULL,
-z.name = NULL,
-main = NULL,
-blr.tx = NULL,
-css.lab = NULL,
-text.sum = NULL,
-base.css.ps.lim = NULL,
-tri.css.ps.lim = NULL,
-dat.css.ps.lim = NULL,
-css.transf = NULL,
-text.transf.fun = NULL,
-trsf.add.opt1 = NULL,
-trsf.add.opt2 = NULL,
-unit.ps = NULL,
-unit.tx = NULL,
-blr.clock = NULL,
-tlr.an = NULL,
-font = NULL,
-font.axis = NULL,
-font.lab = NULL,
-font.main = NULL,
-bg = NULL,
-fg = NULL,
-col = NULL,
-col.axis = NULL,
-col.lab = NULL,
-col.main = NULL,
-cex = NULL,
-cex.axis = NULL,
-cex.lab = NULL,
-cex.main = NULL,
-lwd = NULL,
-lwd.axis = NULL,
-lwd.lab = NULL,
-family.op = NULL,
-frame.bg.col = NULL,
-at = NULL,
-grid.show = NULL,
-grid.col = NULL,
-grid.lty = NULL,
-class.sys = NULL,
-class.lab.show = NULL,
-class.lab.col = NULL,
-class.line.col = NULL,
-class.p.bg.col = NULL,
-class.p.bg.hue = NULL,
-arrows.show = NULL,
-arrows.lty = NULL,
-points.type = NULL,
-pch = NULL,
-z.type = NULL,
-z.col.hue = NULL,
-z.cex.range = NULL,
-z.pch = NULL,
-text.tol = NULL,
-tri.sum.tst = NULL,
-tri.pos.tst = NULL,
-b.lim = NULL,
-l.lim = NULL,
-lang = NULL,
-new.mar = NULL,
-new.centroid = TRUE)
-}
+\usage{TT.plot(geo = NULL, tri.data = NULL, add = FALSE, css.names = NULL, 
+    z.name = NULL, main = NULL, blr.tx = NULL, css.lab = NULL, 
+    text.sum = NULL, base.css.ps.lim = NULL, tri.css.ps.lim = NULL, 
+    dat.css.ps.lim = NULL, css.transf = NULL, text.transf.fun = NULL, 
+    trsf.add.opt1 = NULL, trsf.add.opt2 = NULL, unit.ps = NULL, 
+    unit.tx = NULL, blr.clock = NULL, tlr.an = NULL, font = NULL, 
+    font.axis = NULL, font.lab = NULL, font.main = NULL, bg = NULL, 
+    fg = NULL, col = NULL, col.axis = NULL, col.lab = NULL, col.main = NULL, 
+    cex = NULL, cex.axis = NULL, cex.lab = NULL, cex.main = NULL, 
+    lwd = NULL, lwd.axis = NULL, lwd.lab = NULL, family.op = NULL, 
+    frame.bg.col = NULL, at = NULL, grid.show = NULL, grid.col = NULL, 
+    grid.lty = NULL, class.sys = NULL, class.lab.show = NULL, 
+    class.lab.col = NULL, class.line.col = NULL, class.p.bg.col = NULL, 
+    class.p.bg.hue = NULL, arrows.show = NULL, arrows.lty = NULL, 
+    points.type = NULL, pch = NULL, z.type = NULL, z.col.hue = NULL, 
+    z.cex.range = NULL, z.pch = NULL, text.tol = NULL, tri.sum.tst = NULL, 
+    tri.pos.tst = NULL, b.lim = NULL, l.lim = NULL, lang = NULL, 
+    new.mar = NULL, new.centroid = TRUE)}
 \arguments{
   \item{geo}{List. 'geo' is one of the 3 way to set the texture triangle 
 geometry. See there description and hierarchy in the function 
@@ -309,9 +260,8 @@ That texture classification system will determines the triangle
 geometry and particle class size system of the plot, unless 
 higher level options are chosen (see the function definition). 
 Possible values are "none" (no classification plotted), "USDA.TT" 
-(USDA texture triangle), "FAO50.TT" (FAO texture triangle with a 50 
-microns silt-sand limit. DEFAULT VALUE), "FR.AISNE.TT" (French 
-texture triangle 
+(USDA texture triangle), "HYPRES.TT" (texture triangle of the 
+European Sil Map), "FR.AISNE.TT" (French texture triangle 
 of the Aisne region soil survey), "FR.GEPPA.TT" (French GEPPA 
 texture triangle), "DE.BK94.TT" (German texture triangle), 
 "UK.SSEW.TT" (Soil Survey of England and Wales), "AU.TT" 
@@ -416,11 +366,11 @@ taken as the mean x and y coordinates of the vertices.}
 
 # ::: Texture triangles without data
 
-# :: Base plot (FAO triangle) 
+# :: Base plot (HYPRES / European Soil Map triangle) 
 TT.plot() 
 
 # same as
-TT.plot( class.sys = "FAO50.TT" ) 
+TT.plot( class.sys = "HYPRES.TT" ) 
 
 # :: Same plot, but with USDA texture triangle 
 TT.plot( class.sys = "USDA.TT" ) 
@@ -469,7 +419,7 @@ TT.plot(
 # ::: Test all the texture triangles
 
 TT.plot( class.sys = "none" )           # no classification 
-TT.plot( class.sys = "FAO50.TT" )       # FAO 
+TT.plot( class.sys = "HYPRES.TT" )      # HYPRES / European Soil Map 
 TT.plot( class.sys = "USDA.TT" )        # USDA 
 TT.plot( class.sys = "FR.AISNE.TT" )    # French Aisne 
 TT.plot( class.sys = "FR.GEPPA.TT" )    # French GEPPA 
@@ -478,10 +428,10 @@ TT.plot( class.sys = "UK.SSEW.TT" )     # UK
 TT.plot( class.sys = "BE.TT" )          # Belgium 
 TT.plot( class.sys = "CA.FR.TT" )       # Canada (fr) 
 TT.plot( class.sys = "CA.EN.TT" )       # Canada (en) 
-TT.plot( class.sys = "AU.TT" )          # Australian 
+TT.plot( class.sys = "AU2.TT" )         # Australian 
 TT.plot( class.sys = "ISSS.TT" )        # ISSS 
 TT.plot( class.sys = "ROM.TT" )         # Romanian 
-TT.plot( class.sys = "PL.TT" )          # Polish 
+try( TT.plot( class.sys = "PL.TT" ) )   # Polish 
 TT.plot( class.sys = "DE.SEA74.TT" )    # German SEA 1974 
 TT.plot( class.sys = "DE.TGL85.TT" )    # German TGL 1985 
 
@@ -497,5 +447,5 @@ TT.plot( class.sys = "USDA.TT", lang = "nl" )  #  Dutch
 TT.plot( class.sys = "USDA.TT", lang = "fl" )  #  Dutch (Belgian) / Flemmish 
 TT.plot( class.sys = "USDA.TT", lang = "se" )  #  Swedish 
 TT.plot( class.sys = "USDA.TT", lang = "ro" )  #  Romanian 
-TT.plot( class.sys = "USDA.TT", lang = "pl" )  #  Polish 
+try( TT.plot( class.sys = "USDA.TT", lang = "pl" ) ) #  Polish 
 }
