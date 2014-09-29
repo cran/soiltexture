@@ -835,6 +835,46 @@ Manual (Soil Survey Staff 1993\cite{USDA1993}).
 
 
 % +~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+\subsection{Whitney 1911 USDA soil texture classification} 
+
+To display a Whitney (1911) version of the USDA texture triangle, 
+type:
+
+
+<<echo=TRUE,fig=TRUE,include=TRUE>>= 
+TT.plot( class.sys = "USDA1911" ) 
+@ 
+
+
+The Whitney USDA 1911 soil texture triangle has been built 
+considering a silt - sand limit of 
+\Sexpr{TT.get("USDA1911")[["base.css.ps.lim"]][3]}$\mu$meters, 
+and a \textbf{clay - silt limit of 
+\Sexpr{TT.get("USDA1911")[["base.css.ps.lim"]][2]}$\mu$meters 
+(Notice the difference with the actual USDA triangle)}\\ 
+
+See the table for soil texture classes symbols.\\
+
+
+<<echo=FALSE,results=tex>>= 
+tex.tbl <- TT.classes.tbl( class.sys = "USDA1911" ) 
+xtable( 
+    x       = tex.tbl[, -3 ],  #
+    caption = "Texture classes of the Whitney 1911 system / triangle", 
+    label   = NULL  
+)   #
+@ 
+
+
+This triangle has been kindly digitised and provided by Nic 
+Jelinski (University of Minnesota, USA). The original reference 
+used to digitise this triangle is the Whitney 1911\cite{WHITNEY1911}.
+
+\clearpage % otherwise the table may 'eats' next triangle
+
+
+
+% +~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
 \subsection{The European Soil Map (HYPRES) soil texture classification} 
 
 \textbf{NOTE: I had previously erroneously named that system 
@@ -1201,7 +1241,7 @@ value'), due to technical difficulties for reproducing precisely
 this triangle (reproduced after both Minasny and McBratney 
 2001\cite{MINASNY2001AJSR}, and Holbeche 2008\cite{HOLBECHE2008} 
 (brochure 'Soil Texture-Laboratory Method' from soilquality.org.au 
-\footnote{texttt{http://soilquality.org.au}}).\\
+\footnote{\texttt{http://soilquality.org.au}}).\\
 
 \clearpage % otherwise the table may 'eats' next triangle
 
@@ -1492,6 +1532,44 @@ contains). So it is not guaranteed that the triangle is available
 on all platforms. If the triangle is not available (could not 
 be loaded for any reason), a message is issued when the package 
 is loaded (but no error or warning).
+
+\clearpage % otherwise the table may 'eats' next triangle
+
+
+
+% +~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+\subsection{The Brazilian soil texture classification} 
+
+To display a Brazilian texture triangle (Lemos \& Santos 
+1996)\cite{LEMOS1996}, type:
+
+
+<<echo=TRUE,fig=TRUE,include=TRUE>>= 
+TT.plot( class.sys = "BRASIL.TT" ) 
+@ 
+
+
+
+The Brazilian soil texture classification has been built 
+considering a silt - sand limit of 
+\Sexpr{TT.get("BRASIL.TT")[["base.css.ps.lim"]][3]}$\mu$meters.\\
+
+
+See the table for soil texture classes symbols:
+
+
+<<echo=FALSE,results=tex>>= 
+tex.tbl <- TT.classes.tbl( class.sys = "BRASIL.TT" ) 
+xtable( 
+    x       = tex.tbl[,-3],  #
+    caption = "Texture classes of the Brazilian system / triangle", 
+    label   = NULL  
+)   #
+@ 
+
+
+Many thanks to Rodolfo Marcondes Silva Souza, UFPE, Brasil, for 
+providing information and references on the Brasilian triangle.\\
 
 \clearpage % otherwise the table may 'eats' next triangle
 
@@ -3327,7 +3405,10 @@ par(old.par)
 
 
 The polish language can be obtained by typing \texttt{lang = "pl"} 
-on all platforms by Mac.\\
+on all platforms but Mac.\\
+
+
+The Portuguese language can be obtained by typing \texttt{lang = "pt"}.
 
 
 And finally in English, the default language (\texttt{lang = "en"}):
