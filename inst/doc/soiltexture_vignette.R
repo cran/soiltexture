@@ -1,7 +1,7 @@
 ### R code from vignette source 'soiltexture_vignette.Rnw'
 
 ###################################################
-### code chunk number 1: soiltexture_vignette.Rnw:99-121
+### code chunk number 1: soiltexture_vignette.Rnw:99-111
 ###################################################
 # Set a few Sweave options:
 options( 
@@ -14,41 +14,33 @@ options(
 # setwd("C:/_RTOOLS/SWEAVE_WORK/SOIL_TEXTURES/rforge/pkg/soiltexture/inst/doc/INOUT") 
 
 # And load the xtable package:
-if( !"xtable" %in% .packages(all.available = TRUE) )
-{   #
-    message( paste( sep = "", 
-        "The xtable package is not present in your R install:\n", 
-        "R will now try to connect to one package server\n", 
-        "and propose you a list of package to download\n", 
-        "and install: Choose 'xtable' from the list"
-    )   )   #
-    utils:::menuInstallPkgs() 
-}   #
-require( "xtable" ) 
+library( "xtable" )
 
 
 ###################################################
-### code chunk number 2: soiltexture_vignette.Rnw:140-161
+### code chunk number 2: soiltexture_vignette.Rnw:130-153
 ###################################################
 old.wd  <- getwd() 
 
 # setwd("C:/_RTOOLS/SWEAVE_WORK/SOIL_TEXTURES/rforge/pkg/soiltexture/inst/doc/INOUT") 
 
-if( !("soiltexture" %in%  as.character( installed.packages()[,1] )) ) 
-{   #
-    suppressMessages( 
-        install.packages( 
-            pkgs  = "soiltexture"  
-            # repos = "http://R-Forge.R-project.org" 
-        )   #
-    )   #
-}   #
+# if( !("soiltexture" %in%  as.character( installed.packages()[,1] )) ) 
+# {   #
+#     suppressMessages( 
+#         install.packages( 
+#             pkgs  = "soiltexture"  
+#             # repos = "http://R-Forge.R-project.org" 
+#         )   #
+#     )   #
+# }   #
 
-require( 
-    package        = "soiltexture", 
-    character.only = TRUE, 
-    quietly        = TRUE 
-)   #
+suppressPackageStartupMessages( library( "soiltexture" ) )
+
+# library( 
+#     package        = "soiltexture", 
+#     character.only = TRUE, 
+#     quietly        = TRUE 
+# )   
 
 # setwd(old.wd) 
 
@@ -60,7 +52,7 @@ TT.plot(class.p.bg.col=T,class.sys="USDA.TT",main=NA)
 
 
 ###################################################
-### code chunk number 4: soiltexture_vignette.Rnw:375-415
+### code chunk number 4: soiltexture_vignette.Rnw:367-407
 ###################################################
 bornes <- c(0,2,20,50,200,2e3,20e3)
 noms   <- c("Cl","FiSi","CoSi","FiSa","CoSa","Gr","St")
@@ -105,7 +97,7 @@ text(x=xtxt,y=rep(1,length(xtxt)),labels=tmp$"noms",cex=2)
 
 
 ###################################################
-### code chunk number 5: soiltexture_vignette.Rnw:504-513
+### code chunk number 5: soiltexture_vignette.Rnw:496-505
 ###################################################
 TT.plot( 
     class.sys   = "none", 
@@ -119,7 +111,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 6: soiltexture_vignette.Rnw:551-560
+### code chunk number 6: soiltexture_vignette.Rnw:543-552
 ###################################################
 TT.plot( 
     class.sys   = "HYPRES.TT", 
@@ -133,13 +125,13 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 7: soiltexture_vignette.Rnw:565-566
+### code chunk number 7: soiltexture_vignette.Rnw:557-558
 ###################################################
 library( "xtable" ) 
 
 
 ###################################################
-### code chunk number 8: soiltexture_vignette.Rnw:569-575
+### code chunk number 8: soiltexture_vignette.Rnw:561-567
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "HYPRES.TT" ) 
 xtable( 
@@ -150,47 +142,47 @@ xtable(
 
 
 ###################################################
-### code chunk number 9: soiltexture_vignette.Rnw:648-649 (eval = FALSE)
+### code chunk number 9: soiltexture_vignette.Rnw:640-641 (eval = FALSE)
 ###################################################
 ## install.packages( pkgs = "soiltexture" ) 
 
 
 ###################################################
-### code chunk number 10: soiltexture_vignette.Rnw:658-662 (eval = FALSE)
+### code chunk number 10: soiltexture_vignette.Rnw:650-654 (eval = FALSE)
 ###################################################
 ## install.packages( 
 ##     pkgs  = "soiltexture", 
 ##     repos = "http://R-Forge.R-project.org" 
-## )   #
+## )   
 
 
 ###################################################
-### code chunk number 11: soiltexture_vignette.Rnw:669-670
+### code chunk number 11: soiltexture_vignette.Rnw:661-662
 ###################################################
-require( soiltexture ) 
+library( soiltexture ) 
 
 
 ###################################################
-### code chunk number 12: soiltexture_vignette.Rnw:678-680 (eval = FALSE)
+### code chunk number 12: soiltexture_vignette.Rnw:670-672 (eval = FALSE)
 ###################################################
-## detach( package:soiltexture ) 
+## detach( "package:soiltexture" ) 
 ## remove.packages( "soiltexture" ) 
 
 
 ###################################################
-### code chunk number 13: soiltexture_vignette.Rnw:779-780
+### code chunk number 13: soiltexture_vignette.Rnw:771-772
 ###################################################
 TT.plot( class.sys = "none" ) 
 
 
 ###################################################
-### code chunk number 14: soiltexture_vignette.Rnw:805-806
+### code chunk number 14: soiltexture_vignette.Rnw:797-798
 ###################################################
 TT.plot( class.sys = "USDA.TT" ) 
 
 
 ###################################################
-### code chunk number 15: soiltexture_vignette.Rnw:820-826
+### code chunk number 15: soiltexture_vignette.Rnw:812-818
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "USDA.TT" ) 
 xtable( 
@@ -201,13 +193,13 @@ xtable(
 
 
 ###################################################
-### code chunk number 16: soiltexture_vignette.Rnw:844-845
+### code chunk number 16: soiltexture_vignette.Rnw:836-837
 ###################################################
 TT.plot( class.sys = "USDA1911" ) 
 
 
 ###################################################
-### code chunk number 17: soiltexture_vignette.Rnw:859-865
+### code chunk number 17: soiltexture_vignette.Rnw:851-857
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "USDA1911" ) 
 xtable( 
@@ -218,13 +210,13 @@ xtable(
 
 
 ###################################################
-### code chunk number 18: soiltexture_vignette.Rnw:894-895
+### code chunk number 18: soiltexture_vignette.Rnw:886-887
 ###################################################
 TT.plot( class.sys = "HYPRES.TT" ) 
 
 
 ###################################################
-### code chunk number 19: soiltexture_vignette.Rnw:915-921
+### code chunk number 19: soiltexture_vignette.Rnw:907-913
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "HYPRES.TT" ) 
 xtable( 
@@ -235,13 +227,13 @@ xtable(
 
 
 ###################################################
-### code chunk number 20: soiltexture_vignette.Rnw:941-942
+### code chunk number 20: soiltexture_vignette.Rnw:933-934
 ###################################################
 TT.plot( class.sys = "FR.AISNE.TT" ) 
 
 
 ###################################################
-### code chunk number 21: soiltexture_vignette.Rnw:956-962
+### code chunk number 21: soiltexture_vignette.Rnw:948-954
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "FR.AISNE.TT" ) 
 xtable( 
@@ -252,13 +244,13 @@ xtable(
 
 
 ###################################################
-### code chunk number 22: soiltexture_vignette.Rnw:981-982
+### code chunk number 22: soiltexture_vignette.Rnw:973-974
 ###################################################
 TT.plot( class.sys = "FR.GEPPA.TT" ) 
 
 
 ###################################################
-### code chunk number 23: soiltexture_vignette.Rnw:993-999
+### code chunk number 23: soiltexture_vignette.Rnw:985-991
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "FR.GEPPA.TT" ) 
 xtable( 
@@ -269,13 +261,13 @@ xtable(
 
 
 ###################################################
-### code chunk number 24: soiltexture_vignette.Rnw:1022-1023
+### code chunk number 24: soiltexture_vignette.Rnw:1014-1015
 ###################################################
 TT.plot( class.sys = "DE.BK94.TT" ) 
 
 
 ###################################################
-### code chunk number 25: soiltexture_vignette.Rnw:1034-1040
+### code chunk number 25: soiltexture_vignette.Rnw:1026-1032
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "DE.BK94.TT" ) 
 xtable( 
@@ -286,19 +278,19 @@ xtable(
 
 
 ###################################################
-### code chunk number 26: soiltexture_vignette.Rnw:1065-1066
+### code chunk number 26: soiltexture_vignette.Rnw:1057-1058
 ###################################################
 TT.plot( class.sys = "DE.SEA74.TT" ) 
 
 
 ###################################################
-### code chunk number 27: soiltexture_vignette.Rnw:1071-1072
+### code chunk number 27: soiltexture_vignette.Rnw:1063-1064
 ###################################################
 plLim <- TT.get("DE.SEA74.TT")[["base.css.ps.lim"]][3]
 
 
 ###################################################
-### code chunk number 28: soiltexture_vignette.Rnw:1083-1089
+### code chunk number 28: soiltexture_vignette.Rnw:1075-1081
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "DE.SEA74.TT" ) 
 xtable( 
@@ -309,7 +301,7 @@ xtable(
 
 
 ###################################################
-### code chunk number 29: soiltexture_vignette.Rnw:1104-1110
+### code chunk number 29: soiltexture_vignette.Rnw:1096-1102
 ###################################################
 TT.plot( 
     class.sys = "DE.SEA74.TT", 
@@ -320,19 +312,19 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 30: soiltexture_vignette.Rnw:1126-1127
+### code chunk number 30: soiltexture_vignette.Rnw:1118-1119
 ###################################################
 TT.plot( class.sys = "DE.TGL85.TT" ) 
 
 
 ###################################################
-### code chunk number 31: soiltexture_vignette.Rnw:1132-1133
+### code chunk number 31: soiltexture_vignette.Rnw:1124-1125
 ###################################################
 plLim <- TT.get("DE.TGL85.TT")[["base.css.ps.lim"]][3]
 
 
 ###################################################
-### code chunk number 32: soiltexture_vignette.Rnw:1144-1150
+### code chunk number 32: soiltexture_vignette.Rnw:1136-1142
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "DE.TGL85.TT" ) 
 xtable( 
@@ -343,7 +335,7 @@ xtable(
 
 
 ###################################################
-### code chunk number 33: soiltexture_vignette.Rnw:1161-1167
+### code chunk number 33: soiltexture_vignette.Rnw:1153-1159
 ###################################################
 TT.plot( 
     class.sys = "DE.TGL85.TT", 
@@ -354,13 +346,13 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 34: soiltexture_vignette.Rnw:1182-1183
+### code chunk number 34: soiltexture_vignette.Rnw:1174-1175
 ###################################################
 TT.plot( class.sys = "UK.SSEW.TT" ) 
 
 
 ###################################################
-### code chunk number 35: soiltexture_vignette.Rnw:1193-1199
+### code chunk number 35: soiltexture_vignette.Rnw:1185-1191
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "UK.SSEW.TT" ) 
 xtable( 
@@ -371,15 +363,15 @@ xtable(
 
 
 ###################################################
-### code chunk number 36: soiltexture_vignette.Rnw:1216-1217
+### code chunk number 36: soiltexture_vignette.Rnw:1208-1209
 ###################################################
-TT.plot( class.sys = "AU.TT" ) 
+TT.plot( class.sys = "AU2.TT" ) 
 
 
 ###################################################
-### code chunk number 37: soiltexture_vignette.Rnw:1228-1234
+### code chunk number 37: soiltexture_vignette.Rnw:1220-1226
 ###################################################
-tex.tbl <- TT.classes.tbl( class.sys = "AU.TT" ) 
+tex.tbl <- TT.classes.tbl( class.sys = "AU2.TT" ) 
 xtable( 
     x       = tex.tbl[,-3],  #
     caption = "Texture classes of the Australian system / triangle", 
@@ -388,13 +380,13 @@ xtable(
 
 
 ###################################################
-### code chunk number 38: soiltexture_vignette.Rnw:1256-1257
+### code chunk number 38: soiltexture_vignette.Rnw:1248-1249
 ###################################################
 TT.plot( class.sys = "BE.TT" ) 
 
 
 ###################################################
-### code chunk number 39: soiltexture_vignette.Rnw:1272-1278
+### code chunk number 39: soiltexture_vignette.Rnw:1264-1270
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "BE.TT" ) 
 xtable( 
@@ -405,19 +397,19 @@ xtable(
 
 
 ###################################################
-### code chunk number 40: soiltexture_vignette.Rnw:1296-1297
+### code chunk number 40: soiltexture_vignette.Rnw:1288-1289
 ###################################################
 TT.plot( class.sys = "CA.EN.TT" ) 
 
 
 ###################################################
-### code chunk number 41: soiltexture_vignette.Rnw:1304-1305
+### code chunk number 41: soiltexture_vignette.Rnw:1296-1297
 ###################################################
 TT.plot( class.sys = "CA.FR.TT" ) 
 
 
 ###################################################
-### code chunk number 42: soiltexture_vignette.Rnw:1318-1324
+### code chunk number 42: soiltexture_vignette.Rnw:1310-1316
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "CA.EN.TT" ) 
 xtable( 
@@ -428,7 +420,7 @@ xtable(
 
 
 ###################################################
-### code chunk number 43: soiltexture_vignette.Rnw:1331-1337
+### code chunk number 43: soiltexture_vignette.Rnw:1323-1329
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "CA.FR.TT" ) 
 xtable( 
@@ -439,13 +431,13 @@ xtable(
 
 
 ###################################################
-### code chunk number 44: soiltexture_vignette.Rnw:1363-1364
+### code chunk number 44: soiltexture_vignette.Rnw:1355-1356
 ###################################################
 TT.plot( class.sys = "ISSS.TT" ) 
 
 
 ###################################################
-### code chunk number 45: soiltexture_vignette.Rnw:1377-1383
+### code chunk number 45: soiltexture_vignette.Rnw:1369-1375
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "ISSS.TT" ) 
 xtable( 
@@ -456,13 +448,13 @@ xtable(
 
 
 ###################################################
-### code chunk number 46: soiltexture_vignette.Rnw:1401-1402
+### code chunk number 46: soiltexture_vignette.Rnw:1393-1394
 ###################################################
 TT.plot( class.sys = "ROM.TT" ) 
 
 
 ###################################################
-### code chunk number 47: soiltexture_vignette.Rnw:1415-1421
+### code chunk number 47: soiltexture_vignette.Rnw:1407-1413
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "ROM.TT" ) 
 xtable( 
@@ -473,7 +465,7 @@ xtable(
 
 
 ###################################################
-### code chunk number 48: soiltexture_vignette.Rnw:1432-1438
+### code chunk number 48: soiltexture_vignette.Rnw:1424-1430
 ###################################################
 TT.plot( 
     class.sys = "ROM.TT", 
@@ -484,7 +476,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 49: soiltexture_vignette.Rnw:1459-1466
+### code chunk number 49: soiltexture_vignette.Rnw:1451-1458
 ###################################################
 test <- try( TT.plot( class.sys = "PL.TT" ) ) 
 
@@ -496,14 +488,14 @@ if( "try-error" %in% class(test) ){
 
 
 ###################################################
-### code chunk number 50: soiltexture_vignette.Rnw:1490-1492
+### code chunk number 50: soiltexture_vignette.Rnw:1482-1484
 ###################################################
 test <- try( plLim <- TT.get("PL.TT")[["base.css.ps.lim"]][3] ) 
 if( "try-error" %in% class(test) ){ plLim <- NA_real_ }
 
 
 ###################################################
-### code chunk number 51: soiltexture_vignette.Rnw:1515-1521
+### code chunk number 51: soiltexture_vignette.Rnw:1507-1513
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "PL.TT" ) 
 xtable( 
@@ -514,24 +506,41 @@ xtable(
 
 
 ###################################################
-### code chunk number 52: soiltexture_vignette.Rnw:1547-1548
+### code chunk number 52: soiltexture_vignette.Rnw:1539-1540
 ###################################################
 TT.plot( class.sys = "BRASIL.TT" ) 
 
 
 ###################################################
-### code chunk number 53: soiltexture_vignette.Rnw:1561-1567
+### code chunk number 53: soiltexture_vignette.Rnw:1553-1559
 ###################################################
 tex.tbl <- TT.classes.tbl( class.sys = "BRASIL.TT" ) 
 xtable( 
     x       = tex.tbl[,-3],  #
-    caption = "Texture classes of the Brazilian system / triangle", 
+    caption = "Texture classes of the Brazilian system (1996)", 
     label   = NULL  
 )   #
 
 
 ###################################################
-### code chunk number 54: soiltexture_vignette.Rnw:1589-1606
+### code chunk number 54: soiltexture_vignette.Rnw:1577-1578
+###################################################
+TT.plot( class.sys = "SiBCS13.TT" ) 
+
+
+###################################################
+### code chunk number 55: soiltexture_vignette.Rnw:1591-1597
+###################################################
+tex.tbl <- TT.classes.tbl( class.sys = "SiBCS13.TT" ) 
+xtable( 
+    x       = tex.tbl[,-3],  #
+    caption = "Texture classes of the Brazilian system (2013)", 
+    label   = NULL  
+)   #
+
+
+###################################################
+### code chunk number 56: soiltexture_vignette.Rnw:1620-1637
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -553,7 +562,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 55: soiltexture_vignette.Rnw:1614-1631
+### code chunk number 57: soiltexture_vignette.Rnw:1645-1662
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -575,7 +584,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 56: soiltexture_vignette.Rnw:1639-1656
+### code chunk number 58: soiltexture_vignette.Rnw:1670-1687
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -597,7 +606,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 57: soiltexture_vignette.Rnw:1663-1680
+### code chunk number 59: soiltexture_vignette.Rnw:1694-1711
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -605,7 +614,7 @@ par("mfcol" = c(1,2),"mfrow"=c(1,2))
 
 # Plot the triangles
 TT.plot( 
-    class.sys       = "AU.TT", 
+    class.sys       = "AU2.TT", 
     class.p.bg.col  = TRUE
 )   #
 
@@ -619,7 +628,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 58: soiltexture_vignette.Rnw:1688-1705
+### code chunk number 60: soiltexture_vignette.Rnw:1719-1736
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -641,7 +650,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 59: soiltexture_vignette.Rnw:1719-1723
+### code chunk number 61: soiltexture_vignette.Rnw:1750-1754
 ###################################################
 TT.plot( 
     class.sys       = "HYPRES.TT", 
@@ -650,7 +659,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 60: soiltexture_vignette.Rnw:1744-1761
+### code chunk number 62: soiltexture_vignette.Rnw:1775-1792
 ###################################################
 # First plot the USDA texture triangle, and retrieve its 
 #   geometrical features, silently outputted by TT.plot 
@@ -672,7 +681,7 @@ TT.classes(
 
 
 ###################################################
-### code chunk number 61: soiltexture_vignette.Rnw:1779-1796
+### code chunk number 63: soiltexture_vignette.Rnw:1810-1827
 ###################################################
 # First plot the USDA texture triangle, and retrieve its 
 #   geometrical features, silently outputted by TT.plot 
@@ -694,7 +703,7 @@ TT.classes(
 
 
 ###################################################
-### code chunk number 62: soiltexture_vignette.Rnw:1813-1823
+### code chunk number 64: soiltexture_vignette.Rnw:1844-1854
 ###################################################
 # Create a dummy data frame of soil textures:
 my.text <- data.frame( 
@@ -709,7 +718,7 @@ my.text
 
 
 ###################################################
-### code chunk number 63: soiltexture_vignette.Rnw:1830-1835
+### code chunk number 65: soiltexture_vignette.Rnw:1861-1866
 ###################################################
 TT.plot( 
     class.sys   = "HYPRES.TT", 
@@ -719,7 +728,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 64: soiltexture_vignette.Rnw:1853-1859
+### code chunk number 66: soiltexture_vignette.Rnw:1884-1890
 ###################################################
 TT.plot( 
     class.sys   = "none", 
@@ -730,13 +739,13 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 65: soiltexture_vignette.Rnw:1881-1882
+### code chunk number 67: soiltexture_vignette.Rnw:1912-1913
 ###################################################
 rand.text	<- TT.dataset(n=100,seed.val=1980042401)
 
 
 ###################################################
-### code chunk number 66: soiltexture_vignette.Rnw:1886-1892
+### code chunk number 68: soiltexture_vignette.Rnw:1917-1923
 ###################################################
 TT.plot( 
     class.sys   = "none", 
@@ -747,7 +756,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 67: soiltexture_vignette.Rnw:1903-1952
+### code chunk number 69: soiltexture_vignette.Rnw:1934-1983
 ###################################################
 TT.plot( 
     class.sys   = "none", 
@@ -801,7 +810,7 @@ legend(
 
 
 ###################################################
-### code chunk number 68: soiltexture_vignette.Rnw:1999-2018
+### code chunk number 70: soiltexture_vignette.Rnw:2030-2049
 ###################################################
 geo <- TT.geo.get() 
 #
@@ -825,7 +834,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 69: soiltexture_vignette.Rnw:2048-2066
+### code chunk number 71: soiltexture_vignette.Rnw:2079-2097
 ###################################################
 TT.image( 
     x       = iwd.res, 
@@ -848,7 +857,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 70: soiltexture_vignette.Rnw:2101-2123
+### code chunk number 72: soiltexture_vignette.Rnw:2132-2154
 ###################################################
 geo <- TT.geo.get()  
 #
@@ -875,7 +884,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 71: soiltexture_vignette.Rnw:2169-2191
+### code chunk number 73: soiltexture_vignette.Rnw:2200-2222
 ###################################################
 geo <- TT.geo.get() 
 #
@@ -902,7 +911,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 72: soiltexture_vignette.Rnw:2219-2243
+### code chunk number 74: soiltexture_vignette.Rnw:2250-2274
 ###################################################
 geo <- TT.geo.get() 
 #
@@ -931,7 +940,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 73: soiltexture_vignette.Rnw:2272-2287
+### code chunk number 75: soiltexture_vignette.Rnw:2303-2318
 ###################################################
 # Display the USDA texture triangle:
 geo     <- TT.plot(class.sys="USDA.TT") 
@@ -951,13 +960,13 @@ TT.text(
 
 
 ###################################################
-### code chunk number 74: soiltexture_vignette.Rnw:2325-2326
+### code chunk number 76: soiltexture_vignette.Rnw:2356-2357
 ###################################################
 TT.data.test( tri.data = rand.text ) 
 
 
 ###################################################
-### code chunk number 75: soiltexture_vignette.Rnw:2349-2360
+### code chunk number 77: soiltexture_vignette.Rnw:2380-2391
 ###################################################
 res <- TT.normalise.sum( tri.data = rand.text ) 
 #
@@ -973,7 +982,7 @@ max( res[ , "residuals" ] )
 
 
 ###################################################
-### code chunk number 76: soiltexture_vignette.Rnw:2388-2392
+### code chunk number 78: soiltexture_vignette.Rnw:2419-2423
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -982,7 +991,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### code chunk number 77: soiltexture_vignette.Rnw:2401-2405
+### code chunk number 79: soiltexture_vignette.Rnw:2432-2436
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -991,7 +1000,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### code chunk number 78: soiltexture_vignette.Rnw:2417-2422
+### code chunk number 80: soiltexture_vignette.Rnw:2448-2453
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -1001,7 +1010,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### code chunk number 79: soiltexture_vignette.Rnw:2433-2438
+### code chunk number 81: soiltexture_vignette.Rnw:2464-2469
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -1011,7 +1020,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### code chunk number 80: soiltexture_vignette.Rnw:2449-2455
+### code chunk number 82: soiltexture_vignette.Rnw:2480-2486
 ###################################################
 TT.points.in.classes( 
     tri.data    = my.text[1:5,], 
@@ -1022,7 +1031,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### code chunk number 81: soiltexture_vignette.Rnw:2532-2623
+### code chunk number 83: soiltexture_vignette.Rnw:2563-2654
 ###################################################
 tmp.cex <- 1.5
 old.par <- par(no.readonly = TRUE)
@@ -1118,13 +1127,13 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 82: soiltexture_vignette.Rnw:2635-2636
+### code chunk number 84: soiltexture_vignette.Rnw:2666-2667
 ###################################################
 my.text[1:5,]   
 
 
 ###################################################
-### code chunk number 83: soiltexture_vignette.Rnw:2647-2652
+### code chunk number 85: soiltexture_vignette.Rnw:2678-2683
 ###################################################
 TT.text.transf( 
 	tri.data        = my.text[1:5,],  
@@ -1134,7 +1143,7 @@ TT.text.transf(
 
 
 ###################################################
-### code chunk number 84: soiltexture_vignette.Rnw:2660-2666
+### code chunk number 86: soiltexture_vignette.Rnw:2691-2697
 ###################################################
 # Copy the data.frame
 my.text.fr  <- my.text 
@@ -1145,7 +1154,7 @@ colnames(my.text.fr) <- c("ARGILE","LIMON","SABLE","CO")
 
 
 ###################################################
-### code chunk number 85: soiltexture_vignette.Rnw:2673-2679
+### code chunk number 87: soiltexture_vignette.Rnw:2704-2710
 ###################################################
 TT.text.transf( 
     tri.data        = my.text.fr[1:5,],  
@@ -1156,7 +1165,7 @@ TT.text.transf(
 
 
 ###################################################
-### code chunk number 86: soiltexture_vignette.Rnw:2718-2729
+### code chunk number 88: soiltexture_vignette.Rnw:2749-2760
 ###################################################
 # Create a random fraction between 0 and 1
 r.frac <- runif(n=dim(my.text)[1]) 
@@ -1172,7 +1181,7 @@ my.text4[1:5,]
 
 
 ###################################################
-### code chunk number 87: soiltexture_vignette.Rnw:2738-2743
+### code chunk number 89: soiltexture_vignette.Rnw:2769-2774
 ###################################################
 TT.text.transf.X( 
     tri.data        = my.text4[1:5,], 
@@ -1182,7 +1191,7 @@ TT.text.transf.X(
 
 
 ###################################################
-### code chunk number 88: soiltexture_vignette.Rnw:2757-2762
+### code chunk number 90: soiltexture_vignette.Rnw:2788-2793
 ###################################################
 TT.text.transf.X( 
     tri.data        = my.text4[1:5,], 
@@ -1192,7 +1201,7 @@ TT.text.transf.X(
 
 
 ###################################################
-### code chunk number 89: soiltexture_vignette.Rnw:2776-2793
+### code chunk number 91: soiltexture_vignette.Rnw:2807-2824
 ###################################################
 # First, plot the data without transformation:
 geo <- TT.plot( 
@@ -1214,7 +1223,7 @@ TT.points(
 
 
 ###################################################
-### code chunk number 90: soiltexture_vignette.Rnw:2816-2836
+### code chunk number 92: soiltexture_vignette.Rnw:2847-2867
 ###################################################
 # Not transformed
 geo <- TT.plot( 
@@ -1239,7 +1248,7 @@ TT.classes(
 
 
 ###################################################
-### code chunk number 91: soiltexture_vignette.Rnw:2852-2870
+### code chunk number 93: soiltexture_vignette.Rnw:2883-2901
 ###################################################
 # No transformation needed or stated
 geo <- TT.plot( 
@@ -1262,7 +1271,7 @@ TT.classes(
 
 
 ###################################################
-### code chunk number 92: soiltexture_vignette.Rnw:2881-2900
+### code chunk number 94: soiltexture_vignette.Rnw:2912-2931
 ###################################################
 # Untransformed
 geo <- TT.plot( 
@@ -1286,7 +1295,7 @@ TT.classes(
 
 
 ###################################################
-### code chunk number 93: soiltexture_vignette.Rnw:2911-2929
+### code chunk number 95: soiltexture_vignette.Rnw:2942-2960
 ###################################################
 geo <- TT.plot( 
     class.sys   = "FR.GEPPA.TT", 
@@ -1309,7 +1318,7 @@ TT.classes(
 
 
 ###################################################
-### code chunk number 94: soiltexture_vignette.Rnw:2939-2959
+### code chunk number 96: soiltexture_vignette.Rnw:2970-2990
 ###################################################
 # Not transformed
 geo <- TT.plot( 
@@ -1334,7 +1343,7 @@ TT.classes(
 
 
 ###################################################
-### code chunk number 95: soiltexture_vignette.Rnw:2975-2981
+### code chunk number 97: soiltexture_vignette.Rnw:3006-3012
 ###################################################
 TT.points.in.classes( 
     tri.data        = my.text[1:5,], 
@@ -1345,7 +1354,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### code chunk number 96: soiltexture_vignette.Rnw:2986-2993
+### code chunk number 98: soiltexture_vignette.Rnw:3017-3024
 ###################################################
 TT.plot( 
     class.sys       = "USDA.TT", 
@@ -1357,7 +1366,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 97: soiltexture_vignette.Rnw:3001-3008
+### code chunk number 99: soiltexture_vignette.Rnw:3032-3039
 ###################################################
 TT.points.in.classes( 
     tri.data        = my.text[1:5,], 
@@ -1369,7 +1378,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### code chunk number 98: soiltexture_vignette.Rnw:3014-3022
+### code chunk number 100: soiltexture_vignette.Rnw:3045-3053
 ###################################################
 TT.plot( 
     class.sys       = "USDA.TT", 
@@ -1382,7 +1391,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 99: soiltexture_vignette.Rnw:3066-3080
+### code chunk number 101: soiltexture_vignette.Rnw:3097-3111
 ###################################################
 # Create a new function, in fact the copy of TT.text.transf()
 TT.text.transf2 <- TT.text.transf
@@ -1401,7 +1410,7 @@ TT.points.in.classes(
 
 
 ###################################################
-### code chunk number 100: soiltexture_vignette.Rnw:3087-3098
+### code chunk number 102: soiltexture_vignette.Rnw:3118-3129
 ###################################################
 TT.plot( 
     class.sys       = "USDA.TT", 
@@ -1417,7 +1426,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 101: soiltexture_vignette.Rnw:3153-3158
+### code chunk number 103: soiltexture_vignette.Rnw:3184-3189
 ###################################################
 TT.plot( 
     class.sys   = "USDA.TT", 
@@ -1427,7 +1436,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 102: soiltexture_vignette.Rnw:3183-3188
+### code chunk number 104: soiltexture_vignette.Rnw:3214-3219
 ###################################################
 TT.plot( 
     class.sys   = "FR.AISNE.TT", 
@@ -1437,7 +1446,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 103: soiltexture_vignette.Rnw:3217-3222
+### code chunk number 105: soiltexture_vignette.Rnw:3248-3253
 ###################################################
 TT.plot( 
     class.sys   = "HYPRES.TT", 
@@ -1447,7 +1456,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 104: soiltexture_vignette.Rnw:3243-3250
+### code chunk number 106: soiltexture_vignette.Rnw:3274-3281
 ###################################################
 TT.plot( 
     class.sys   = "FR.GEPPA.TT", 
@@ -1459,7 +1468,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 105: soiltexture_vignette.Rnw:3268-3284
+### code chunk number 107: soiltexture_vignette.Rnw:3299-3315
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -1480,7 +1489,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 106: soiltexture_vignette.Rnw:3308-3325
+### code chunk number 108: soiltexture_vignette.Rnw:3339-3356
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -1502,7 +1511,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 107: soiltexture_vignette.Rnw:3333-3350
+### code chunk number 109: soiltexture_vignette.Rnw:3364-3381
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -1524,7 +1533,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 108: soiltexture_vignette.Rnw:3360-3377
+### code chunk number 110: soiltexture_vignette.Rnw:3391-3408
 ###################################################
 # Set a 2 by 2 plot matrix:
 old.par <- par(no.readonly=T)
@@ -1546,7 +1555,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 109: soiltexture_vignette.Rnw:3385-3403
+### code chunk number 111: soiltexture_vignette.Rnw:3416-3434
 ###################################################
 # Set a 2 by 2 plot matrix (for size):
 old.par <- par(no.readonly=T)
@@ -1569,7 +1578,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 110: soiltexture_vignette.Rnw:3417-3429
+### code chunk number 112: soiltexture_vignette.Rnw:3448-3460
 ###################################################
 # Set a 2 by 2 plot matrix (for size):
 old.par <- par(no.readonly=T)
@@ -1586,7 +1595,7 @@ par(old.par)
 
 
 ###################################################
-### code chunk number 111: soiltexture_vignette.Rnw:3454-3459
+### code chunk number 113: soiltexture_vignette.Rnw:3485-3490
 ###################################################
 TT.plot( 
     tri.data    = my.text.fr, 
@@ -1596,7 +1605,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 112: soiltexture_vignette.Rnw:3483-3491
+### code chunk number 114: soiltexture_vignette.Rnw:3514-3522
 ###################################################
 TT.plot( 
     tri.data    = my.text.fr, 
@@ -1609,7 +1618,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 113: soiltexture_vignette.Rnw:3499-3511
+### code chunk number 115: soiltexture_vignette.Rnw:3530-3542
 ###################################################
 TT.plot( 
     tri.data    = my.text.fr, 
@@ -1626,7 +1635,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 114: soiltexture_vignette.Rnw:3535-3546
+### code chunk number 116: soiltexture_vignette.Rnw:3566-3577
 ###################################################
 # Fisrt, retrieve all the data about 
 #   the USDA texture triangle
@@ -1642,7 +1651,7 @@ tmp[ !names(tmp) %in% c("tt.points","tt.polygons") ]
 
 
 ###################################################
-### code chunk number 115: soiltexture_vignette.Rnw:3564-3572
+### code chunk number 117: soiltexture_vignette.Rnw:3595-3603
 ###################################################
 # Retrieve and save the table:
 tmp2 <- TT.classes.tbl( class.sys = "HYPRES.TT" ) 
@@ -1655,13 +1664,13 @@ tmp2[,c(1,3)]
 
 
 ###################################################
-### code chunk number 116: soiltexture_vignette.Rnw:3587-3588
+### code chunk number 118: soiltexture_vignette.Rnw:3618-3619
 ###################################################
 TT.vertices.tbl( class.sys = "HYPRES.TT" ) 
 
 
 ###################################################
-### code chunk number 117: soiltexture_vignette.Rnw:3604-3616
+### code chunk number 119: soiltexture_vignette.Rnw:3635-3647
 ###################################################
 geo <- TT.plot( 
     class.sys   = "HYPRES.TT", 
@@ -1678,7 +1687,7 @@ TT.vertices.plot(
 
 
 ###################################################
-### code chunk number 118: soiltexture_vignette.Rnw:3645-3658
+### code chunk number 120: soiltexture_vignette.Rnw:3676-3689
 ###################################################
 # Step 1 
 HYPRES63 <- TT.get("HYPRES.TT") 
@@ -1696,7 +1705,7 @@ TT.add( "HYPRES63.TT" = HYPRES63 )
 
 
 ###################################################
-### code chunk number 119: soiltexture_vignette.Rnw:3666-3670
+### code chunk number 121: soiltexture_vignette.Rnw:3697-3701
 ###################################################
 TT.plot( 
     class.sys   = "HYPRES63.TT", 
@@ -1705,7 +1714,7 @@ TT.plot(
 
 
 ###################################################
-### code chunk number 120: soiltexture_vignette.Rnw:3681-3701
+### code chunk number 122: soiltexture_vignette.Rnw:3712-3732
 ###################################################
 # Get the definition of the HYPRES texture triangle
 HYPRES <- TT.get( "HYPRES.TT" ) 

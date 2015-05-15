@@ -1,6 +1,6 @@
 \name{TT.polygon.centroids}
 \alias{TT.polygon.centroids}
-\title{Determines the centroid of 1 polygon (in x-y coordinates). }
+\title{Internal. Determines the centroid of 1 polygon (in x-y coordinates). }
 \description{Determines the centroid of 1 non-intersecting polygon (in x-y 
 coordinates). Used to determine the centroid of each texture 
 class in the texture triangle onces its clay silt sand 
@@ -21,7 +21,7 @@ polygon.}
 \value{Returns a vector of 2 numericals: x and y coordinates of 
 the polygon's centroid. Vector items are names "x" and "y". }
 
-\author{Julien MOEYS <jules_m78-soiltexture@yahoo.fr>, contributions from Wei Shangguan.}
+\author{Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb], Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor Zelazny [ctb],  Rodolfo Marcondes Silva Souza [ctb],  Jose Lucas Safanelli [ctb], Alexandre ten Caten [ctb]}
 
 
 

@@ -1,157 +1,3 @@
-# source( "C:/_R_PACKAGES/soiltexture/pkg/soiltexture/R/soiltexture.R" ) 
-# source( "http://r-forge.r-project.org/scm/viewvc.php/*checkout*/pkg/soiltexture/R/soiltexture.R?revision=19&root=soiltexture" ) 
-# +-------------------------------------------------------------------------+
-# |                                                                         |
-# | Julien MOEYS                                                            |
-# |                                                                         |
-# | The Soil Texture Wizard -- A set of R functions to plot soil texture    |
-# | triangles, classify and transform soil texture data                     |
-# |                                                                         |
-# | These functions are _originally_ based on the soil.texture function,    |
-# | in the PLOTRIX package from Jim LEMON and Ben BOLKER. But the code has  |
-# | been gradually modified, and is now (ALMOST?) ENTIRELY DIFFERENT from   |
-# | the original code. Not compatibilty has been maintained with PLOTRIX    |
-# | see <http://cran.r-project.org/web/packages/plotrix/index.html>         |
-# |                                                                         |
-# | Author:             -   Moeys Julien (2006-2010)                        |
-# | Contact:                http://julienmoeys.free.fr                      |
-# |                                                                         |
-# | Original sources:   -   plotrix package, by Lemon J. and Bolker B.      |
-# |                                                                         |
-# | Institution:            < 2008: EGC                                     |
-# |                                 UMG Environnement et Grandes Cultures   |
-# |                                 Equipe Sol, INRA/AgroParisTech          |
-# |                                 av. Lucien Bretignre, BP01              |
-# |                                 F-78850, Thiverval-Grignon, FRANCE      |
-# |                         > 2008: SLU Swedish University of               |
-# |                                 Agricultural Sciences                   |
-# |                                 Soil Science dept.,                     |
-# |                                 Environmental Physics div.              |
-# |                                 Ulls vg 17, Ultuna - PO Box 7014        |
-# |                                 SE-75651 Uppsala, SWEDEN                |
-# |                                                                         |
-# | None of the institution above, and neither the author, endorse any      |
-# | responsibility for problems that could arise from inaccuracies or errors|
-# | in the code presented here. (1) It is much based on free personal work  |
-# | and (2) it is provided for free, so users have the responsibility to    |
-# | check themselves that the program works as expected...                  |
-# |                                                                         |
-# | Research program:       An awful lots of _personal_ work +              |
-# | Research program:       < 2008: ESHEL research program,                 |
-# | Research program:       < 2009: FOOTPRINT, EU-FP6-funded project        |
-# |                                                                         |
-# | Context:                PhD thesis (France)                             |
-# |                         Post-doctoral position (Sweden)                 |
-# |                                                                         |
-# | Copyleft:               Julien Moeys                                    |
-# | Licence:                General Public Licence, GPL (>=3)               |
-# |                                                                         |
-# | Programing language:    R language for statistical computing            |
-# |                         http://wwww:r-project.org                       |
-# | OS:                     Tested on Windows XP                            |
-# |                         this scripts may/should work on Linux and MacOS |
-# |                                                                         |
-# +-------------------------------------------------------------------------+
-# |                                                                         |
-# | FEATURES list:                                                          |
-# | -   Create ternary/triangle plot of point variables defined by a        |
-# |     triplet of variable (which sum to a constant).                      |
-# |     -   Default settings for Soil Texture Triangle Plots                |
-# |     -   Capable of displaying 4 FAMILIES/TYPES of ternary plots         |
-# |         (1) Equilateral with clockwise axis                             |
-# |         (2) Equilateral with counter-clockwise axis                     |
-# |         (3) Right-triangle, with right-side 90deg angle, base side      |
-# |             counter-clockwise and right side clockwise                  |
-# |         (4) Right-triangle, with left-side 90deg angle, base side       |
-# |             clockwise and right left counter-clockwise                  |
-# |     -   For all families, triangle internal angles fully customizable,  |
-# |         a fancy feature for creating free form ternary plot             |
-# |     -   Free variable sum (1, 100 or X) for the ternary plot;           |
-# | -   Display variable-classes polygons/area on the ternary plot;         |
-# |     -   7 pre-parameterized national Soil Texture Triangles/Classes     |
-# |         systems, including classes polygons, classes and axis names,    |
-# |         and geometric settings of the triangle.                         |
-# |         (EU, USDA, French-Aisne, French-GEPPA, German, UK and          |
-# |         Australian triangles)                                           |
-# |     -   Capable of projecting any Soil Texture Triangles/Classes systems|
-# |         in another family of ternary plot (custom angles and clock),    |
-# |         thus enabling otherwise difficult comparisons of systems        |
-# | -   Retrieve the class(es) of point data in a given (Soil Texture)-     |
-# |     class system (pre-defined)                                          |
-# | -   Several features for exploratory/visual analysis                    |
-# |     -   Create a background 2d map of a 4th variable (heat-map),        |
-# |         through inverse weighted distance grid-interpolation            |
-# | -   Global (and triangle-specific) parameters management system, with   |
-# |     functions for easily retrieving and changing these options          |
-# | -   Simple pre-defined Bubble & color-gradient plot for a 4th variable  |
-# | -   Linguistic components ('local' variable names)                      |
-# | -   A generic function for checking "sum of variable triplets"          |
-# | -   'geo' global and triangle specific option, that is outputted either |
-# |     from TT.plot() or TT.frame() and is used by lower level plotting    |
-# |     functions: frame, grid, arrows, points...                           |
-# |     (Parameters: tlr.an, blr.clock, blr.tx, text.sum, etc)              |
-# |                                                                         |
-# +-------------------------------------------------------------------------+
-
-
-
-# +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
-# | LOAD REQUIRED PACKAGES: sp, drc, lattice, magic, nlme, plotrix           |
-# +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
-
-
-
-# sp package is required for his pointinpolygon() function 
-#   it is used here to determine is a data-point belong to a class-polygon (Soil Texture Class) 
-
-# drc package is required for his drm() function 
-#   it is used here fitting the Particle-size Distribution modes. 
-
-# lattice, magic, nlme and plotrix package is required by drc 
-
-# if( !"sp" %in% as.character( installed.packages()[,1] ) )
-# {   #
-#     install.packages("sp")
-# }   #
-
-# if( !"drc" %in% as.character( installed.packages()[,1] ) )
-# {   #
-#     install.packages("drc")
-# }   #
-
- 
-# if( !"lattice" %in% as.character( installed.packages()[,1] ) )
-# {   #
-#     install.packages("lattice")
-# }   #
-#    
-# if( !"lattice" %in% as.character( installed.packages()[,1] ) )
-# {   #
-#     install.packages("magic")
-# }   #
-#    
-# if( !"lattice" %in% as.character( installed.packages()[,1] ) )
-# {   #
-#     install.packages("nlme")
-# }   #
-#    
-# if( !"lattice" %in% as.character( installed.packages()[,1] ) )
-# {   #
-#     install.packages("plotrix")
-# }   #
-
-# require( "sp" )
-# require( "drc" )
-# require( "drc" )
-# require( "lattice" )
-# require( "magic" )
-# require( "nlme" )
-# require( "plotrix" )
-
-
-
-
-
 
 # Environment for storing, hiding and protecting internal variables and functions.
 TT.env <- new.env() 
@@ -954,7 +800,7 @@ assign(
             main            = "Autralia (AU)", 
             #
             # The coordinates of this triangle were kindly provided by Budiman Minasni
-            #    as a replacememnt for the original implementation of the Australian 
+            #    as a replacement for the original implementation of the Australian 
             #    texture triangle.
             #
             #                 The list below specify the CSS coordinates of the different POINTS
@@ -1520,7 +1366,66 @@ assign(
             unit.tx         = quote(bold('%')), 
             #
             text.sum        = 100 
-        )   #
+        ),  #
+        
+        "SiBCS13.TT" = list(  
+            # Subagrupamento Textural SiBCS 2013 parameters (Embrapa 2013)
+            #   Embrapa. Sistema Brasileiro de Classificacao de Solos /
+            #   Humberto Golcalves dos Santos ... [et al.]. 3a ed. rev. ampl.
+            #   Brasilia, DF: Embrapa, 2013.
+            
+            # Information is a courtesy of Jose Lucas Safanelli and
+            # Alexandre ten Caten, UFSC Curitibanos, Brasil.
+            
+            # main            = "Subagrupamento textural SiBCS 2013 - Embrapa 2013", 
+            main            = "SiBCS 2013 (Embrapa)", # Shorter title and more international?
+            # 
+            #                The list below specify the CSS coordinates of the different POINTS
+            #                   that are used to draw soil texture classes. One points can be 
+            #                   used by several classes :
+            #                  = P01    P02    P03    P04    P05    P06    P07    P08    P09    P10    P11    P12
+            #                  = P13    P14    P15    P16    P17    P18    (submits)
+            "tt.points"     = data.frame( 
+                "CLAY"      = c( 1.000, 0.600, 0.600, 0.350, 0.350, 0.350, 0.350, 0.200, 0.200, 0.250, 0.150, 0.100,  
+                                 0.000, 0.000, 0.000, 0.000, 0.000, 0.000 ),
+                            #
+                "SILT"      = c( 0.000, 0.000, 0.400, 0.000, 0.175, 0.500, 0.650, 0.000, 0.250, 0.275, 0.000, 0.000,  
+                                 0.000, 0.150, 0.300, 0.475, 0.850, 1.000 ),
+                            #
+                "SAND"      = c( 0.000, 0.400, 0.000, 0.650, 0.475, 0.150, 0.000, 0.800, 0.550, 0.475, 0.850, 0.900,  
+                                 1.000, 0.850, 0.700, 0.525, 0.150, 0.000 )
+            ),  #
+            
+            #   Abreviations;       Names of the texture cl;    Points marking the class limits (points specified above)
+            "tt.polygons"  = list( 
+                "MA"       = list( "name" = "muito argilosa", "points" = c(01,02,03)          ), 
+                "A"        = list( "name" = "argilosa",       "points" = c(02,03,07,06,05,04) ), 
+                "S"        = list( "name" = "siltosa",        "points" = c(06,07,18,17)       ), 
+                "MeS"      = list( "name" = "media siltosa",  "points" = c(05,06,17,16,09,10) ), 
+                "MeA"      = list( "name" = "media argilosa", "points" = c(04,05,10,09,08)    ), 
+                "MeAr"     = list( "name" = "media arenosa",  "points" = c(08,09,16,15,11)    ), 
+                "ArMe"     = list( "name" = "arenosa media",  "points" = c(11,15,14,12)       ), 
+                "MAr"      = list( "name" = "muito arenosa",  "points" = c(12,14,13)          )   
+            ),  
+            
+            # Triangle specific parameters for triangle geometry / appearance
+            #   See general parameters above for detailed description of them
+            blr.clock       = rep(T,3), 
+            tlr.an          = c(60,60,60), 
+            
+            blr.tx          = c("SAND","CLAY","SILT"), 
+             
+            base.css.ps.lim = c(0,2,50,2000), 
+            tri.css.ps.lim  = c(0,2,50,2000), 
+            
+            unit.ps         = quote(bold(mu) * bold('m')), 
+            unit.tx         = quote(bold('%')), 
+            
+            text.sum        = 100, 
+            
+            #   New parameter
+            class.lab.cex   = 2/3
+        )   
         
         # +-------------------------------------------------------------------------+
         # | END(SCRIPT PARAMETERS SPECIFICATION)                                    |
@@ -1751,6 +1656,7 @@ TT.add <- function(# Function to add a new default package parameters.
 
 TT.str <- function(# Internal. Stretch or reshape the range of value of some data set. 
 ### Function to 'stretch' or reshape the range of value of some data set. Usefull for cex parameter in plot. 
+##keywords<< internal
 
     x, 
     str.min = 0, 
@@ -1807,6 +1713,7 @@ TT.str <- function(# Internal. Stretch or reshape the range of value of some dat
 
 TT.gen.op.set  <- function(# Internal. Retrieve and set default values from options. 
 ### Retrieve and set default values from options (that do _not_ superseed par()). 
+##keywords<< internal
 
     param, 
     assign.op   = TRUE, 
@@ -1876,6 +1783,7 @@ TT.gen.op.set  <- function(# Internal. Retrieve and set default values from opti
 
 TT.par.op.set  <- function(# Internal. Retrieve and set default values from options with default in "par()". 
 ### Retrieve and set default values from options with default in "par()"
+##keywords<< internal
 
     param, 
     assign.op   = TRUE, 
@@ -1940,6 +1848,7 @@ TT.par.op.set  <- function(# Internal. Retrieve and set default values from opti
 
 TT.auto.set    <- function(# Internal. Retrieve and set default values for parameters (par() or not), when NULL.
 ### Retrieve and set default values for parameters (par() or not), when NULL.
+##keywords<< internal
 
     fun         = sys.function(which=-1), 
     assign.op   = TRUE, 
@@ -2032,8 +1941,9 @@ TT.auto.set    <- function(# Internal. Retrieve and set default values for param
 
 
 
-TT.DJ.col <- function(# A function to obtaine a weight average 'mix' of different colors!
+TT.DJ.col <- function(# Internal. A function to obtaine a weight average 'mix' of different colors!
 ### A function to obtaine a weight average 'mix' of different colors!
+##keywords<< internal
 
     cl,             # vector of colors, html stype "#808080"
     w,              # vector of weight corresponding to the colors
@@ -2063,8 +1973,9 @@ TT.DJ.col <- function(# A function to obtaine a weight average 'mix' of differen
 
 
 
-TT.col2hsv  <- function(# Convert any colors to hsv. 
+TT.col2hsv  <- function(# Internal. Convert any colors to hsv. 
 ### Convert any colors to hsv. Wrapper around rgb2hsv() and col2rgb(). 
+##keywords<< internal
 
     col 
 ){  #
@@ -2088,6 +1999,7 @@ TT.col2hsv  <- function(# Convert any colors to hsv.
 TT.blr.tx.check <- function(# Internal. Check the consistency between blr.tx and css.names. 
 ### Check the consistency between blr.tx and css.names. All values 
 ### in blr.tx should be found in css.names and vice-versa.
+##keywords<< internal
 
     blr.tx, 
     css.names  
@@ -2125,6 +2037,7 @@ TT.blr.tx.check <- function(# Internal. Check the consistency between blr.tx and
 
 TT.blr.ps.lim <- function(# Internal. Create a tabular version of clay silt sand particle size limits. 
 ### Create a tabular version of clay silt sand particle size limits. 
+##keywords<< internal
 
     blr.tx, 
     css.ps.lim  
@@ -2159,6 +2072,7 @@ TT.blr.ps.lim <- function(# Internal. Create a tabular version of clay silt sand
 
 TT.geo.set  <- function(# Internal. Takes "geo" values and assign them individually in the parent function. 
 ### Takes "geo" values and assign them individually in the parent function. 
+##keywords<< internal
 
     geo, 
     p.env   = parent.frame()  
@@ -2260,6 +2174,7 @@ TT.geo.set  <- function(# Internal. Takes "geo" values and assign them individua
 
 TT.geo.get  <- function(# Internal. Retrieve and return the geometrical parameters from a list of parameter values (NULL or not).
 ### Retrieve and return the geometrical parameters from a list of parameter values (NULL or not).
+##keywords<< internal
 
     class.sys       = NULL,  
     blr.clock       = NULL,  
@@ -2512,9 +2427,10 @@ TT.data.test.X <- function(# Test the validity of some soil texture data table (
 
 
 
-TT.dia2phi <- function(# Convert a soil particle diameter dia [micro-meters] into phi = -log2(dia/1000)
+TT.dia2phi <- function(# Internal. Convert a soil particle diameter dia [micro-meters] into phi = -log2(dia/1000)
 ### Convert a soil particle diameter dia [micro-meters] into 
 ### phi = -log2(dia). See also TT.phi2dia().
+##keywords<< internal
 
  dia
 ### Particle size diameter in micro-meters (will be converted in milli-meters)
@@ -2528,9 +2444,10 @@ TT.dia2phi <- function(# Convert a soil particle diameter dia [micro-meters] int
 
 
 
-TT.phi2dia <- function(# Convert a soil particle phi value into diameter dia [micro-meters]. 
+TT.phi2dia <- function(# Internal. Convert a soil particle phi value into diameter dia [micro-meters]. 
 ### Convert a soil particle phi value into diameter dia [micro-meters]. 
 ### See also TT.dia2phi(). dia = (2^-phi)*1000. Not used by the package. 
+##keywords<< internal
 
 phi
 
@@ -2546,10 +2463,11 @@ phi
 TT.check.ps.lim <- function(# Internal. Check the consistency between 'base.ps.lim' and 'dat.ps.lim'. 
 ### Check the consistency between 'base.ps.lim' and 'dat.ps.lim'. 
 ### 5 tests performed.
+##keywords<< internal
 
     base.ps.lim,  
     dat.ps.lim,  
- ps.lim.length=c(4,4)
+    ps.lim.length=c(4,4)
 ### vector of 2 integers. Number of particle size classes + 1. c(base,dat)
 
 ){  #
@@ -2915,8 +2833,9 @@ TT.text.transf.X <- function(# Log-linear transformation of a soil texture data 
 
 
 
-TT.deg2rad <- function(# Function to convert angle in degree to angle in radian.
+TT.deg2rad <- function(# Internal. Function to convert angle in degree to angle in radian.
 ### Function to convert angle in degree to angle in radian.
+##keywords<< internal
 
  A
 ### Angle in Degrees
@@ -2932,6 +2851,7 @@ TT.deg2rad <- function(# Function to convert angle in degree to angle in radian.
 
 TT.ifelse <- function(# Internal. Flexible version of ifelse. 
 ### Flexible version of ifelse. 
+##keywords<< internal
 
  test,
  yes,
@@ -2949,6 +2869,7 @@ TT.ifelse <- function(# Internal. Flexible version of ifelse.
 
 TT.switch <- function(# Internal. Used in the plot axis drawings.
 ### Used in the plot axis drawings.
+##keywords<< internal
 
     blr.clock   = TT.get("blr.clock"), 
     c1          = NA, 
@@ -2977,9 +2898,10 @@ TT.switch <- function(# Internal. Used in the plot axis drawings.
 
 
 
-TT.css2xy <- function(# Converts texture data (3 classes) into x-y coordinates. 
+TT.css2xy <- function(# Internal. Converts texture data (3 classes) into x-y coordinates. 
 ### Converts texture data (3 classes) into x-y coordinates. This 
 ### function is the 'heart' of most soiltexture plot functions.
+##keywords<< internal
 
     tri.data, 
     geo, 
@@ -3020,7 +2942,7 @@ TT.css2xy <- function(# Converts texture data (3 classes) into x-y coordinates.
         )   )  
     }   #
     #
-    # Check for tlr.an: angle sum must be 180°
+    # Check for tlr.an: angle sum must be 180 degrees
     if( sum(tlr.an) != 180 ) 
     {   #
         stop( paste( 
@@ -3393,6 +3315,7 @@ TT.baseplot <- function(# Internal. Create an empty plot scene for a texture tri
 ### Create an empty plot where a texture triangle can be drawn with 
 ### other secondary functions (frame, axis, ...). Also return the 
 ### 'geo' parameters needed by these secondary functions.
+##keywords<< internal
 
     geo             = NULL, 
     class.sys       = "none",  
@@ -3582,6 +3505,7 @@ TT.edges <- function(# Internal. Plot the edges (bare axis) of a soil texture tr
 ### Plot the edges (bare axis) of a soil texture triangle. This 
 ### is not a primary plot function, TT.baseplot() must have been 
 ### called before (usually inside TT.plot()).
+##keywords<< internal
 
     geo, 
     #
@@ -3905,6 +3829,7 @@ TT.grid <- function(# Plot a grid at regular texture intervals inside an existin
 
 TT.ticks <- function(# Internal. Plot the axis' ticks of a texture triangle plot. 
 ### Plot the axis' ticks of a texture triangle plot. 
+##keywords<< internal
 
     geo, 
     at          = NULL, 
@@ -3985,6 +3910,7 @@ TT.ticks <- function(# Internal. Plot the axis' ticks of a texture triangle plot
 
 TT.ticks.lab <- function(# Internal. Plot the axis ticks' labels of a texture triangle plot. 
 ### Plot the axis ticks' labels of a texture triangle plot. 
+##keywords<< internal
 
     geo, 
     at          = NULL, 
@@ -4076,6 +4002,7 @@ TT.ticks.lab <- function(# Internal. Plot the axis ticks' labels of a texture tr
 
 TT.axis.arrows <- function(# Internal. Plot the axis' arrows of a texture triangle plot. 
 ### Plot the axis' arrows of a texture triangle plot. 
+##keywords<< internal
 
     geo, 
     #css.names       = NULL, 
@@ -4604,11 +4531,12 @@ TT.vertices.tbl <- function(# Returns the table of vertices of a texture classif
 
 
 
-TT.vertices.plot <- function(# Plot the vertices of a texture classification system. 
+TT.vertices.plot <- function(# Internal. Plot the vertices of a texture classification system. 
 ### Plot the vertices of a texture classification system, on top 
 ### of an already drawn texture triangle plot. Also plot the 
 ### vertices numbers. See TT.vertices.tbl() and TT.classes.tbl() 
 ### for a non graphic, tabular equivalent of the plot.
+##keywords<< internal
 
     geo, 
     class.sys   = "HYPRES.TT", 
@@ -4666,7 +4594,7 @@ TT.vertices.plot <- function(# Plot the vertices of a texture classification sys
 
 
 
-TT.polygon.area <- function(# Determines the area of 1 polygon (in x-y coordinates). 
+TT.polygon.area <- function(# Internal. Determines the area of 1 polygon (in x-y coordinates). 
 ### Determines the area of 1 non-intersecting polygon (in x-y 
 ### coordinates). Used by TT.polygon.centroids(). pol.x[1]:pol.y[1] 
 ### is supposed different from pol.x[n]:pol.y[n] (i.e. the polygon 
@@ -4674,6 +4602,7 @@ TT.polygon.area <- function(# Determines the area of 1 polygon (in x-y coordinat
 ### After "http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/
 ### Calculating The Area And Centroid Of A Polygon. Written by 
 ### Paul Bourke, July 1988".
+##keywords<< internal
 
  pol.x,
 ### Vector of numericals. X coordinates of each vertices of the 
@@ -4702,7 +4631,7 @@ TT.polygon.area <- function(# Determines the area of 1 polygon (in x-y coordinat
 
 
 
-TT.polygon.centroids <- function(# Determines the centroid of 1 polygon (in x-y coordinates). 
+TT.polygon.centroids <- function(# Internal. Determines the centroid of 1 polygon (in x-y coordinates). 
 ### Determines the centroid of 1 non-intersecting polygon (in x-y 
 ### coordinates). Used to determine the centroid of each texture 
 ### class in the texture triangle onces its clay silt sand 
@@ -4712,6 +4641,7 @@ TT.polygon.centroids <- function(# Determines the centroid of 1 polygon (in x-y 
 ### After "http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/ 
 ### Calculating The Area And Centroid Of A Polygon. Written by 
 ### Paul Bourke, July 1988".
+##keywords<< internal
 
  pol.x,
 ### Vector of numericals. X coordinates of each vertices of the 
@@ -4981,6 +4911,12 @@ TT.classes <- function(# Plot the texture classes polygons in a texture triangle
                 class.lab.col <- class.line.col 
             }   #
             #
+            if( "class.lab.cex" %in% names(TT.data) ){ # New 2015-03-06
+                class.lab.cex <- TT.data[[ "class.lab.cex" ]]
+            }else{ 
+                class.lab.cex <- 1
+            }   
+            #
             text( 
                 x       = cent.xy["x",pol], 
                 y       = cent.xy["y",pol], 
@@ -4988,7 +4924,7 @@ TT.classes <- function(# Plot the texture classes polygons in a texture triangle
                 adj     = c(0.5,0.5), 
                 offset  = 0, 
                 col     = class.lab.col, 
-                cex     = cex.lab, 
+                cex     = cex.lab * class.lab.cex, 
                 font    = font.lab, 
                 family  = family.op  
             )   #
@@ -5793,7 +5729,7 @@ TT.plot <- function(# Plot soil texture triangles / diagrams.
             a.h.s           = TT.get("arrows.head.shift"), 
             a.t.s           = TT.get("arrows.text.shift"), 
             a.b.s           = TT.get("arrows.base.shift"), 
-            text.tol        = text.tol,     # useless�
+            text.tol        = text.tol,     # useless
             base.css.ps.lim = base.css.ps.lim, 
             tlr.an          = tlr.an, 
             lwd.lab         = lwd.lab, 
@@ -6363,7 +6299,7 @@ TT.xy2css <- function(# Internal. Convert point-data duplets (2 variables, x-y c
         )   )  
     }   #
     #
-    # Check for tlr.an: angle sum must be 180°
+    # Check for tlr.an: angle sum must be 180 degrees
     if( sum(tlr.an) != 180 ) 
     {   #
         stop( paste( 
@@ -6583,6 +6519,8 @@ TT.xy.grid <- function(# Internal. Create a grid in the x-y coordinate system.
 ### Create a grid in the x-y coordinate system. Most of the function 
 ### is a reshaped extract from kde2d() from the MASS package, by 
 ### Venables & Ripley (+ modifications)
+##keywords<< internal
+
     x,  
     y,  
     n   = 25  

@@ -1,6 +1,6 @@
 \name{TT.css2xy}
 \alias{TT.css2xy}
-\title{Converts texture data (3 classes) into x-y coordinates. }
+\title{Internal. Converts texture data (3 classes) into x-y coordinates. }
 \description{Converts texture data (3 classes) into x-y coordinates. This 
 function is the 'heart' of most soiltexture plot functions.}
 \usage{TT.css2xy(tri.data, geo, css.names = NULL, text.tol = NULL, tri.sum.tst = NULL, 
@@ -28,7 +28,7 @@ function is the 'heart' of most soiltexture plot functions.}
 
 
 
-\author{Julien MOEYS <jules_m78-soiltexture@yahoo.fr>, contributions from Wei Shangguan.}
+\author{Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb], Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor Zelazny [ctb],  Rodolfo Marcondes Silva Souza [ctb],  Jose Lucas Safanelli [ctb], Alexandre ten Caten [ctb]}
 
 
 
