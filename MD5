@@ -1,16 +1,16 @@
-f42d18c8f3d1e32ec6f264251fa347be *DESCRIPTION
+3421e1423c1b08fa20b9184d0c9de46f *DESCRIPTION
 f177b5453f13c618044afc8f7ec9e60b *NAMESPACE
-55b4f00963e789268caf2426c5015a9e *NEWS
+0ed3342e94c5f343d1f5cef6928f5e98 *NEWS
 f37ec44f7aea7fd4f3f4d2c5485f6ffc *R/onAttach.R
 28a93d3b6dd53a50ef89912e8d07b36c *R/soiltexture.R
 e8526519ff7a7148980fa809967638bf *R/soiltextureInfo.R
 9c494e033cf76e9bd2d66004bfe633d0 *R/soiltexture_text_gui.R
-9d37b3fe20c2d3e5df5077a32d3896c2 *build/vignette.rds
-f5b43dcd8bcdf38246eedcd8ded5410a *inst/GIT_REVISION
+070be1ab69942041f8f19188199bc319 *build/vignette.rds
+408d79df14f4d5a2be1480496e9bd755 *inst/GIT_REVISION
 0e4faafe7f0e51d0f07571b0434a5514 *inst/SVN_VERSION
 dad70ae05059f9fd92436198c48943d3 *inst/doc/soiltexture_vignette.R
 a34092a9988c1cc262c52ec57138ae32 *inst/doc/soiltexture_vignette.Rnw
-564d0da0509a8956546efbe574881898 *inst/doc/soiltexture_vignette.pdf
+afe68570ee821c211b8aae885e1f993a *inst/doc/soiltexture_vignette.pdf
 8c0746f42487891d0a3f084d907129ba *inst/languages.rds
 c42bcab56c6d4f21e9aae75b31fed241 *inst/text.transf.R
 eac398f5c7aa11f44e43894e40000df2 *inst/triangles.rds
@@ -76,4 +76,4 @@ c93ab1b22798e7cc738a4c7488f1aaf9 *man/soiltextureInfo.Rd
 e25ffe2bd1ce4c9ef83bd9d9727627b1 *tests/soiltextureInfo.R
 31b886f39d14cc34db0951ae60050627 *tests/soiltexture_gui.R
 a34092a9988c1cc262c52ec57138ae32 *vignettes/soiltexture_vignette.Rnw
-93c850eb8aa3d1fd11a919fc9ce58877 *vignettes/soiltexture_vignette.bib
+2aac5a462f12f44dc643bff196e944d8 *vignettes/soiltexture_vignette.bib
