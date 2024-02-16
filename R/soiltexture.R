@@ -1,5 +1,19 @@
 
+
+#'@importFrom sp point.in.polygon
+NULL
+
 # Environment for storing, hiding and protecting internal variables and functions.
+#' TT env
+#' 
+#' Environment for storing, hiding and protecting internal variables and
+#' functions
+#' 
+#' 
+#' @docType data
+#' @noRd
+
+NULL
 TT.env <- new.env() 
 
 # assign( 
@@ -16,6 +30,7 @@ TT.env <- new.env()
 # | LIST: TT.par                        |
 # +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
 # [ TT.par :: A list of default parameters, contained in a list, stored in the TT.env environment (~ invisible)
+#' @importFrom utils read.table
 assign( 
     envir   = TT.env,
     x       = "TT.par", 
@@ -1360,7 +1375,7 @@ assign(
             
             "main"  = "USDA 1911 (M. Whitney, 1911) - Ternary Plot", 
             
-            "tt.points" = read.table( sep = "", header = TRUE, 
+            "tt.points" = utils::read.table( sep = "", header = TRUE, 
                 text = "CLAY SILT SAND
                         0.0  0.0  1.0       # 1
                         0.2  0.0  0.8       # 2
@@ -1702,6 +1717,30 @@ assign(
 
 
 
+
+
+#' Function to change / set the default package parameters.
+#' 
+#' Function to change / set the default package parameters as they are stored
+#' in the list TT.par in the environment TT.env. Use this function to change
+#' some deafult parameters for all the current R cession. Many functions of
+#' soiltexture take some of their parameter values in TT.par.
+#' 
+#' 
+#' @param \dots List of parameters and value in the form "par.name1" =
+#' par.value1, "par.name2" = par.value2... List of parameters to change.
+#' @param reset Single logical. If set to TRUE the parameter list is reset to
+#' default
+#' @param par.list Single character. Name of the list containing the parameters
+#' @param bkp.par.list Single character. Name of the backuped list containing
+#' the default parameters
+#' @param par.env An R environment. Name of the environment containing the
+#' parameter lists (no quotes)
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export
 TT.set <- function(# Function to change / set the default package parameters. 
 ### Function to change / set the default package parameters as they 
 ### are stored in the list TT.par in the environment TT.env. Use 
@@ -1782,6 +1821,22 @@ par.env=TT.env
 
 
 
+
+
+#' Function to retrieve / get the default package parameters.
+#' 
+#' Function to retrieve / get the default package parameters.
+#' 
+#' 
+#' @param \dots Vector of character strings. Name of arguments for which default value is to be retrieved.
+#' @param par.list Name of the list containing the parameters
+#' @param bkp.par.list Name of the backuped list containing the default parameters
+#' @param par.env name of the environment containing the parameter lists
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export
 TT.get <- function(# Function to retrieve / get the default package parameters. 
 ### Function to retrieve / get the default package parameters. 
 
@@ -1827,6 +1882,23 @@ TT.get <- function(# Function to retrieve / get the default package parameters.
 
 
 
+
+
+#' Function to add a new default package parameters.
+#' 
+#' Function to add a new default package parameters. Mostly used to add a new
+#' texture triangle definition.
+#' 
+#' 
+#' @param \dots parameters to be changed in format: "parameter_name1" = new_value1, "parameter_name2" = new_value2
+#' @param par.list Name of the list containing the parameters
+#' @param bkp.par.list Name of the backuped list containing the default parameters
+#' @param par.env name of the environment containing the parameter lists
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export
 TT.add <- function(# Function to add a new default package parameters. 
 ### Function to add a new default package parameters. Mostly used 
 ### to add a new texture triangle definition.
@@ -1904,7 +1976,23 @@ TT.add <- function(# Function to add a new default package parameters.
 
 
 
-TT.str <- function(# Internal. Stretch or reshape the range of value of some data set. 
+
+
+#' Stretch or reshape the range of value of some data set.
+#' 
+#' Function to 'stretch' or reshape the range of value of some data set.
+#' Usefull for cex parameter in plot.
+#' 
+#' 
+#' @param x Vector of numeric values.
+#' @param str.min Minimun value after stretching.
+#' @param str.max Maximun value after stretching.
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export
+TT.str <- function(# Stretch or reshape the range of value of some data set. 
 ### Function to 'stretch' or reshape the range of value of some data set. Usefull for cex parameter in plot. 
 ##keywords<< internal
 
@@ -1960,6 +2048,23 @@ TT.str <- function(# Internal. Stretch or reshape the range of value of some dat
 
 
 
+
+
+
+#' Internal. Retrieve and set default values from options.
+#' 
+#' Retrieve and set default values from options (that do _not_ superseed
+#' par()).
+#' 
+#' 
+#' @param param
+#' @param assign.op
+#' @param p.env
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 
 TT.gen.op.set  <- function(# Internal. Retrieve and set default values from options. 
 ### Retrieve and set default values from options (that do _not_ superseed par()). 
@@ -2031,6 +2136,23 @@ TT.gen.op.set  <- function(# Internal. Retrieve and set default values from opti
 
 
 
+
+
+#' Internal. Retrieve and set default values from options with default in
+#' "par()".
+#' 
+#' Retrieve and set default values from options with default in "par()"
+#' 
+#' 
+#' @param param
+#' @param assign.op
+#' @param p.env
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
+#' @importFrom graphics par
 TT.par.op.set  <- function(# Internal. Retrieve and set default values from options with default in "par()". 
 ### Retrieve and set default values from options with default in "par()"
 ##keywords<< internal
@@ -2057,7 +2179,7 @@ TT.par.op.set  <- function(# Internal. Retrieve and set default values from opti
     {   #
         # Get the default value in par() 
         param[ param == "family.op" ]       <- "family" # for compatibility with family() 
-        param.val[ null.param ]             <- par(param[ null.param ]) 
+        param.val[ null.param ]             <- graphics::par(param[ null.param ]) 
         param[ param == "family" ]          <- "family.op" 
         # 
         # Assign the values in the higher level function
@@ -2096,6 +2218,24 @@ TT.par.op.set  <- function(# Internal. Retrieve and set default values from opti
 
 
 
+
+
+#' Internal. Retrieve and set default values for parameters (par() or not),
+#' when NULL.
+#' 
+#' Retrieve and set default values for parameters (par() or not), when NULL.
+#' 
+#' 
+#' @param fun
+#' @param assign.op
+#' @param p.env
+#' @param set.par If TRUE parameters are set automatically to their defualt value
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
+#' @importFrom graphics par
 TT.auto.set    <- function(# Internal. Retrieve and set default values for parameters (par() or not), when NULL.
 ### Retrieve and set default values for parameters (par() or not), when NULL.
 ##keywords<< internal
@@ -2109,7 +2249,7 @@ TT.auto.set    <- function(# Internal. Retrieve and set default values for param
     #
     if( set.par )
     {   #
-        sel.par <- (param %in% names(par())) 
+        sel.par <- (param %in% names(graphics::par())) 
         #
         l1  <- TT.par.op.set( 
             param       = param[ sel.par ], 
@@ -2191,6 +2331,24 @@ TT.auto.set    <- function(# Internal. Retrieve and set default values for param
 
 
 
+
+
+#' Internal. A function to obtaine a weight average 'mix' of different colors!
+#' 
+#' A function to obtaine a weight average 'mix' of different colors!
+#' 
+#' 
+#' @param cl
+#' @param w
+#' @param gray.l
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
+#' @importFrom grDevices col2rgb
+#' @importFrom grDevices rgb 
+#' @importFrom stats weighted.mean
 TT.DJ.col <- function(# Internal. A function to obtaine a weight average 'mix' of different colors!
 ### A function to obtaine a weight average 'mix' of different colors!
 ##keywords<< internal
@@ -2199,19 +2357,19 @@ TT.DJ.col <- function(# Internal. A function to obtaine a weight average 'mix' o
     w,              # vector of weight corresponding to the colors
     gray.l  = FALSE # if TRUE Produce a gray level color, instead of a 'colored' color
 ){  #
-    cl  <- col2rgb( cl, alpha = FALSE )
+    cl  <- grDevices::col2rgb( cl, alpha = FALSE )
     #
     m.cl    <- apply( 
         X       = cl, 
         MARGIN  = 1, 
         FUN     = function(X){ 
-            weighted.mean(x=X,w=w) 
+            stats::weighted.mean(x=X,w=w) 
         }   #
     )   #
     #
     if( gray.l ){ m.cl[] <- rep(mean(m.cl),3) }     # 1:3 stands here in case of alpha value...
     #
-    rgb( 
+    grDevices::rgb( 
         red           = m.cl["red"], 
         green         = m.cl["green"], 
         blue          = m.cl["blue"], 
@@ -2223,6 +2381,21 @@ TT.DJ.col <- function(# Internal. A function to obtaine a weight average 'mix' o
 
 
 
+
+
+#' Internal. Convert any colors to hsv.
+#' 
+#' Convert any colors to hsv. Wrapper around rgb2hsv() and col2rgb().
+#' 
+#' 
+#' @param col See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
+#' @importFrom grDevices rgb2hsv
+#' @importFrom grDevices col2rgb
 TT.col2hsv  <- function(# Internal. Convert any colors to hsv. 
 ### Convert any colors to hsv. Wrapper around rgb2hsv() and col2rgb(). 
 ##keywords<< internal
@@ -2230,8 +2403,8 @@ TT.col2hsv  <- function(# Internal. Convert any colors to hsv.
     col 
 ){  #
     t(  #
-        rgb2hsv( 
-            col2rgb( 
+        grDevices::rgb2hsv( 
+            grDevices::col2rgb( 
                 col     = col, 
                 alpha   = FALSE
             ),  #
@@ -2246,6 +2419,21 @@ TT.col2hsv  <- function(# Internal. Convert any colors to hsv.
 
 
 
+
+
+#' Internal. Check the consistency between blr.tx and css.names.
+#' 
+#' Check the consistency between blr.tx and css.names. All values in blr.tx
+#' should be found in css.names and vice-versa.
+#' 
+#' 
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.blr.tx.check <- function(# Internal. Check the consistency between blr.tx and css.names. 
 ### Check the consistency between blr.tx and css.names. All values 
 ### in blr.tx should be found in css.names and vice-versa.
@@ -2285,6 +2473,20 @@ TT.blr.tx.check <- function(# Internal. Check the consistency between blr.tx and
 
 
 
+
+
+#' Internal. Create a tabular version of clay silt sand particle size limits.
+#' 
+#' Create a tabular version of clay silt sand particle size limits.
+#' 
+#' 
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param css.ps.lim
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.blr.ps.lim <- function(# Internal. Create a tabular version of clay silt sand particle size limits. 
 ### Create a tabular version of clay silt sand particle size limits. 
 ##keywords<< internal
@@ -2320,6 +2522,21 @@ TT.blr.ps.lim <- function(# Internal. Create a tabular version of clay silt sand
 
 
 
+
+
+#' Internal. Takes "geo" values and assign them individually in the parent
+#' function.
+#' 
+#' Takes "geo" values and assign them individually in the parent function.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param p.env
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.geo.set  <- function(# Internal. Takes "geo" values and assign them individually in the parent function. 
 ### Takes "geo" values and assign them individually in the parent function. 
 ##keywords<< internal
@@ -2422,6 +2639,26 @@ TT.geo.set  <- function(# Internal. Takes "geo" values and assign them individua
 
 
 
+
+
+#' Retrieve and return the geometrical parameters from a list of
+#' parameter values (NULL or not).
+#' 
+#' Retrieve and return the geometrical parameters from a list of parameter
+#' values (NULL or not).
+#' 
+#' 
+#' @param class.sys See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tlr.an See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param base.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export
 TT.geo.get  <- function(# Internal. Retrieve and return the geometrical parameters from a list of parameter values (NULL or not).
 ### Retrieve and return the geometrical parameters from a list of parameter values (NULL or not).
 ##keywords<< internal
@@ -2494,6 +2731,29 @@ TT.geo.get  <- function(# Internal. Retrieve and return the geometrical paramete
 
 
 
+
+
+#' Test the validity of some soil texture data table (3 particle size classes).
+#' 
+#' Test the validity of some soil texture data table. (1) Test that it is a
+#' data.frame or matrix, (2) Test that column names contains 'css.names', (3)
+#' Test that there are no missing values, (4) that all values are >= 0, (5)
+#' That the sum of the 3 particle size classes is >= 'text.sum'*(1-'text.tol')
+#' or <= 'text.sum'*(1+'text.tol').  'tri.data' may contain other variables
+#' than the 3 textuer classes (ignored).
+#' 
+#' 
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export 
 TT.data.test <- function(# Test the validity of some soil texture data table (3 particle size classes). 
 ### Test the validity of some soil texture data table. (1) Test that 
 ### it is a data.frame or matrix, (2) Test that column names contains 
@@ -2602,6 +2862,29 @@ TT.data.test <- function(# Test the validity of some soil texture data table (3 
 
 
 
+
+
+#' Test the validity of some soil texture data table (X particle size classes).
+#' 
+#' Test the validity of some soil texture data table. (1) Test that it is a
+#' data.frame or matrix, (3) Test that there are no missing values, (4) that
+#' all values are >= 0, (5) That the sum of the X particle size class is >=
+#' 'text.sum'*(1-'text.tol') or <= 'text.sum'*(1+'text.tol'). Contrary to
+#' TT.data.test() no test are performed for the particle size classes and
+#' columns names, so 'tri.data' should only contains texture data, and nothing
+#' else.
+#' 
+#' 
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export
 TT.data.test.X <- function(# Test the validity of some soil texture data table (X particle size classes). 
 ### Test the validity of some soil texture data table. (1) Test that 
 ### it is a data.frame or matrix, (3) Test that there are no missing 
@@ -2677,6 +2960,22 @@ TT.data.test.X <- function(# Test the validity of some soil texture data table (
 
 
 
+
+
+#' Convert a soil particle diameter dia [micro-meters] into phi =
+#' -log2(dia/1000)
+#' 
+#' Convert a soil particle diameter dia [micro-meters] into phi = -log2(dia).
+#' See also TT.phi2dia().
+#' 
+#' 
+#' @param dia Particle size diameter in micro-meters (will be converted in
+#' milli-meters)
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export
 TT.dia2phi <- function(# Internal. Convert a soil particle diameter dia [micro-meters] into phi = -log2(dia/1000)
 ### Convert a soil particle diameter dia [micro-meters] into 
 ### phi = -log2(dia). See also TT.phi2dia().
@@ -2694,6 +2993,21 @@ TT.dia2phi <- function(# Internal. Convert a soil particle diameter dia [micro-m
 
 
 
+
+
+#' Internal. Convert a soil particle phi value into diameter dia
+#' [micro-meters].
+#' 
+#' Convert a soil particle phi value into diameter dia [micro-meters].  See
+#' also TT.dia2phi(). dia = (2^-phi)*1000. Not used by the package.
+#' 
+#' 
+#' @param phi
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.phi2dia <- function(# Internal. Convert a soil particle phi value into diameter dia [micro-meters]. 
 ### Convert a soil particle phi value into diameter dia [micro-meters]. 
 ### See also TT.dia2phi(). dia = (2^-phi)*1000. Not used by the package. 
@@ -2710,6 +3024,23 @@ phi
 
 
 
+
+
+#' Internal. Check the consistency between 'base.ps.lim' and 'dat.ps.lim'.
+#' 
+#' Check the consistency between 'base.ps.lim' and 'dat.ps.lim'.  5 tests
+#' performed.
+#' 
+#' 
+#' @param base.ps.lim
+#' @param dat.ps.lim
+#' @param ps.lim.length vector of 2 integers. Number of particle size classes +
+#' 1. c(base,dat)
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.check.ps.lim <- function(# Internal. Check the consistency between 'base.ps.lim' and 'dat.ps.lim'. 
 ### Check the consistency between 'base.ps.lim' and 'dat.ps.lim'. 
 ### 5 tests performed.
@@ -2793,6 +3124,36 @@ TT.check.ps.lim <- function(# Internal. Check the consistency between 'base.ps.l
 
 
 
+
+
+#' Log-linear transformation of a soil texture data table between 2 particle
+#' size systems (3 classes).
+#' 
+#' Log-linear transformation of a soil texture data table ('tri.data') from one
+#' particle size system ('dat.css.ps.lim') into another ('base.css.ps.lim').
+#' Only 3 particle size classes allowed. See TT.text.transf.X for
+#' transformation involving more than 3 particle classes. 'tri.data' may
+#' contain other variables (not in 'css.names'). They are returned unchanged
+#' with the transformed texture data.
+#' 
+#' 
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param base.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param dat.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param trsf.add.opt1 See \code{\link[soiltexture]{TT.plot}}
+#' @param trsf.add.opt2 See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom stats approx
+#' @export 
 TT.text.transf <- function(# Log-linear transformation of a soil texture data table between 2 particle size systems (3 classes).
 ### Log-linear transformation of a soil texture data table 
 ### ('tri.data') from one 
@@ -2878,7 +3239,7 @@ TT.text.transf <- function(# Log-linear transformation of a soil texture data ta
         X       = tri.data, 
         MARGIN  = 1, 
         FUN     = function(X,base.css.ps.lim2,dat.css.ps.lim2){ 
-            c( X[1], diff( approx( 
+            c( X[1], diff( stats::approx( 
                 x       = dat.css.ps.lim2[ ps.start:4 ], 
                 y       = X, 
                 xout    = base.css.ps.lim2[ ps.start:4 ], 
@@ -2964,6 +3325,31 @@ TT.text.transf <- function(# Log-linear transformation of a soil texture data ta
 
 
 
+
+
+#' Log-linear transformation of a soil texture data table between 2 particle
+#' size systems (X classes).
+#' 
+#' Log-linear transformation of a soil texture data table ('tri.data') from one
+#' particle size system ('dat.css.ps.lim') into another ('base.css.ps.lim'). No
+#' limit in the number of partile size classes in the inputed and outputed
+#' texture tables. See TT.text.transf for transformation involving only 3
+#' particle classes. 'tri.data' can only contain texture data.
+#' 
+#' 
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param base.ps.lim Vector of numeric value. Particle size limits of the system tri.data should be converted into.
+#' @param dat.ps.lim Vector of numeric value. Particle size limits of tri.data.
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom stats approx
+#' @export
 TT.text.transf.X <- function(# Log-linear transformation of a soil texture data table between 2 particle size systems (X classes).
 ### Log-linear transformation of a soil texture data table 
 ### ('tri.data') from one 
@@ -3028,7 +3414,7 @@ TT.text.transf.X <- function(# Log-linear transformation of a soil texture data 
         X       = tri.data, 
         MARGIN  = 1, 
         FUN     = function(X,base.ps.lim2,dat.ps.lim2){ 
-            c( X[1], diff( approx( 
+            c( X[1], diff( stats::approx( 
                 x       = dat.ps.lim2[ ps.start:ps.end ], 
                 y       = X, 
                 xout    = base.ps.lim2[ ps.start:length(base.ps.lim) ], 
@@ -3083,6 +3469,19 @@ TT.text.transf.X <- function(# Log-linear transformation of a soil texture data 
 
 
 
+
+
+#' Internal. Function to convert angle in degree to angle in radian.
+#' 
+#' Function to convert angle in degree to angle in radian.
+#' 
+#' 
+#' @param A Angle in Degrees
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.deg2rad <- function(# Internal. Function to convert angle in degree to angle in radian.
 ### Function to convert angle in degree to angle in radian.
 ##keywords<< internal
@@ -3099,6 +3498,21 @@ TT.deg2rad <- function(# Internal. Function to convert angle in degree to angle 
 
 
 
+
+
+#' Internal. Flexible version of ifelse.
+#' 
+#' Flexible version of ifelse.
+#' 
+#' 
+#' @param test
+#' @param yes
+#' @param no
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.ifelse <- function(# Internal. Flexible version of ifelse. 
 ### Flexible version of ifelse. 
 ##keywords<< internal
@@ -3117,6 +3531,24 @@ TT.ifelse <- function(# Internal. Flexible version of ifelse.
 
 
 
+
+
+#' Internal. Used in the plot axis drawings.
+#' 
+#' Used in the plot axis drawings.
+#' 
+#' 
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param c1
+#' @param c2
+#' @param c3
+#' @param c4
+#' @param blr.order
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.switch <- function(# Internal. Used in the plot axis drawings.
 ### Used in the plot axis drawings.
 ##keywords<< internal
@@ -3148,6 +3580,28 @@ TT.switch <- function(# Internal. Used in the plot axis drawings.
 
 
 
+
+
+#' Internal. Converts texture data (3 classes) into x-y coordinates.
+#' 
+#' Converts texture data (3 classes) into x-y coordinates. This function is the
+#' 'heart' of most soiltexture plot functions.
+#' 
+#' 
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param set.par If TRUE parameters are set automatically to their defualt value
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.css2xy <- function(# Internal. Converts texture data (3 classes) into x-y coordinates. 
 ### Converts texture data (3 classes) into x-y coordinates. This 
 ### function is the 'heart' of most soiltexture plot functions.
@@ -3293,6 +3747,48 @@ TT.css2xy <- function(# Internal. Converts texture data (3 classes) into x-y coo
 
 
 
+
+
+#' Plot a soil texture data table as points on an existing texture plot.
+#' 
+#' Plot a soil texture data table as points on an existing texture plot.
+#' 
+#' 
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param z.name See \code{\link[soiltexture]{TT.plot}}
+#' @param base.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param dat.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param css.transf See \code{\link[soiltexture]{TT.plot}}
+#' @param text.transf.fun See \code{\link[soiltexture]{TT.plot}}
+#' @param trsf.add.opt1 See \code{\link[soiltexture]{TT.plot}}
+#' @param trsf.add.opt2 See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param pch See \code{\link[soiltexture]{TT.plot}}
+#' @param fg See \code{\link[soiltexture]{TT.plot}}
+#' @param col See \code{\link[soiltexture]{TT.plot}}
+#' @param bg See \code{\link[soiltexture]{TT.plot}}
+#' @param cex See \code{\link[soiltexture]{TT.plot}}
+#' @param lwd See \code{\link[soiltexture]{TT.plot}}
+#' @param points.type See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param z.type See \code{\link[soiltexture]{TT.plot}}
+#' @param z.col.hue See \code{\link[soiltexture]{TT.plot}}
+#' @param z.cex.range See \code{\link[soiltexture]{TT.plot}}
+#' @param z.pch See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom grDevices hsv
+#' @importFrom grDevices dev.cur
+#' @importFrom graphics points
+#' @export 
 TT.points <- function(# Plot a soil texture data table as points on an existing texture plot. 
 ### Plot a soil texture data table as points on an existing texture plot. 
 
@@ -3344,7 +3840,7 @@ TT.points <- function(# Plot a soil texture data table as points on an existing 
     TT.auto.set() 
     #
     # Basic checks
-    if( dev.cur() == 1 ) 
+    if( grDevices::dev.cur() == 1 ) 
     {   #
         stop("Cannot add points unless the TT.plot has been drawn")
     }   #
@@ -3400,7 +3896,7 @@ TT.points <- function(# Plot a soil texture data table as points on an existing 
             points.val <- TT.str(z,1.00,0.25) 
         }   #
         #
-        col <- hsv( 
+        col <- grDevices::hsv( 
             h   = z.col.hue, 
             s   = points.sat, 
             v   = points.val 
@@ -3417,7 +3913,7 @@ TT.points <- function(# Plot a soil texture data table as points on an existing 
     #
     nobs <- dim(xy.coord)[1]
     #
-    points( 
+    graphics::points( 
         x       = xy.coord$"xpos", 
         y       = xy.coord$"ypos", 
         pch     = pch1, # Added 20090617 
@@ -3430,7 +3926,7 @@ TT.points <- function(# Plot a soil texture data table as points on an existing 
     #
     if( !is.null(z.name) & z.type == "bubble" ) 
     {   #
-        points( 
+        graphics::points( 
             x       = xy.coord$"xpos", 
             y       = xy.coord$"ypos", 
             pch     = pch2, 
@@ -3450,6 +3946,46 @@ TT.points <- function(# Plot a soil texture data table as points on an existing 
 
 
 
+
+
+#' Plot text labels for each values of a soil texture data table on an existing
+#' texture plot.
+#' 
+#' Plot text labels for each values of a soil texture data table on an existing
+#' texture plot.
+#' 
+#' 
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param labels Vector of character strings. Label to be plotted, for each point in 'tri.data'
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param base.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param dat.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param css.transf See \code{\link[soiltexture]{TT.plot}}
+#' @param text.transf.fun See \code{\link[soiltexture]{TT.plot}}
+#' @param trsf.add.opt1 See \code{\link[soiltexture]{TT.plot}}
+#' @param trsf.add.opt2 See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param fg See \code{\link[soiltexture]{TT.plot}}
+#' @param col See \code{\link[graphics]{text}}
+#' @param cex See \code{\link[graphics]{text}}
+#' @param font See \code{\link[graphics]{text}}
+#' @param family.op See \code{\link[soiltexture]{TT.plot}}
+#' @param adj See \code{\link[graphics]{text}}
+#' @param pos See \code{\link[graphics]{text}}
+#' @param offset See \code{\link[graphics]{text}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom grDevices dev.cur
+#' @importFrom graphics text
+#' @export 
 TT.text <- function(# Plot text labels for each values of a soil texture data table on an existing texture plot. 
 ### Plot text labels for each values of a soil texture data table on an existing texture plot. 
 
@@ -3502,7 +4038,7 @@ TT.text <- function(# Plot text labels for each values of a soil texture data ta
     TT.auto.set() 
     #
     # Basic checks
-    if( dev.cur() == 1 ) 
+    if( grDevices::dev.cur() == 1 ) 
     {   #
         stop("Cannot add points unless the TT.plot has been drawn")
     }   #
@@ -3539,7 +4075,7 @@ TT.text <- function(# Plot text labels for each values of a soil texture data ta
     #
     nobs <- dim(xy.coord)[1]
     #
-    text( 
+    graphics::text( 
         x       = xy.coord$"xpos", 
         y       = xy.coord$"ypos", 
         labels  = labels, 
@@ -3561,6 +4097,42 @@ TT.text <- function(# Plot text labels for each values of a soil texture data ta
 
 
 
+
+
+#' Internal. Create an empty plot scene for a texture triangle.
+#' 
+#' Create an empty plot where a texture triangle can be drawn with other
+#' secondary functions (frame, axis, ...). Also return the 'geo' parameters
+#' needed by these secondary functions.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param class.sys See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tlr.an See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param base.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param unit.ps See \code{\link[soiltexture]{TT.plot}}
+#' @param unit.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param b.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param l.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param main See \code{\link[soiltexture]{TT.plot}}
+#' @param new.mar See \code{\link[soiltexture]{TT.plot}}
+#' @param bg See \code{\link[soiltexture]{TT.plot}}
+#' @param fg See \code{\link[soiltexture]{TT.plot}}
+#' @param col See \code{\link[soiltexture]{TT.plot}}
+#' @param cex.main See \code{\link[soiltexture]{TT.plot}}
+#' @param lang See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom graphics plot
+#' @export 
 TT.baseplot <- function(# Internal. Create an empty plot scene for a texture triangle.
 ### Create an empty plot where a texture triangle can be drawn with 
 ### other secondary functions (frame, axis, ...). Also return the 
@@ -3727,7 +4299,7 @@ TT.baseplot <- function(# Internal. Create an empty plot scene for a texture tri
     # | Ghost plot to set the limits of |
     # | the graph                       | 
     # +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ 
-    plot( 
+    graphics::plot( 
         x           = ghost.TT$"xpos", 
         y           = ghost.TT$"ypos",
         type        = "n", 
@@ -3751,6 +4323,32 @@ TT.baseplot <- function(# Internal. Create an empty plot scene for a texture tri
 
 
 
+
+
+#' Internal. Plot the edges (bare axis) of a soil texture triangle.
+#' 
+#' Plot the edges (bare axis) of a soil texture triangle. This is not a primary
+#' plot function, TT.baseplot() must have been called before (usually inside
+#' TT.plot()).
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param col.axis See \code{\link[soiltexture]{TT.plot}}
+#' @param plot.axis If TRUE the 3 axes are plotted.
+#' @param frame.bg.col See \code{\link[soiltexture]{TT.plot}}
+#' @param lwd.axis See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param bg See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
+#' @importFrom graphics polygon
 TT.edges <- function(# Internal. Plot the edges (bare axis) of a soil texture triangle. 
 ### Plot the edges (bare axis) of a soil texture triangle. This 
 ### is not a primary plot function, TT.baseplot() must have been 
@@ -3822,7 +4420,7 @@ TT.edges <- function(# Internal. Plot the edges (bare axis) of a soil texture tr
     #
     if( !plot.axis ){ col.axis <- NA }
     #
-    polygon( 
+    graphics::polygon( 
         x       = tri.TT$"xpos", 
         y       = tri.TT$"ypos", 
         border  = col.axis, 
@@ -3836,6 +4434,31 @@ TT.edges <- function(# Internal. Plot the edges (bare axis) of a soil texture tr
 
 
 
+
+
+#' Internal. Used to plot line elements of a texture plot axis, ticks, arrows,
+#' etc.
+#' 
+#' Used to plot line elements of a texture plot axis, ticks, arrows, etc.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param at.1.s
+#' @param at.2.s
+#' @param at.3.s
+#' @param at.1.e
+#' @param at.2.e
+#' @param at.3.e
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.lines <- function(# Internal. Used to plot line elements of a texture plot axis, ticks, arrows, etc.
 ### Used to plot line elements of a texture plot axis, ticks, arrows, etc.
 
@@ -3964,6 +4587,38 @@ TT.lines <- function(# Internal. Used to plot line elements of a texture plot ax
 
 
 
+
+
+#' Plot a grid at regular texture intervals inside an existing soil texture
+#' triangle.
+#' 
+#' Plot a grid at regular texture intervals inside an existing soil texture
+#' triangle.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param at Vector of numeric values.
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param grid.col Passed to argument 'col' of \code{\link[graphics]{segments}}
+#' @param grid.lty Passed to argument 'lty' of \code{\link[graphics]{segments}}
+#' @param lwd.axis See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param class.p.bg.col See \code{\link[soiltexture]{TT.plot}}
+#' @param class.p.bg.hue See \code{\link[soiltexture]{TT.plot}}
+#' @param frame.bg.col See \code{\link[soiltexture]{TT.plot}}
+#' @param bg See \code{\link[soiltexture]{TT.plot}}
+#' @param col.axis See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom grDevices rgb
+#' @importFrom grDevices hsv
+#' @importFrom graphics segments
+#' @export 
 TT.grid <- function(# Plot a grid at regular texture intervals inside an existing soil texture triangle. 
 ### Plot a grid at regular texture intervals inside an existing soil texture triangle.
 
@@ -4007,7 +4662,7 @@ TT.grid <- function(# Plot a grid at regular texture intervals inside an existin
         {   # Check "darkness" of the background:
             night.cols  <-  TT.col2hsv(bg)[,"v"] < 0.5 
             #
-            grid.col    <- hsv( 
+            grid.col    <- grDevices::hsv( 
                 h   = class.p.bg.hue, 
                 # Below, check with class polygon color: consitency:
                 s   = ifelse(night.cols,0.45,0.45), # a little less than the min saturation (night or day)
@@ -4019,9 +4674,9 @@ TT.grid <- function(# Plot a grid at regular texture intervals inside an existin
             if( is.null(frame.bg.col) )
             {   #  # Added 20090617 
                 # Step that will "remove" transparency:
-                bg.hsv      <- col2rgb( bg, alpha = FALSE )[,1]/255 
+                bg.hsv      <- grDevices::col2rgb( bg, alpha = FALSE )[,1]/255 
                 #
-                grid.col    <- rgb( 
+                grid.col    <- grDevices::rgb( 
                     red   = bg.hsv["red"], 
                     green = bg.hsv["green"], 
                     blue  = bg.hsv["blue"]  
@@ -4058,7 +4713,7 @@ TT.grid <- function(# Plot a grid at regular texture intervals inside an existin
     invisible( lapply( 
             X   = grid.lns, 
             FUN = function(X){ 
-                segments( 
+                graphics::segments( 
                     x0      = X$"start"$"xpos", 
                     y0      = X$"start"$"ypos", 
                     x1      = X$"end"$"xpos", 
@@ -4077,6 +4732,29 @@ TT.grid <- function(# Plot a grid at regular texture intervals inside an existin
 
 
 
+
+
+#' Internal. Plot the axis' ticks of a texture triangle plot.
+#' 
+#' Plot the axis' ticks of a texture triangle plot.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param at
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tk.s
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param lwd.axis See \code{\link[soiltexture]{TT.plot}}
+#' @param col.axis See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
+#' @importFrom graphics segments
 TT.ticks <- function(# Internal. Plot the axis' ticks of a texture triangle plot. 
 ### Plot the axis' ticks of a texture triangle plot. 
 ##keywords<< internal
@@ -4139,7 +4817,7 @@ TT.ticks <- function(# Internal. Plot the axis' ticks of a texture triangle plot
             FUN = function(X){ 
                 if( plot.TF[X] )
                 {   #
-                    segments( 
+                    graphics::segments( 
                         x0      = grid.lns[[X]]$"start"$"xpos", 
                         y0      = grid.lns[[X]]$"start"$"ypos", 
                         x1      = grid.lns[[X]]$"end"$"xpos", 
@@ -4158,6 +4836,32 @@ TT.ticks <- function(# Internal. Plot the axis' ticks of a texture triangle plot
 
 
 
+
+
+#' Internal. Plot the axis ticks' labels of a texture triangle plot.
+#' 
+#' Plot the axis ticks' labels of a texture triangle plot.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param at
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tlr.an See \code{\link[soiltexture]{TT.plot}}
+#' @param tk.ls
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param col.axis See \code{\link[soiltexture]{TT.plot}}
+#' @param font.axis
+#' @param cex.axis
+#' @param family.op See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
+#' @importFrom graphics text
 TT.ticks.lab <- function(# Internal. Plot the axis ticks' labels of a texture triangle plot. 
 ### Plot the axis ticks' labels of a texture triangle plot. 
 ##keywords<< internal
@@ -4230,7 +4934,7 @@ TT.ticks.lab <- function(# Internal. Plot the axis ticks' labels of a texture tr
             FUN = function(X){ 
                 if( plot.TF[X] )
                 {   #
-                    text( 
+                    graphics::text( 
                         x           = grid.lns[[X]]$"end"$"xpos", 
                         y           = grid.lns[[X]]$"end"$"ypos", 
                         labels      = at * text.sum, 
@@ -4250,6 +4954,45 @@ TT.ticks.lab <- function(# Internal. Plot the axis ticks' labels of a texture tr
 
 
 
+
+
+#' Internal. Plot the axis' arrows of a texture triangle plot.
+#' 
+#' Plot the axis' arrows of a texture triangle plot.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param css.lab
+#' @param a.l
+#' @param a.h.s
+#' @param a.t.s
+#' @param a.t.s2
+#' @param a.b.s
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tlr.an See \code{\link[soiltexture]{TT.plot}}
+#' @param base.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param lwd.lab
+#' @param arrows.lty
+#' @param col.lab
+#' @param font.lab
+#' @param cex.lab
+#' @param family.op See \code{\link[soiltexture]{TT.plot}}
+#' @param unit.ps See \code{\link[soiltexture]{TT.plot}}
+#' @param unit.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param lang See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
+#' @importFrom graphics segments
+#' @importFrom graphics points
+#' @importFrom graphics arrows 
+#' @importFrom graphics text
 TT.axis.arrows <- function(# Internal. Plot the axis' arrows of a texture triangle plot. 
 ### Plot the axis' arrows of a texture triangle plot. 
 ##keywords<< internal
@@ -4390,7 +5133,7 @@ TT.axis.arrows <- function(# Internal. Plot the axis' arrows of a texture triang
                     x1  <- grid.lns1[[X]]$"end"$"xpos" 
                     y1  <- grid.lns1[[X]]$"end"$"ypos" 
                     #
-                    segments( 
+                    graphics::segments( 
                         x0      = x0,   y0  = y0, 
                         x1      = x1,   y1  = y1, 
                         col     = col.lab, 
@@ -4399,7 +5142,7 @@ TT.axis.arrows <- function(# Internal. Plot the axis' arrows of a texture triang
                     )   #
                     #
                     # Add a nice little point at the arrow start point:
-                    points( 
+                    graphics::points( 
                         x       = c(x0), 
                         y       = c(y0), 
                         col     = col.lab, 
@@ -4461,7 +5204,7 @@ TT.axis.arrows <- function(# Internal. Plot the axis' arrows of a texture triang
     invisible( lapply( 
             X   = names(grid.lns2), 
             FUN = function(X){ 
-                arrows( 
+                graphics::arrows( 
                     x0      = grid.lns2[[X]]$"start"$"xpos", 
                     y0      = grid.lns2[[X]]$"start"$"ypos", 
                     x1      = grid.lns2[[X]]$"end"$"xpos", 
@@ -4543,7 +5286,7 @@ TT.axis.arrows <- function(# Internal. Plot the axis' arrows of a texture triang
     invisible( lapply( 
             X   = names(grid.lns3), 
             FUN = function(X){ 
-                text( 
+                graphics::text( 
                     x       = grid.lns3[[X]]$"start"$"xpos", 
                     y       = grid.lns3[[X]]$"start"$"ypos", 
                     labels  = blr.lab[X], # Changed 2009/06/30 
@@ -4578,7 +5321,7 @@ TT.axis.arrows <- function(# Internal. Plot the axis' arrows of a texture triang
 #     point.df    <- data.frame(  "x" = x,        "y" = y,        "z" = z     ) 
 #     grid.df     <- expand.grid( "x" = x.val,    "y" = y.val,    "z" = NA    ) 
 #     #
-#     dist.mat    <- dist( 
+#     dist.mat    <- stats::dist( 
 #         x       = rbind(point.df[,c("x","y")],grid.df[,c("x","y")]), 
 #         method  = "euclidean", 
 #         diag    = FALSE, 
@@ -4654,6 +5397,24 @@ TT.axis.arrows <- function(# Internal. Plot the axis' arrows of a texture triang
 
 
 
+
+
+#' Genetates a virtual cross correlated clay silt sand + Z dataset.
+#' 
+#' Genetates a virtual cross correlated clay silt sand + Z dataset, where Z is
+#' a virtual 4th variable correlated to the texture.
+#' 
+#' 
+#' @param n Single numeric value. Number of points to be generated.
+#' @param seed.val See \code{\link[base]{set.seed}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom MASS mvrnorm 
+#' @export 
 TT.dataset <- function(# Genetates a virtual cross correlated clay silt sand + Z dataset. 
 ### Genetates a virtual cross correlated clay silt sand + Z dataset, 
 ### where Z is a virtual 4th variable correlated to the texture.
@@ -4693,7 +5454,7 @@ TT.dataset <- function(# Genetates a virtual cross correlated clay silt sand + Z
     #
     if(!is.null(seed.val)){ set.seed(seed.val) } 
     #
-    rand.text <- mvrnorm(n=n,mu=rep(10,4),Sigma=CovMat)
+    rand.text <- MASS::mvrnorm(n=n,mu=rep(10,4),Sigma=CovMat)
     #
     rand.text[,1:3] <- t(   apply( 
             X       = rand.text[,1:3], 
@@ -4712,6 +5473,23 @@ TT.dataset <- function(# Genetates a virtual cross correlated clay silt sand + Z
 
 
 
+
+
+#' Returns the table of classes of a texture classification system.
+#' 
+#' Returns the table of classes of a texture classification system.  Returns
+#' the classes abbreviations, names and the vertices numbers that defines each
+#' class. Use TT.vertices.tbl() to retrieve the clay silt sand coordinates of
+#' the triangle classes vertices.  See also TT.vertices.plot().
+#' 
+#' 
+#' @param class.sys See \code{\link[soiltexture]{TT.plot}}
+#' @param collapse Single character string. Default ", ". Separator when showing differents points in each class.
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export 
 TT.classes.tbl <- function(# Returns the table of classes of a texture classification system.
 ### Returns the table of classes of a texture classification system. 
 ### Returns the classes abbreviations, names and the vertices numbers 
@@ -4752,6 +5530,22 @@ TT.classes.tbl <- function(# Returns the table of classes of a texture classific
 
 
 
+
+
+#' Returns the table of vertices of a texture classification system.
+#' 
+#' Returns the table of vertices of a texture classification system.  Returns
+#' the clay silt sand coordinates of each vertices. Use TT.classes.tbl() to
+#' know the vertices that bounds each texture class. See also
+#' TT.vertices.plot().
+#' 
+#' 
+#' @param class.sys See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export 
 TT.vertices.tbl <- function(# Returns the table of vertices of a texture classification system.
 ### Returns the table of vertices of a texture classification system. 
 ### Returns the clay silt sand coordinates of each vertices. Use 
@@ -4781,6 +5575,34 @@ TT.vertices.tbl <- function(# Returns the table of vertices of a texture classif
 
 
 
+
+
+#' Plot the vertices of a texture classification system.
+#' 
+#' Plot the vertices of a texture classification system, on top of an already
+#' drawn texture triangle plot. Also plot the vertices numbers. See
+#' TT.vertices.tbl() and TT.classes.tbl() for a non graphic, tabular equivalent
+#' of the plot.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param class.sys See \code{\link[soiltexture]{TT.plot}}
+#' @param fg See \code{\link[soiltexture]{TT.plot}}
+#' @param col See \code{\link[soiltexture]{TT.plot}}
+#' @param cex See \code{\link[soiltexture]{TT.plot}}
+#' @param font See \code{\link[soiltexture]{TT.plot}}
+#' @param family.op See \code{\link[soiltexture]{TT.plot}}
+#' @param adj Passed to See \code{\link[soiltexture]{TT.text}}
+#' @param pos Passed to See \code{\link[soiltexture]{TT.text}}
+#' @param offset Passed to See \code{\link[soiltexture]{TT.text}}
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export
 TT.vertices.plot <- function(# Internal. Plot the vertices of a texture classification system. 
 ### Plot the vertices of a texture classification system, on top 
 ### of an already drawn texture triangle plot. Also plot the 
@@ -4844,6 +5666,27 @@ TT.vertices.plot <- function(# Internal. Plot the vertices of a texture classifi
 
 
 
+
+
+#' Internal. Determines the area of 1 polygon (in x-y coordinates).
+#' 
+#' Determines the area of 1 non-intersecting polygon (in x-y coordinates). Used
+#' by TT.polygon.centroids(). pol.x[1]:pol.y[1] is supposed different from
+#' pol.x[n]:pol.y[n] (i.e. the polygon is NOT closed).  After
+#' "http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/ Calculating The
+#' Area And Centroid Of A Polygon. Written by Paul Bourke, July 1988".
+#' 
+#' 
+#' @param pol.x Vector of numericals. X coordinates of each vertices of the
+#' polygon.
+#' @param pol.y Vector of numericals. Y coordinates of each vertices of the
+#' polygon.
+#' @return Returns a single numerical: area of the polygon.
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.polygon.area <- function(# Internal. Determines the area of 1 polygon (in x-y coordinates). 
 ### Determines the area of 1 non-intersecting polygon (in x-y 
 ### coordinates). Used by TT.polygon.centroids(). pol.x[1]:pol.y[1] 
@@ -4881,6 +5724,30 @@ TT.polygon.area <- function(# Internal. Determines the area of 1 polygon (in x-y
 
 
 
+
+
+#' Internal. Determines the centroid of 1 polygon (in x-y coordinates).
+#' 
+#' Determines the centroid of 1 non-intersecting polygon (in x-y coordinates).
+#' Used to determine the centroid of each texture class in the texture triangle
+#' onces its clay silt sand coordinates have been converted to x-y coordinates.
+#' pol.x[1]:pol.y[1] is supposed different from pol.x[n]:pol.y[n] (i.e. the
+#' polygon is NOT closed).  After
+#' "http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/ Calculating The
+#' Area And Centroid Of A Polygon. Written by Paul Bourke, July 1988".
+#' 
+#' 
+#' @param pol.x Vector of numericals. X coordinates of each vertices of the
+#' polygon.
+#' @param pol.y Vector of numericals. Y coordinates of each vertices of the
+#' polygon.
+#' @return Returns a vector of 2 numericals: x and y coordinates of the
+#' polygon's centroid. Vector items are names "x" and "y".
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.polygon.centroids <- function(# Internal. Determines the centroid of 1 polygon (in x-y coordinates). 
 ### Determines the centroid of 1 non-intersecting polygon (in x-y 
 ### coordinates). Used to determine the centroid of each texture 
@@ -4927,6 +5794,52 @@ TT.polygon.centroids <- function(# Internal. Determines the centroid of 1 polygo
 
 
 
+
+
+#' Plot the texture classes polygons in a texture triangle plot.
+#' 
+#' Plot the texture classes ploygons in an existing texture triangle plot. Draw
+#' the polygons and the labels inside each polygons.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param class.sys See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param css.transf See \code{\link[soiltexture]{TT.plot}}
+#' @param text.transf.fun See \code{\link[soiltexture]{TT.plot}}
+#' @param trsf.add.opt1 See \code{\link[soiltexture]{TT.plot}}
+#' @param trsf.add.opt2 See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param base.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.tx See See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param bg See \code{\link[soiltexture]{TT.plot}}
+#' @param class.lab.col See \code{\link[soiltexture]{TT.plot}}
+#' @param class.p.bg.col See \code{\link[soiltexture]{TT.plot}}
+#' @param class.p.bg.hue See \code{\link[soiltexture]{TT.plot}}
+#' @param class.line.col See \code{\link[soiltexture]{TT.plot}}
+#' @param class.lty See \code{\link[soiltexture]{TT.plot}}
+#' @param class.lab.show See \code{\link[soiltexture]{TT.plot}}
+#' @param cex.lab See \code{\link[soiltexture]{TT.plot}}
+#' @param font.lab See \code{\link[soiltexture]{TT.plot}}
+#' @param family.op See \code{\link[soiltexture]{TT.plot}}
+#' @param lwd.axis See \code{\link[soiltexture]{TT.plot}}
+#' @param col.axis See \code{\link[soiltexture]{TT.plot}}
+#' @param new.centroid Single logical. If TRUE (default) the new method (Paul
+#' Bourke) is used to calculate the centroid. If FALSE the centroid is taken as
+#' the mean x and y coordinates of the vertices.
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom grDevices hsv
+#' @importFrom graphics par
+#' @importFrom graphics text
+#' @importFrom graphics polygon 
+#' @export 
 TT.classes <- function(# Plot the texture classes polygons in a texture triangle plot.
 ### Plot the texture classes ploygons in an existing texture 
 ### triangle plot. Draw the polygons and the labels inside each 
@@ -5092,7 +6005,7 @@ TT.classes <- function(# Plot the texture classes polygons in a texture triangle
                     class.val <- 0.85 + (cent.xy["y",pol]*a.y+b.y)*0.15 # range 0.85;1.00 
                 }   #
                 #
-                class.p.bg.col2 <- hsv( 
+                class.p.bg.col2 <- grDevices::hsv( 
                     h = class.p.bg.hue,  
                     s = class.sat,  # max = 0.9 
                     v = class.val   # max = 0.9 
@@ -5128,12 +6041,12 @@ TT.classes <- function(# Plot the texture classes polygons in a texture triangle
         #
         if( is.null( class.lty ) )
         {   #
-            class.lty   <- par("lty") 
+            class.lty   <- graphics::par("lty") 
         }   #
         #
         # Plot the classes-polygons: phase 1, the background
         #   the lines are drawn after the grid
-        polygon( 
+        graphics::polygon( 
             x       = xy.new[ sel.vec , "xpos" ], 
             y       = xy.new[ sel.vec , "ypos" ], 
             border  = class.line.col, 
@@ -5167,7 +6080,7 @@ TT.classes <- function(# Plot the texture classes polygons in a texture triangle
                 class.lab.cex <- 1
             }   
             #
-            text( 
+            graphics::text( 
                 x       = cent.xy["x",pol], 
                 y       = cent.xy["y",pol], 
                 labels  = class.lab, 
@@ -5202,6 +6115,435 @@ TT.classes <- function(# Plot the texture classes polygons in a texture triangle
 
 
 
+
+
+# TT.plot()
+#' Plot soil texture triangles / diagrams.
+#' 
+#' Plot a soil texture triangle (also called soil texture diagrams, or soil
+#' texture ternary plots), with or without background soil texture classes
+#' boundaries, and with or without soil texture data points. The triangle
+#' geometry depends on the soil texture classification system chosen
+#' ('class.sys' argument) or on 'forcing' parameters (see below).  Both the
+#' boundaries of the background texture classification system and the texture
+#' data points can be transformed from one particle size limits system to
+#' another (the particle size limits system of the plot). Default behaviour is
+#' no transformation (set 'css.transf' argument to TRUE to allow
+#' transformation).  There are 3 different way to set the triangle geometry and
+#' characteristics (1) setting the 'class.sys' argument [lowest priority], (2)
+#' changing one or several values of the 'geo' list of arguments or (3) setting
+#' the corresponding arguments of TT.plot() [highest priority]. These arguments
+#' are "blr.clock", "tlr.an", "blr.tx", "text.sum", and "base.css.ps.lim".
+#' Different geometry arguments can be set at different levels (1, 2 or 3).
+#' Case (1) should be used when one wants to use the 'default' triangle
+#' geometry associated with a given texture classification system (chosen with
+#' the 'class.sys' argument). Case (2) should be used when TT.plot() has been
+#' called previously, with a call like geo <- TT.plot(), so the 'geo' object
+#' returned can be used for setting the geometry of a new texture triangle
+#' TT.plot( geo = geo ) identical to the previous one. Case (3) should be used
+#' whenever the user wants to set the geometry of a texture triangle plot
+#' different from default values of the texture classification system chosen,
+#' and without re-using the geometry from a previous plot.  ON DEFAULT VALUES
+#' OF TT.plot() ARGUMENTS? As TT.plot() shares its arguments with many other
+#' functions, their default value is not defined in TT.plot() source code, but
+#' rather in a dedicated list object called 'TT.par' and stored in the
+#' environment TT.env. The function TT.get() is used to retrieve the default
+#' value of the arguments defined in TT.par (see ?TT.get). For instance, to
+#' know the default value of 'class.sys', you can type TT.get("class.sys"). To
+#' set a different default value for a given argument in R, use TT.set() (see
+#' ?TT.set).  For instance to change the default value of 'class.sys', type
+#' TT.set( "class.sys" = "USDA.TT" ).
+#' 
+#' 
+#' @param geo List. 'geo' is one of the 3 way to set the texture triangle
+#' geometry. See there description and hierarchy in the function description.
+#' If geo != NULL, then geo must be a list containing 1 or several of the
+#' following items: "blr.clock", "tlr.an", "blr.tx", "text.sum", and
+#' "base.css.ps.lim".  See the options with the same name for a description of
+#' the expected values and effects. The list can be created manually (like
+#' list( "text.sum" = 1000 ) ), or taken from the output of a previous call to
+#' TT.plot(), TT.baseplot() or TT.geo.get() (that return a 'geo' list).
+#' @param tri.data Data frame. Data frame containing the CLAY, SILT and SAND
+#' 'coordinates' of the texture data points to be plotted on top of the texture
+#' triangle and texture class boundaries. The data frame can contain more
+#' column than needed (ignored). The data frame must have column named CLAY,
+#' SILT and SAND (uppercase, the order has no importance) or named after the
+#' 'css.names' argument (alternative names). If 'z.name' argument is not NULL,
+#' the data frame must also contain a column named after 'z.name' value. The
+#' sum of CLAY, SILT and SAND must be equal to 'text.sum' ('text.tol'
+#' determines the error tolerance).
+#' @param add Single logical. If FALSE, a new plot is created. If FALSE, the
+#' plot is added to the existing one.
+#' @param css.names Vector of 3 character strings. Name of the columns in
+#' 'tri.data' that contains the CLAY SILT and SAND values, respectively.  If
+#' NULL, default c("CLAY","SILT","SAND") value is assumed. Not to be confused
+#' with 'css.lab' that defines the labels of the CLAY SILT and SAND axes in the
+#' plot.
+#' @param z.name Single character string. Name of the column in 'tri.data' that
+#' contains the '4th quantitative variable' whose value must be used to define
+#' the points expansion factor and color (bubble plot). If NULL, a simple plot
+#' is drawn (no 'bubbles')
+#' @param main Single character string or expression. Main title of the plot.
+#' @param blr.tx Vector of 3 character strings. The 1st, 2nd and 3rd values
+#' must be either CLAY, SILT or SAND, and determines the particle size classes
+#' associated with the BOTTOM, LEFT and RIGHT axis, respectively.  CLAY, SILT
+#' and SAND order in the vector is free, but they should all be used one time.
+#' The CLAY, SILT and SAND names must appear whatever the corresponding columns
+#' names in 'tri.data' (eventually set by 'css.names') and whatever the labels
+#' of the axis in the plot (eventually set by 'css.lab')
+#' @param css.lab Vector of 3 character strings or 3 expressions. The 1st, 2nd
+#' and 3rd values must be text strings or expressions, and determines the axes
+#' plot labels for the CLAY, SILT and SAND particle size classes, respectively.
+#' 'css.lab' values are independent from columns names in 'tri.data'
+#' (eventually set by 'css.names') and from whatever the placement of particle
+#' size classes on each axis (eventually set by 'blr.tx')
+#' @param text.sum Single numerical. Sum of the 3 particle size classes for
+#' each texture value (fixed). The real sum of the 3 particle size classes in
+#' 'tri.data' should be >= text.sum * (1-text.tol) OR <= text.sum *
+#' (1+text.tol), where 'text.tol' is an argument that can be changed. If some
+#' of the texture values don't match this requirement, an error occur (function
+#' fails) and TT.plot returns a of bad values with their actual particle size
+#' classes sum. You can 'normalise' you data table () prior to the use of
+#' TT.plot, by using the function TT.normalise.sum(), so all values match the
+#' 'text.sum' criteria.  See also 'tri.sum.tst' that can be set to FALSE to
+#' avoid sum of particle size classes tests.
+#' @param base.css.ps.lim Vector of 4 numericals. Particle size boundaries
+#' (upper and lower) of the 3 particle size classes (CLAY, SILT and SAND,
+#' starting from the lower size of CLAY particles, 0, to the upper size of the
+#' SAND particles, 2000), in micrometers, FOR THE BASE PLOT. These particles
+#' size class limits are the references and all other texture values with
+#' different limits will be converted into that reference if (and only if)
+#' css.transf == TRUE (not default).  If NULL, 'base.css.ps.lim' will be set to
+#' the default value of the texture classification system chosen ('class.sys').
+#' The transformation function is set by 'text.transf.fun' and is a log-linear
+#' interpolation by default.
+#' @param tri.css.ps.lim Vector of 4 numericals. Particle size boundaries
+#' (upper and lower) of the 3 particle size classes (CLAY, SILT and SAND,
+#' starting from the lower size of CLAY particles, 0, to the upper size of the
+#' SAND particles, 2000), in micrometers, FOR THE TEXTURE TRIANGLE.  If not
+#' NULL, different from 'base.css.ps.lim', and css.transf == TRUE (not
+#' default), then the CLAY SILT and SAND coordinates of the texture triangle
+#' will be converted into the 'base.css.ps.lim' reference. If NULL,
+#' 'tri.css.ps.lim' will be set to the default value of the texture
+#' classification system chosen ('class.sys'). The transformation function is
+#' set by 'text.transf.fun' and is a log-linear interpolation by default.
+#' @param dat.css.ps.lim Vector of 4 numericals. Particle size boundaries
+#' (upper and lower) of the 3 particle size classes (CLAY, SILT and SAND,
+#' starting from the lower size of CLAY particles, 0, to the upper size of the
+#' SAND particles, 2000), in micrometers, FOR THE TEXTURE DATA TABLE
+#' ('tri.data'). If not NULL, different from 'base.css.ps.lim', and css.transf
+#' == TRUE (not default), then the CLAY SILT and SAND coordinates of the
+#' texture data in tri.data will be converted into the 'base.css.ps.lim'
+#' reference. If NULL, 'tri.css.ps.lim' will be set to the default value of the
+#' texture classification system chosen ('class.sys'). The transformation
+#' function is set by 'text.transf.fun' and is a log-linear interpolation by
+#' default.
+#' @param css.transf Single logical. Set to TRUE to transform the texture
+#' coordinates of the texture triangle ('class.sys') or the texture data
+#' ('tri.data') into the base particle size class limits.  See
+#' 'base.css.ps.lim' for the base plot particle size class limits,
+#' 'tri.css.ps.lim' for the triangle particle size class limits and
+#' 'dat.css.ps.lim' for the data table particle size class limits.  The
+#' transformation function is set by 'text.transf.fun' and is a log-linear
+#' interpolation by default. The default value is FALSE, so no transformation
+#' is made.
+#' @param text.transf.fun R function with the same argument names and same
+#' output as the function TT.text.transf(). 'text.transf.fun' is the function
+#' that transform the texture values from one system of particle class size
+#' limits to another. Only used if css.transf == TRUE.  Default value is
+#' text.transf.fun=TT.text.transf. See also 'base.css.ps.lim', 'tri.css.ps.lim'
+#' and 'dat.css.ps.lim'.
+#' @param trsf.add.opt1 Non pre-defined format. If the user specifies its own
+#' texture transformation function in 'text.transf.fun' (not TT.text.transf()),
+#' then he can use 'trsf.add.opt1' and 'trsf.add.opt1' as new, additional,
+#' argument for his function. So the format of 'trsf.add.opt1' depends on the
+#' function defined by the user in 'text.transf.fun'.
+#' @param trsf.add.opt2 Non pre-defined format. If the user specifies its own
+#' texture transformation function in 'text.transf.fun' (not TT.text.transf()),
+#' then he can use 'trsf.add.opt1' and 'trsf.add.opt1' as new, additional,
+#' argument for his function. So the format of 'trsf.add.opt1' depends on the
+#' function defined by the user in 'text.transf.fun'.
+#' @param unit.ps Single text string or expression. Unit of particle size class
+#' limits displayed on the plot (= part of the axis labels). Does not affect
+#' the other calculations. Default micrometers.
+#' @param unit.tx Single text string or expression. Unit of particle texture
+#' values displayed on the plot (= part of the axis labels). Does not affect
+#' the other calculations. Default is percentage.
+#' @param blr.clock Vector of logicals, eventually with NA values. Direction of
+#' increasing texture values on the BOTTOM, LEFT and RIGHT axis, respectively.
+#' A value of TRUE means that the axis direction is clockwise. A value of FALSE
+#' means that the axis direction is counterclockwise. A value of NA means that
+#' the axis direction is centripetal. Possible combinations are c(T,T,T);
+#' c(F,F,F); c(F,T,NA) and c(T,NA,F), for fully clockwise, fully
+#' counterclockwise, right centripetal and left centripetal orientations,
+#' respectively.
+#' @param tlr.an Vector of numericals. Value - in degrees - of the TOP, LEFT
+#' and RIGHT angles of the triangle. Any value between 0 and 90 is possible,
+#' but values belonging to 0 or 45 or 60 or 90 give a better graphical
+#' rendering.
+#' @param font Single integer. Not used yet.
+#' @param font.axis Single integer. Same definition as par("font.axis"). Font
+#' of the triangle axis's numbering.
+#' @param font.lab Single integer. Same definition as par("font.lab"). Font of
+#' the triangle axis's labels.
+#' @param font.main Single integer. Same definition as par("font.main"). Font
+#' of the triangle main title.
+#' @param bg Text string containing an R color code. Background color of the
+#' plot (= outside the triangle). See 'frame.bg.col' for the background color
+#' inside the triangle frame.
+#' @param fg Text string containing an R color code. DEPRECATED. foreground
+#' color of the plot (= point fill color).
+#' @param col Text string containing an R color code. Same definition as
+#' par("col"). Color of the points plotted in the triangle.
+#' @param col.axis Text string containing an R color code. Color of the
+#' triangle's axis (line and tics) The color of the texture classes boundaries
+#' is set by 'class.line.col'.
+#' @param col.lab Text string containing an R color code. Color of the
+#' triangle's labels (text) and arrows. The color of the texture classes labels
+#' is set by 'class.lab.col'.
+#' @param col.main Text string containing an R color code. Color of the main
+#' title.
+#' @param cex Vector of numerical or single numerical. Same definition as
+#' par("cex").  Expansion factor for the points plotted on the triangle.
+#' @param cex.axis Single numerical. Same definition as par("cex.axis").
+#' Expansion factor for the axis tics labels (numbering).
+#' @param cex.lab Single numerical. Same definition as par("cex.lab").
+#' Expansion factor for the axis labels AND the texture classes labels.
+#' @param cex.main Single numerical. Same definition as par("cex.main").
+#' Expansion factor for the main title.
+#' @param lwd Single numerical. Same definition as par("lwd"). Line width for
+#' the graphical elements inside the triangle (points plotted).
+#' @param lwd.axis Single numerical. Same definition as par("lwd.axis"). Line
+#' width for the axis lines, tics and the grid lines inside the triangle.
+#' @param lwd.lab Single numerical. Same definition as par("lwd"). Line width
+#' for the direction arrows.
+#' @param family.op Single text string. Same definition as par("family"). Font
+#' type to be used in the plot text elements (title, labels)
+#' @param frame.bg.col Text string containing an R color code. Background color
+#' of the triangle plot (= inside the triangle). See 'bg' for the background
+#' color outside the triangle frame.
+#' @param at Vector of numericals. Location of the grid line start points on
+#' all 3 triangles axis. At the moment values are identical for all 3 axis, and
+#' changes to that parameter have not been tested.
+#' @param grid.show Single logical. If set to TRUE (the default) a grid is
+#' drawn on the background of the texture triangle. Set to FALSE to remove the
+#' grid.
+#' @param grid.col Text string containing an R color code. Color of the grid
+#' lines.  If equal to NULL, then an appropriate color is used. Appropriate
+#' means (i) if 'class.p.bg.col' is FALSE (no color gradient in texture class
+#' polygons), then grid.col is equal to 'bg' (without transparency) unless a
+#' color is specified for the triangle frame background ('frame.bg.col'), in
+#' which case grid.col is a mix of 'frame.bg.col' and 'col.axis'. (ii) if
+#' 'class.p.bg.col' is TRUE, then grid.col is a light or dark color based on
+#' 'class.p.bg.hue' (light if 'bg' is dark and dark if 'bg' is light).
+#' @param grid.lty Single numerical. Line type of the grid lines (same types as
+#' par("lty")).
+#' @param class.sys Single text string. Text code of the texture classification
+#' system to be plotted on the background of the texture triangle.  That
+#' texture classification system will determines the triangle geometry and
+#' particle class size system of the plot, unless higher level options are
+#' chosen (see the function definition).  Possible values are "none" (no
+#' classification plotted), "USDA.TT" (USDA texture triangle), "HYPRES.TT"
+#' (texture triangle of the European Sil Map), "FR.AISNE.TT" (French texture
+#' triangle of the Aisne region soil survey), "FR.GEPPA.TT" (French GEPPA
+#' texture triangle), "DE.BK94.TT" (German texture triangle), "UK.SSEW.TT"
+#' (Soil Survey of England and Wales), "AU.TT" (Australian texture triangle),
+#' "BE.TT" (Belgium texture triangle), "CA.EN.TT" (Canadian texture triangle,
+#' with English class abbreviations) and "CA.FR.TT" (Canadian texture triangle,
+#' with French class abbreviations).
+#' @param class.lab.show Single text string. If equal to "abr" (default) or
+#' "full", labels are drawn inside texture class polygons with their full name
+#' ("full") or abbreviated name ("abr"). If equal to "none", no label is drawn.
+#' @param class.lab.col Text string containing an R color code. Color of the
+#' text label drawn inside texture class polygons.
+#' @param class.line.col Text string containing an R color code. Color of the
+#' texture class polygon boundary lines.
+#' @param class.p.bg.col Single logical OR vector of R colors (character
+#' strings).  If FALSE (the default), no color gradient is used inside the
+#' texture class polygons. If TRUE, a color gradient is drawn, with the color
+#' hue specified in 'class.p.bg.hue' and with saturation and values that vary
+#' with texture. If 'class.p.bg.col' is a vector of R colors of the same length
+#' as the number of classes in the triangle, these colors will be used as
+#' background color for each texture classe plygons.
+#' @param class.p.bg.hue Single numerical. Only used if class.p.bg.col == TRUE
+#' (no default).  Color hue (between 0 and 1) used to create a color gradient
+#' between the different texture class polygons.
+#' @param arrows.show Single logical. If TRUE (default), 3 arrows are drawn
+#' outside the triangle, along each axis, that show the direction of increasing
+#' values (arrow base) and of isovalue (arrow tip) of the texture class. If
+#' FALSE no arrows are drawn.
+#' @param arrows.lty Single numerical. Line type of the arrows drawn outside
+#' the triangle, along each axis. Same possible types as par("lty").
+#' @param points.type Single text letter. Point type. Either "p" (points only),
+#' "l" (lines only) or "b" (both points and lines), as for plot() or points().
+#' Point refer here to soil texture values plotted on the triangle.
+#' @param pch Single numerical or vector of numericals, or single text string
+#' or vector of text string. Point shape number(s) or point character(s) to be
+#' plotted. Point refer here to soil texture values plotted on the triangle.
+#' @param z.type Single character string. Type of plot to be used for
+#' displaying a 4th variable on the texture triangle (in addition to Clay, Silt
+#' and Sand). Only used if 'z.name' is not NULL. Currently only one value is
+#' supported, "bubble", for displaying a bubble plot with bubble sizes and
+#' color saturation and values proportional to the value of tri.data[,z.name].
+#' The value 'map' is deprecated and replaced by TT.iwd(), TT.image() or
+#' TT.contour().
+#' @param z.col.hue Single numerical. Hue of the bubble color ([0-1]) to be
+#' used if 'z.name' is not NULL. A gradient of saturation and value is
+#' automatically created for the bubbles (with this hue).
+#' @param z.cex.range Vector of 2 numericals. Minimum and maximum 'cex' of the
+#' bubbles plotted on the triangle if 'z.name' is not NULL.
+#' @param z.pch Single numerical or vector of numericals. Point symbol
+#' number(s) to be used for the bubbles if 'z.name' is not NULL.
+#' @param text.tol Single numerical. Tolerance on the sum of the 3 particle
+#' size classes.  The real sum of the 3 particle size classes in 'tri.data'
+#' should be >= text.sum * (1-text.tol) OR <= text.sum * (1+text.tol). See
+#' 'text.sum' for more details, as well as 'tri.sum.tst' (to prevent texture
+#' sum tests).
+#' @param tri.sum.tst Single logical. If TRUE (the default), the sum of the 3
+#' texture classes of each texture value in 'tri.data' will be checked in
+#' regard to 'text.sum' and 'text.tol'. If FALSE, no test is done.
+#' @param tri.pos.tst Single logical. If TRUE (the default), the position of
+#' texture values in 'tri.data' are tested to check that they are not OUTSIDE
+#' the texture triangle (i.e. that some texture values may be negative).
+#' @param b.lim Vector of 2 numerical values. This is an equivalent to plot()
+#' xlim argument. Minimum and maximum x / bottom value of the texture triangle
+#' area, in FRACTION OF THE MAXIMAL EXTENSION.  Default is c(0,1). The real
+#' span is then b.lim * text.sum.  This is a minimal 'zoom' implementation
+#' (results are not always perfect). 'b.lim' and 'l.lim' should be equal for
+#' better rendering.
+#' @param l.lim Vector of 2 numerical values. This is an equivalent to plot()
+#' ylim argument. Minimum and maximum y / left value of the texture triangle
+#' area, in FRACTION OF THE MAXIMAL EXTENSION.  Default is c(0,1). The real
+#' span is then l.lim * text.sum.  This is a minimal 'zoom' implementation
+#' (results are not always perfect). 'b.lim' and 'l.lim' should be equal for
+#' better rendering.
+#' @param lang Single text string. Determines the language used for the plot
+#' main title and axis labels. Possible values are 'en' (English, the default),
+#' "fr" (French), "it" (Italian), "es" (Spanish), "de" (German), "nl" (Dutch),
+#' "se" (Swedish) and "fl" (Flemish).
+#' @param new.mar Vector of 4 numericals. Margin sizes of the plot. Default is
+#' the same as par("mar"). See par("mar") for more details. Use this at your
+#' own risks!
+#' @param new.centroid Single logical. If TRUE (default) the new method (Paul
+#' Bourke) is used to calculate the centroid. If FALSE the centroid is taken as
+#' the mean x and y coordinates of the vertices.
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @examples
+#' require( soiltexture ) 
+#' 
+#' # ::: Texture triangles without data
+#' 
+#' # :: Base plot (HYPRES / European Soil Map triangle) 
+#' TT.plot() 
+#' 
+#' # same as
+#' TT.plot( class.sys = "HYPRES.TT" ) 
+#' 
+#' # :: Same plot, but with USDA texture triangle 
+#' TT.plot( class.sys = "USDA.TT" ) 
+#' 
+#' # :: Same plot, but with a color gradient 
+#' TT.plot( 
+#'     class.sys       = "USDA.TT", 
+#'     class.p.bg.col  = TRUE
+#' )   #
+#' 
+#' # :: No texture classification system
+#' TT.plot( class.sys = "none" ) 
+#' 
+#' # ::: Texture triangles with texture data 
+#' 
+#' # :: 1st create a dummy texture dataset 
+#' my.text <- data.frame( 
+#'     "CLAY"  = c(05,60,15,05,25,05,25,45,65,75,13,47), 
+#'     "SILT"  = c(05,08,15,25,55,85,65,45,15,15,17,43), 
+#'     "SAND"  = c(90,32,70,70,20,10,10,10,20,10,70,10), 
+#'     "OC"    = c(20,14,15,05,12,15,07,21,25,30,05,28)  
+#' )   #
+#' 
+#' # :: And plot it on a French Aisne texture triangle
+#' #    with a title
+#' TT.plot( 
+#'     class.sys   = "FR.AISNE.TT", 
+#'     tri.data    = my.text, 
+#'     main        = "Soil texture data" 
+#' )   #
+#' 
+#' # ::: Bubble plots (4th variable) 
+#' 
+#' # :: 1st generate a dummy texture dataset with a 4th variable 
+#' #    with TT.dataset() 
+#' rand.text   <- TT.dataset( n = 100, seed.val = 1980042401 ) 
+#' 
+#' # :: Plot the dummy dataset as a bubble plot
+#' TT.plot( 
+#'     class.sys   = "none", 
+#'     tri.data    = rand.text, 
+#'     z.name      = "Z", 
+#'     main        = "Soil texture triangle and Z bubble plot" 
+#' )   #
+#' 
+#' # ::: Test all the texture triangles
+#' TT.plot( class.sys = "none" )           # no classification 
+#' TT.plot( class.sys = "HYPRES.TT" )      # HYPRES / European Soil Map 
+#' TT.plot( class.sys = "USDA.TT" )        # USDA 
+#' TT.plot( class.sys = "USDA-NCSS.TT" )   # USDA with NCSS labels
+#' TT.plot( class.sys = "FR.AISNE.TT" )    # French Aisne 
+#' TT.plot( class.sys = "FR.GEPPA.TT" )    # French GEPPA 
+#' TT.plot( class.sys = "DE.BK94.TT" )     # Germany 
+#' TT.plot( class.sys = "DE.SEA74.TT" )    # German SEA 1974 
+#' TT.plot( class.sys = "DE.TGL85.TT" )    # German TGL 1985 
+#' TT.plot( class.sys = "UK.SSEW.TT" )     # UK 
+#' TT.plot( class.sys = "BE.TT" )          # Belgium 
+#' TT.plot( class.sys = "CA.FR.TT" )       # Canada (fr) 
+#' TT.plot( class.sys = "CA.EN.TT" )       # Canada (en) 
+#' TT.plot( class.sys = "CA2.EN.TT" )      # Canada (en) with official labels 
+#' TT.plot( class.sys = "AU2.TT" )         # Australian 
+#' TT.plot( class.sys = "ISSS.TT" )        # ISSS 
+#' TT.plot( class.sys = "ROM.TT" )         # Romanian 
+#' TT.plot( class.sys = "USDA1911" )       # USDA 1911 (M. Whitney, 1911)
+#' TT.plot( class.sys = "BRASIL.TT" )      # Brasil (Lemos & Santos 1996)
+#' TT.plot( class.sys = "SiBCS13.TT" )     # Brasil (Lemos & Santos 1996)
+#' 
+#' ##  Polish triangles:
+#' 
+#' #   PTG 1956-1959
+#' try( TT.plot( class.sys = "PL.TT" ) ) 
+#' #   PTG 1956 Musierowicz
+#' try( TT.plot( class.sys = "Polish_PTG_1956_Musierowicz.TT" ) )
+#' #   BN 1978
+#' try( TT.plot( class.sys = "Polish_BN_1978.TT" ) ) 
+#' #   PTG 2008
+#' #   Polish kategorie agronomiczne 1990
+#' try( TT.plot( class.sys = 
+#'     "Polish_kategorie_agronomiczne_1990.TT" ) ) 
+#' try( TT.plot( class.sys = "PTG_2008.TT" ) ) 
+#' 
+#' #   All/most polish triangles includes special characters
+#' #   and may not work on all platforms (or some accents may 
+#' #   be missing). Remove the try() around the code.
+#' 
+#' # ::: Test all the languages:
+#' TT.plot( class.sys = "USDA.TT", lang = "en" )  # English, default 
+#' TT.plot( class.sys = "USDA.TT", lang = "fr" )  # French 
+#' TT.plot( class.sys = "USDA.TT", lang = "de" )  # German 
+#' TT.plot( class.sys = "USDA.TT", lang = "es" )  # Spanish 
+#' TT.plot( class.sys = "USDA.TT", lang = "it" )  # Italian 
+#' TT.plot( class.sys = "USDA.TT", lang = "nl" )  # Dutch 
+#' TT.plot( class.sys = "USDA.TT", lang = "fl" )  # Dutch (Belgium) / Flemish 
+#' TT.plot( class.sys = "USDA.TT", lang = "se" )  # Swedish 
+#' TT.plot( class.sys = "USDA.TT", lang = "ro" )  # Romanian 
+#' 
+#' #   Languages with special characters
+#' #   (may not work on all platforms + some accents can be missing)
+#' try( TT.plot( class.sys = "USDA.TT", lang = "pl"  ) ) # Polish 
+#' try( TT.plot( class.sys = "USDA.TT", lang = "pt"  ) ) # Portuguese 
+#' try( TT.plot( class.sys = "USDA.TT", lang = "es2" ) ) # Spanish
+#' try( TT.plot( class.sys = "USDA.TT", lang = "ro2" ) ) # Romanian
+#' @export 
 TT.plot <- function(# Plot soil texture triangles / diagrams.
 ### Plot a soil texture triangle (also called soil texture 
 ### diagrams, or soil texture ternary plots), with or without 
@@ -6054,6 +7396,221 @@ TT.plot <- function(# Plot soil texture triangles / diagrams.
 
 
 
+
+
+#' Classify a table of soil texture data according to a soil texture triangle.
+#' 
+#' The function calculate in which classe(s) of a texture triangle
+#' (classification system defined by 'class.sys') lies each soil sample (with
+#' texture data) in the table 'tri.data'. As a sample may lie inside a texture
+#' class, but also at the edge of 2 or more texture classes, the function does
+#' not only output one single texture class per sample. If 'PiC.type' is 'n' or
+#' 'l', it rather output a table where each column is a texture class and each
+#' row a texture sample, and yes / no information about the belonging of the
+#' sample to each texture class.  Alternatively, If 'PiC.type' is 't'it will
+#' output a text string (per sample) containing all the texture classes to
+#' which that point belong. The texture data in 'tri.data' can be transformed
+#' into another particle size system prior to their classification if needed.
+#' See the options base.css.ps.lim, tri.css.ps.lim, dat.css.ps.lim, css.transf
+#' and text.transf.fun. ON DEFAULT VALUES OF TT.points.in.classes() ARGUMENTS?
+#' As TT.points.in.classes() shares its arguments with many other functions,
+#' their default value is not defined in TT.points.in.classes() source code,
+#' but rather in a dedicated list object called 'TT.par' and stored in the
+#' environment TT.env. The function TT.get() is used to retrieve the default
+#' value of the arguments defined in TT.par (see ?TT.get). For instance, to
+#' know the default value of 'class.sys', you can type TT.get("class.sys"). To
+#' set a different default value for a given argument in R, use TT.set() (see
+#' ?TT.set).  For instance to change the default value of 'class.sys', type
+#' TT.set( "class.sys" = "USDA.TT" ).
+#' 
+#' 
+#' @param tri.data Data frame. Data frame containing the CLAY, SILT and SAND
+#' 'coordinates' of the texture data points to be classified The data frame can
+#' contain more column than needed (ignored). The data frame must have column
+#' named CLAY, SILT and SAND (uppercase, the order has no importance) or named
+#' after the 'css.names' argument (alternative names). The sum of CLAY, SILT
+#' and SAND must be equal to 'text.sum' ('text.tol' determines the error
+#' tolerance).
+#' @param class.sys Single text string. Text code of the texture classification
+#' system to be used for the classification of 'tri.data'.  Possible values are
+#' "none" (no classification plotted), "USDA.TT" (USDA texture triangle),
+#' "HYPRES.TT" (texture triangle of the European Soil Map), "FR.AISNE.TT"
+#' (French texture triangle of the Aisne region soil survey), "FR.GEPPA.TT"
+#' (French GEPPA texture triangle), "DE.BK94.TT" (German texture triangle),
+#' "UK.SSEW.TT" (Soil Survey of England and Wales), "AU.TT" (Australian texture
+#' triangle), "BE.TT" (Belgium texture triangle), "CA.EN.TT" (Canadian texture
+#' triangle, with English class abbreviations) and "CA.FR.TT" (Canadian texture
+#' triangle, with French class abbreviations) (see the package vignette for a
+#' complete list).
+#' @param PiC.type Single character string. If equal to 'n', then a table of 0,
+#' 1, 2 or 3 is outputed (0 if the sample does not belong to a class, 1 if it
+#' does, 2 if it lies on an edge and 3 if it lies on a vertex). Notice that the
+#' accuracy of the classification is not garanteed for samples lying very close
+#' to an edge, or right on it. See
+#' <http://www.mail-archive.com/r-help@r-project.org/msg96180.html>
+#' @param css.names Vector of 3 character strings. Name of the columns in
+#' 'tri.data' that contains the CLAY SILT and SAND values, respectively.  If
+#' NULL, default c("CLAY","SILT","SAND") value is assumed. Not to be confused
+#' with 'css.lab' that defines the labels of the CLAY SILT and SAND axes in the
+#' plot.
+#' @param text.sum Single numerical. Sum of the 3 particle size classes for
+#' each texture value (fixed). The real sum of the 3 particle size classes in
+#' 'tri.data' should be >= text.sum * (1-text.tol) OR <= text.sum *
+#' (1+text.tol), where 'text.tol' is an argument that can be changed. If some
+#' of the texture values don't match this requirement, an error occur (function
+#' fails) and TT.points.in.classes returns a of bad values with their actual
+#' particle size classes sum. You can 'normalise' you data table () prior to
+#' the use of TT.points.in.classes, by using the function TT.normalise.sum(),
+#' so all values match the 'text.sum' criteria.  See also 'tri.sum.tst' that
+#' can be set to FALSE to avoid sum of particle size classes tests.
+#' @param base.css.ps.lim Vector of 4 numericals. Particle size boundaries
+#' (upper and lower) of the 3 particle size classes (CLAY, SILT and SAND,
+#' starting from the lower size of CLAY particles, 0, to the upper size of the
+#' SAND particles, 2000), in micrometers, FOR THE BASE SYSTEM. These particles
+#' size class limits are the references and all other texture values with
+#' different limits will be converted into that reference if (and only if)
+#' css.transf == TRUE (not default).  If NULL, 'base.css.ps.lim' will be set to
+#' the default value of the texture classification system chosen ('class.sys').
+#' The transformation function is set by 'text.transf.fun' and is a log-linear
+#' interpolation by default.
+#' @param tri.css.ps.lim Vector of 4 numericals. Particle size boundaries
+#' (upper and lower) of the 3 particle size classes (CLAY, SILT and SAND,
+#' starting from the lower size of CLAY particles, 0, to the upper size of the
+#' SAND particles, 2000), in micrometers, FOR THE TEXTURE TRIANGLE.  If not
+#' NULL, different from 'base.css.ps.lim', and css.transf == TRUE (not
+#' default), then the CLAY SILT and SAND coordinates of the texture triangle
+#' will be converted into the 'base.css.ps.lim' reference. If NULL,
+#' 'tri.css.ps.lim' will be set to the default value of the texture
+#' classification system chosen ('class.sys'). The transformation function is
+#' set by 'text.transf.fun' and is a log-linear interpolation by default.
+#' @param dat.css.ps.lim Vector of 4 numericals. Particle size boundaries
+#' (upper and lower) of the 3 particle size classes (CLAY, SILT and SAND,
+#' starting from the lower size of CLAY particles, 0, to the upper size of the
+#' SAND particles, 2000), in micrometers, FOR THE TEXTURE DATA TABLE
+#' ('tri.data'). If not NULL, different from 'base.css.ps.lim', and css.transf
+#' == TRUE (not default), then the CLAY SILT and SAND coordinates of the
+#' texture data in tri.data will be converted into the 'base.css.ps.lim'
+#' reference. If NULL, 'tri.css.ps.lim' will be set to the default value of the
+#' texture classification system chosen ('class.sys'). The transformation
+#' function is set by 'text.transf.fun' and is a log-linear interpolation by
+#' default.
+#' @param css.transf Single logical. Set to TRUE to transform the texture
+#' coordinates of the texture triangle ('class.sys') or the texture data
+#' ('tri.data') into the base particle size class limits.  See
+#' 'base.css.ps.lim' for the base plot particle size class limits,
+#' 'tri.css.ps.lim' for the triangle particle size class limits and
+#' 'dat.css.ps.lim' for the data table particle size class limits.  The
+#' transformation function is set by 'text.transf.fun' and is a log-linear
+#' interpolation by default. The default value is FALSE, so no transformation
+#' is made.
+#' @param text.transf.fun R function with the same argument names and same
+#' output as the function TT.text.transf(). 'text.transf.fun' is the function
+#' that transform the texture values from one system of particle class size
+#' limits to another. Only used if css.transf == TRUE.  Default value is
+#' text.transf.fun=TT.text.transf. See also 'base.css.ps.lim', 'tri.css.ps.lim'
+#' and 'dat.css.ps.lim'.
+#' @param trsf.add.opt1 Non pre-defined format. If the user specifies its own
+#' texture transformation function in 'text.transf.fun' (not TT.text.transf()),
+#' then he can use 'trsf.add.opt1' and 'trsf.add.opt1' as new, additional,
+#' argument for his function. So the format of 'trsf.add.opt1' depends on the
+#' function defined by the user in 'text.transf.fun'.
+#' @param trsf.add.opt2 Non pre-defined format. If the user specifies its own
+#' texture transformation function in 'text.transf.fun' (not TT.text.transf()),
+#' then he can use 'trsf.add.opt1' and 'trsf.add.opt1' as new, additional,
+#' argument for his function. So the format of 'trsf.add.opt1' depends on the
+#' function defined by the user in 'text.transf.fun'.
+#' @param text.tol Single numerical. Tolerance on the sum of the 3 particle
+#' size classes.  The real sum of the 3 particle size classes in 'tri.data'
+#' should be >= text.sum * (1-text.tol) OR <= text.sum * (1+text.tol). See
+#' 'text.sum' for more details, as well as 'tri.sum.tst' (to prevent texture
+#' sum tests).
+#' @param tri.sum.tst Single logical. If TRUE (the default), the sum of the 3
+#' texture classes of each texture value in 'tri.data' will be checked in
+#' regard to 'text.sum' and 'text.tol'. If FALSE, no test is done.
+#' @param tri.pos.tst Single logical. If TRUE (the default), the position of
+#' texture values in 'tri.data' are tested to check that they are not OUTSIDE
+#' the texture triangle (i.e. that some texture values may be negative).
+#' @param collapse Single character string. If PiC.type = "t" and a sample lie
+#' on the edge of 2 texture classes, then both will be outputed in a single
+#' character string, separated by 'collapse'. Example of output: [1] "C" "VF,
+#' F" "C" "C" "M"
+#' @param texture2xy Single logical. Set to FALSE to avoid any transformation
+#' of the texture data (trigonometric) prior to testure data classification.
+#' Setting to FALSE avoid some numerical accuracy problems when a point is on
+#' the border of a texture class.
+#' @param blr.tx Vector of 3 character strings. The 1st, 2nd and 3rd values
+#' must be either CLAY, SILT or SAND, and determines the particle size classes
+#' associated with the BOTTOM, LEFT and RIGHT axis, respectively.  CLAY, SILT
+#' and SAND order in the vector is free, but they should all be used one time.
+#' The CLAY, SILT and SAND names must appear whatever the corresponding columns
+#' names in 'tri.data' (eventually set by 'css.names') and whatever the labels
+#' of the axis in the plot (eventually set by 'css.lab')
+#' @param blr.clock Vector of logicals, eventually with NA values. Direction of
+#' increasing texture values on the BOTTOM, LEFT and RIGHT axis, respectively.
+#' A value of TRUE means that the axis direction is clockwise. A value of FALSE
+#' means that the axis direction is counterclockwise. A value of NA means that
+#' the axis direction is centripetal. Possible combinations are c(T,T,T);
+#' c(F,F,F); c(F,T,NA) and c(T,NA,F), for fully clockwise, fully
+#' counterclockwise, right centripetal and left centripetal orientations,
+#' respectively.
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @examples
+#' require( "soiltexture" ) 
+#' 
+#' # Create a dummy data frame of soil textures:
+#' my.text <- data.frame( 
+#'     "CLAY"  = c(05,60,15,05,25,05,25,45,65,75,13,47), 
+#'     "SILT"  = c(05,08,15,25,55,85,65,45,15,15,17,43), 
+#'     "SAND"  = c(90,32,70,70,20,10,10,10,20,10,70,10), 
+#'     "OC"    = c(20,14,15,05,12,15,07,21,25,30,05,28)  
+#' )   #
+#' 
+#' # Display the table:
+#' my.text
+#' 
+#' # Classify according to the HYPRES / European Soil Map classification
+#' TT.points.in.classes( 
+#'     tri.data    = my.text[1:5,], 
+#'     class.sys   = "HYPRES.TT"  
+#' )   #
+#' 
+#' # Classify according to the USDA classification
+#' TT.points.in.classes( 
+#'     tri.data    = my.text[1:5,], 
+#'     class.sys   = "USDA.TT"  
+#' )   #
+#' 
+#' # Classify according to the HYPRES / European Soil Map classification, 
+#' #   returns logical values
+#' TT.points.in.classes( 
+#'     tri.data    = my.text[1:5,], 
+#'     class.sys   = "HYPRES.TT", 
+#'     PiC.type    = "l" 
+#' )   #
+#' 
+#' # Classify according to the HYPRES / European Soil Map classification, 
+#' #   returns text
+#' TT.points.in.classes( 
+#'     tri.data    = my.text[1:5,], 
+#'     class.sys   = "HYPRES.TT", 
+#'     PiC.type    = "t" 
+#' )   #
+#' 
+#' # Classify according to the HYPRES / European Soil Map classification, 
+#' #   returns text, 
+#' #   custom class separator in case of points belonging to 
+#' #   several classes.
+#' TT.points.in.classes( 
+#'     tri.data    = my.text[1:5,], 
+#'     class.sys   = "HYPRES.TT", 
+#'     PiC.type    = "t", 
+#'     collapse    = ";"
+#' )   #
+#'@importFrom sp point.in.polygon
+#' @export 
 TT.points.in.classes <- function(# Classify a table of soil texture data according to a soil texture triangle.
 ### The function calculate in which classe(s) of a texture triangle 
 ### (classification system defined by 'class.sys') lies each soil 
@@ -6403,7 +7960,7 @@ TT.points.in.classes <- function(# Classify a table of soil texture data accordi
         xpol    <- classes.points.xy[ sel.vec , "xpos" ]
         ypol    <- classes.points.xy[ sel.vec , "ypos" ]
         #
-        PiP.res <- point.in.polygon( 
+        PiP.res <- sp::point.in.polygon( 
             point.x = data.points.xy$"xpos",  
             point.y = data.points.xy$"ypos",  
             pol.x   = xpol,  
@@ -6481,6 +8038,29 @@ TT.points.in.classes <- function(# Classify a table of soil texture data accordi
 
 
 
+
+
+#' Internal. Convert point-data duplets (2 variables, x-y coordinaes) in Clay
+#' silta and sand coordinates.
+#' 
+#' Internal. Convert point-data duplets (2 variables, x-y coordinaes) in Clay
+#' silta and sand coordinates.
+#' 
+#' 
+#' @param xy.data a data.frame with xpos and ypos columns
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param set.par If TRUE parameters are set automatically to their defualt value
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.xy2css <- function(# Internal. Convert point-data duplets (2 variables, x-y coordinaes) in Clay silta and sand coordinates. 
 ### Internal. Convert point-data duplets (2 variables, x-y 
 ### coordinaes) in Clay silta and sand coordinates. 
@@ -6704,6 +8284,30 @@ TT.xy2css <- function(# Internal. Convert point-data duplets (2 variables, x-y c
 
 
 
+
+
+#' Interactive (mouse clic) retrieval the CLAY SILT SAND coordinate of points
+#' on a texture triangle.
+#' 
+#' Interactive (mouse clic) retrieval the CLAY SILT SAND coordinate of points
+#' on a texture triangle.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param set.par If TRUE parameters are set automatically to their defualt value
+#' @param n Passed to \code{\link[graphics]{locator}}
+#' @param type Passed to \code{\link[graphics]{locator}}
+#' @param \dots Further argumets passed to locator()
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom graphics locator
+#' @export 
 TT.locator <- function(# Interactive (mouse clic) retrieval the CLAY SILT SAND coordinate of points on a texture triangle.
 ### Interactive (mouse clic) retrieval the CLAY SILT SAND coordinate of points on a texture triangle. 
 
@@ -6732,7 +8336,7 @@ TT.locator <- function(# Interactive (mouse clic) retrieval the CLAY SILT SAND c
     # Set rest of variables:
     TT.auto.set(set.par=set.par) 
     # 
-    xy.data <- locator(n=n,type=type,...) 
+    xy.data <- graphics::locator(n=n,type=type,...) 
     # 
     xy.data <- data.frame( 
         "xpos"  = xy.data[["x"]], 
@@ -6765,6 +8369,23 @@ TT.locator <- function(# Interactive (mouse clic) retrieval the CLAY SILT SAND c
 
 
 
+
+
+#' Internal. Create a grid in the x-y coordinate system.
+#' 
+#' Create a grid in the x-y coordinate system. Most of the function is a
+#' reshaped extract from kde2d() from the MASS package, by Venables & Ripley (+
+#' modifications)
+#' 
+#' 
+#' @param x
+#' @param y
+#' @param n
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @noRd
 TT.xy.grid <- function(# Internal. Create a grid in the x-y coordinate system. 
 ### Create a grid in the x-y coordinate system. Most of the function 
 ### is a reshaped extract from kde2d() from the MASS package, by 
@@ -6811,6 +8432,28 @@ TT.xy.grid <- function(# Internal. Create a grid in the x-y coordinate system.
 
 
 
+
+
+#' Compute the additive log-ratio transformation of compositional data.
+#' 
+#' Function that compute the additive log-ratio transformation of compositional
+#' data (here texture data). This a a copy-paste-and-rename of the alr function
+#' provided by the package chemometrics: P. Filzmoser and K. Varmuza (2008).
+#' chemometrics: Multivariate Statistical Analysis in Chemometrics.  R package
+#' version 0.4. The function has been modified so it returns NA when a value is
+#' below or equal to zero (this happens when using a regular grid of texture
+#' data, for practical reasons). The function has also been modified so it uses
+#' column name rather than column index.
+#' 
+#' 
+#' @param X A data.frame containing soil texture data
+#' @param divisorvar number of ratioing variable
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export 
 TT.chemometrics.alr <- function(# Compute the additive log-ratio transformation of compositional data.
 ### Function that compute the additive 
 ### log-ratio transformation of compositional data (here texture 
@@ -6857,6 +8500,40 @@ TT.chemometrics.alr <- function(# Compute the additive log-ratio transformation 
 
 
 
+
+
+#' Calculates the Mahalanobis distance between clay silt and sand.
+#' 
+#' Function that calculated the Mahalanobis distance between clay silt and
+#' sand, on a regular x-y grid (back-transformed to Clay silt and sand for
+#' Mahalanobis calculation). The underlying function is mahalanobis() by R
+#' Development Core Team (2009)
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param set.par If TRUE parameters are set automatically to their defualt value
+#' @param n Number of points in the grid.
+#' @param center Passed to \code{\link[stats]{mahalanobis}}
+#' @param cov.mat Passed to \code{\link[stats]{mahalanobis}}
+#' @param inverted Passed to \code{\link[stats]{mahalanobis}}
+#' @param \dots More argument passed to \code{\link[stats]{mahalanobis}}
+#' @param alr If TRUE an additive log-ratio transformation of the data is performed, and the Mahalanobis distance is computed on all classes but css.names[divisorvar] 
+#' @param divisorvar The Mahalanobis distance will be computed on all the texture class but css.names[divisorvar]  
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom stats cov 
+#' @importFrom stats mahalanobis
+#' @importFrom sp point.in.polygon
+#' @export 
 TT.mahalanobis <- function(# Calculates the Mahalanobis distance between clay silt and sand.
 ### Function that calculated the Mahalanobis 
 ### distance between clay silt and sand, on a regular x-y grid 
@@ -6954,13 +8631,13 @@ TT.mahalanobis <- function(# Calculates the Mahalanobis distance between clay si
         )   #
         #
         if( is.null(center)  ){ center  <- colMeans(tri.data) } 
-        if( is.null(cov.mat) ){ cov.mat <- cov(tri.data) } 
+        if( is.null(cov.mat) ){ cov.mat <- stats::cov(tri.data) } 
     }else{ 
         tri.data <- tri.data[,css.names[-divisorvar]] 
         tri.grid <- tri.grid[,css.names[-divisorvar]] 
         #
         if( is.null(center)  ){ center  <- colMeans(tri.data) } 
-        if( is.null(cov.mat) ){ cov.mat <- cov(tri.data) } 
+        if( is.null(cov.mat) ){ cov.mat <- stats::cov(tri.data) } 
     }   #
     #
     sel.exc <- apply( 
@@ -6973,7 +8650,7 @@ TT.mahalanobis <- function(# Calculates the Mahalanobis distance between clay si
     #
     maha <- rep(NA,dim(tri.grid)[1])
     #
-    maha[!sel.exc] <- mahalanobis( 
+    maha[!sel.exc] <- stats::mahalanobis( 
         x           = tri.grid[!sel.exc,], 
         center      = center, 
         cov         = cov.mat, 
@@ -6983,7 +8660,7 @@ TT.mahalanobis <- function(# Calculates the Mahalanobis distance between clay si
     
     # require( "sp" ) 
     
-    PiP <- as.logical(  point.in.polygon( 
+    PiP <- as.logical(  sp::point.in.polygon( 
         point.x = xy.grid[["xypos"]][,"xpos"],
         point.y = xy.grid[["xypos"]][,"ypos"], 
         pol.x   = xy.bound[,"xpos"], 
@@ -7021,6 +8698,33 @@ TT.mahalanobis <- function(# Calculates the Mahalanobis distance between clay si
 
 
 
+
+
+#' Calculated the 2D probabilty density on an x-y grid.
+#' 
+#' Function that calculated the 2D probabilty density on an x-y grid (and NOT
+#' on the clay silt sand reference system). Wrapper around the kde2d function
+#' from the MASS package.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param set.par If TRUE parameters are set automatically to their defualt value
+#' @param n Passed to \code{\link[MASS]{kde2d}}
+#' @param lims Passed to \code{\link[MASS]{kde2d}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom MASS kde2d  
+#' @importFrom sp point.in.polygon
+#' @export 
 TT.kde2d <- function(# Calculated the 2D probabilty density on an x-y grid.
 ### Function that calculated the 2D probabilty 
 ### density on an x-y grid (and NOT on the clay silt sand 
@@ -7101,7 +8805,7 @@ TT.kde2d <- function(# Calculated the 2D probabilty density on an x-y grid.
         )   #
     }   #
     #
-    dens.xy <- kde2d( 
+    dens.xy <- MASS::kde2d( 
         x       = xy.data[,"xpos"], 
         y       = xy.data[,"ypos"], 
         n       = n, 
@@ -7115,7 +8819,7 @@ TT.kde2d <- function(# Calculated the 2D probabilty density on an x-y grid.
     
     # require( "sp" ) 
     
-    PiP <- as.logical(  point.in.polygon( 
+    PiP <- as.logical(  sp::point.in.polygon( 
         point.x = ex.dens.xy[,"x"],
         point.y = ex.dens.xy[,"y"], 
         pol.x   = xy.bound[,"xpos"], 
@@ -7142,6 +8846,36 @@ TT.kde2d <- function(# Calculated the 2D probabilty density on an x-y grid.
 
 
 
+
+
+#' Inverse weighted distance interpolation on a grid.
+#' 
+#' Inverse weighted distance interpolation on a grid.
+#' 
+#' 
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param z.name See \code{\link[soiltexture]{TT.plot}}
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param set.par If TRUE parameters are set automatically to their defualt value
+#' @param n Number of points in the grid
+#' @param lims "points" or "triangle"
+#' @param max.dist Maximum distance 
+#' @param q.max.dist Passed to \code{\link[stats]{quantile}}
+#' @param pow Single numeric value. Power of the inverse weighted distance
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom stats dist
+#' @importFrom stats quantile
+#' @importFrom sp point.in.polygon
+#' @export
 TT.iwd <- function(# Inverse weighted distance interpolation on a grid. 
 ### Inverse weighted distance interpolation on a grid. 
 
@@ -7150,7 +8884,7 @@ TT.iwd <- function(# Inverse weighted distance interpolation on a grid.
  geo, 
  
  css.names       = NULL, 
- tri.pol.data    = NULL,     # edges data, same format as tri.data
+# tri.pol.data    = NULL,     # edges data, same format as tri.data
  
  text.tol        = NULL, 
  text.sum        = NULL, 
@@ -7234,7 +8968,7 @@ TT.iwd <- function(# Inverse weighted distance interpolation on a grid.
         "z" = NA  
     )   #
     #
-    dist.mat    <- dist( 
+    dist.mat    <- stats::dist( 
         x       = rbind( 
             xy.data[,c("xpos","ypos")], 
             xy.grid[["xypos"]][,c("xpos","ypos")] 
@@ -7246,7 +8980,7 @@ TT.iwd <- function(# Inverse weighted distance interpolation on a grid.
     #
     if( is.null( max.dist ) )
     {   #
-        max.dist    <- as.numeric( quantile( x = dist.mat, probs = q.max.dist ) ) 
+        max.dist    <- as.numeric( stats::quantile( x = dist.mat, probs = q.max.dist ) ) 
     }   #
     #
     dist.mat    <- as.matrix( dist.mat )
@@ -7269,7 +9003,7 @@ TT.iwd <- function(# Inverse weighted distance interpolation on a grid.
     
     # require( "sp" ) 
     
-    PiP <- as.logical(  point.in.polygon( 
+    PiP <- as.logical(  sp::point.in.polygon( 
         point.x = xy.grid[["xypos"]][,"xpos"],
         point.y = xy.grid[["xypos"]][,"ypos"], 
         pol.x   = xy.bound[,"xpos"], 
@@ -7308,6 +9042,58 @@ TT.iwd <- function(# Inverse weighted distance interpolation on a grid.
 
 
 
+
+
+#' Wrapper for the contour() function adapted to texture triangles.
+#' 
+#' A wrapper for the contour() function adapted to texture triangles (plot
+#' preparation). designed to plot the results of TT.mahalanobis() or
+#' TT.kde2d(), before or after plot.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param x A data.frame of matrix with 3 columns: x, y and z.
+#' @param add If TRUE adds the contour to an existing plot.
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param unit.ps See \code{\link[soiltexture]{TT.plot}}
+#' @param unit.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param b.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param l.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param main See \code{\link[soiltexture]{TT.plot}}
+#' @param new.mar See \code{\link[soiltexture]{TT.plot}}
+#' @param bg See \code{\link[soiltexture]{TT.plot}}
+#' @param fg See \code{\link[soiltexture]{TT.plot}}
+#' @param col See \code{\link[soiltexture]{TT.plot}}
+#' @param cex.main See \code{\link[soiltexture]{TT.plot}}
+#' @param lang See \code{\link[soiltexture]{TT.plot}}
+#' @param nlevels See \code{\link[graphics]{contour}}
+#' @param levels See \code{\link[graphics]{contour}}
+#' @param labels See \code{\link[graphics]{contour}}
+#' @param xlim See \code{\link[graphics]{contour}}
+#' @param ylim See \code{\link[graphics]{contour}}
+#' @param zlim See \code{\link[graphics]{contour}}
+#' @param labcex See \code{\link[graphics]{contour}}
+#' @param drawlabels See \code{\link[graphics]{contour}}
+#' @param method See \code{\link[graphics]{contour}}
+#' @param axes See \code{\link[graphics]{contour}}
+#' @param frame.plot See \code{\link[graphics]{contour}}
+#' @param lty See \code{\link[graphics]{contour}}
+#' @param lwd See \code{\link[graphics]{contour}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tlr.an See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param base.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param \dots Additional parameters passed to  See \code{\link[graphics]{contour}}
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom graphics par 
+#' @importFrom graphics contour
+#' @export
 TT.contour <- function(# Wrapper for the contour() function adapted to texture triangles.
 ### A wrapper for the contour() function 
 ### adapted to texture triangles (plot preparation).
@@ -7425,10 +9211,10 @@ TT.contour <- function(# Wrapper for the contour() function adapted to texture t
     if( any( is.na( zlim       )) ){ zlim       <- range( x[["z"]], finite = TRUE) }  
     if( any( is.na( levels     )) ){ levels     <- pretty(zlim, nlevels) }  
     if( any( is.na( frame.plot )) ){ frame.plot <- axes }  
-    if( any( is.na( lty        )) ){ lty        <- par("lty") }  
-    if( any( is.na( lwd        )) ){ lwd        <- par("lwd") }  
+    if( any( is.na( lty        )) ){ lty        <- graphics::par("lty") }  
+    if( any( is.na( lwd        )) ){ lwd        <- graphics::par("lwd") }  
     #
-    contour( 
+    graphics::contour( 
         x           = x, 
         add         = TRUE, 
         nlevels     = nlevels, 
@@ -7492,6 +9278,49 @@ TT.contour <- function(# Wrapper for the contour() function adapted to texture t
 
 
 
+
+
+#' Wrapper for the image() function adapted to texture triangles.
+#' 
+#' A wrapper for the image() function adapted to texture triangles (plot
+#' preparation). designed to plot the results of TT.mahalanobis() or TT.kde2d()
+#' [to be written], before or after plot.
+#' 
+#' 
+#' @param geo See \code{\link[soiltexture]{TT.plot}}
+#' @param x A list with three items, "x", "y" and "z"
+#' @param add If TRUE the image is added to an existing plot.
+#' @param tri.sum.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param unit.ps See \code{\link[soiltexture]{TT.plot}}
+#' @param unit.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param b.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param l.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param main See \code{\link[soiltexture]{TT.plot}}
+#' @param new.mar See \code{\link[soiltexture]{TT.plot}}
+#' @param bg See \code{\link[soiltexture]{TT.plot}}
+#' @param fg See \code{\link[soiltexture]{TT.plot}}
+#' @param cex.main See \code{\link[soiltexture]{TT.plot}}
+#' @param lang See \code{\link[soiltexture]{TT.plot}}
+#' @param xlim Passed to \code{\link[graphics]{image}}
+#' @param ylim Passed to \code{\link[graphics]{image}}
+#' @param zlim Passed to \code{\link[graphics]{image}}
+#' @param col Passed to \code{\link[graphics]{image}}
+#' @param oldstyle Passed to \code{\link[graphics]{image}}
+#' @param blr.clock See \code{\link[soiltexture]{TT.plot}}
+#' @param tlr.an See \code{\link[soiltexture]{TT.plot}}
+#' @param blr.tx See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param base.css.ps.lim See \code{\link[soiltexture]{TT.plot}}
+#' @param \dots Additional parameters passed to image().
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @importFrom grDevices heat.colors 
+#' @importFrom graphics image
+#' @export 
 TT.image <- function(# Wrapper for the contour() function adapted to texture triangles.
 ### A wrapper for the contour() function 
 ### adapted to texture triangles (plot preparation).
@@ -7586,7 +9415,7 @@ TT.image <- function(# Wrapper for the contour() function adapted to texture tri
     if( any( is.na( ylim       )) ){ ylim       <- range( x[["y"]], finite = TRUE) }  
     if( any( is.na( zlim       )) ){ zlim       <- range( x[["z"]], finite = TRUE) }  
     #
-    image( 
+    graphics::image( 
         x           = x, 
         add         = TRUE, 
         xlim        = xlim, 
@@ -7752,6 +9581,25 @@ TT.image <- function(# Wrapper for the contour() function adapted to texture tri
 
 
 
+
+
+#' Normalises the sum of the 3 particle size classes.
+#' 
+#' Normalises the sum of the 3 particle size classes in tri.data to text.sum
+#' (100\%).
+#' 
+#' 
+#' @param tri.data See \code{\link[soiltexture]{TT.plot}}
+#' @param css.names See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param residuals If TRUE the residuals are calculated and added to the returned data.frame
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export 
 TT.normalise.sum <- function(# Normalises the sum of the 3 particle size classes.
 ### Normalises the sum of the 3 particle size classes in tri.data 
 ### to text.sum (100%).
@@ -7824,6 +9672,24 @@ TT.normalise.sum <- function(# Normalises the sum of the 3 particle size classes
 
 
 
+
+
+#' Normalises the sum of the X particle size classes.
+#' 
+#' Normalises the sum of the X particle size classes in tri.data to text.sum
+#' (100\%).
+#' 
+#' 
+#' @param tri.data  See \code{\link[soiltexture]{TT.plot}}
+#' @param text.sum See \code{\link[soiltexture]{TT.plot}}
+#' @param text.tol See \code{\link[soiltexture]{TT.plot}}
+#' @param tri.pos.tst See \code{\link[soiltexture]{TT.plot}}
+#' @param residuals If TRUE the residuals are calculated and added to the returned data.frame
+#' @author Julien Moeys [aut, cre], Wei Shangguan [ctb], Rainer Petzold [ctb],
+#' Budiman Minasny [ctb], Bogdan Rosca [ctb], Nic Jelinski [ctb], Wiktor
+#' Zelazny [ctb], Rodolfo Marcondes Silva Souza [ctb], Jose Lucas Safanelli
+#' [ctb], Alexandre ten Caten [ctb]
+#' @export 
 TT.normalise.sum.X <- function(# Normalises the sum of the X particle size classes.
 ### Normalises the sum of the X particle size classes
 ### in tri.data to text.sum (100%).
